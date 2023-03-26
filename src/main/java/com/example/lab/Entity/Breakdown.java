@@ -4,8 +4,9 @@ import lombok.Data;
 
 import java.util.Date;
 
+
 @Data
-public class breakdown {
+public class Breakdown {
 	private int breakdownId;
 	private int equipmentId;
 	private String applyReason;

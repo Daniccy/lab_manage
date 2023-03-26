@@ -3,7 +3,7 @@ package com.example.lab.Entity;
 import lombok.Data;
 
 @Data
-public class user {
+public class User {
 	private String userId;
 	private String userPassward;
 	private String userName;

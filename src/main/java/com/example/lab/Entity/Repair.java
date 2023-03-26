@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class repair {
+public class Repair {
 	private int repairId;
 	private String repairPerson;
 	private Date repairTime;

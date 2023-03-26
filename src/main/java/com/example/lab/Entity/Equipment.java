@@ -5,15 +5,13 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class equipment {
+public class Equipment {
 	private int equipmentId;
-	private int equipmentName;
-	private int equipmentType;
+	private String equipmentName;
+	private String equipmentType;
 	private Date date;
 	private int number;
 	private Double singlePrice;
 	private String fromFactory;
 	private String remark;
-
-
 }

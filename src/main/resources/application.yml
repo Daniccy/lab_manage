@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    username: root
+    password: deniccy20011208
+    url: jdbc:mysql://localhost:3306/lab?serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.jdbc.Driver

@@ -5,6 +5,8 @@ import com.example.lab.Entity.Breakdown;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BreakdownEquipmentService {
     @Autowired
@@ -14,7 +16,7 @@ public class BreakdownEquipmentService {
         breakdownDao.add(breakdown);
     }
     // 获取损坏设备
-    public Breakdown get(Integer id){
-        return breakdownDao.get(id);
+    public List<Breakdown> get(){
+        return breakdownDao.get();
     }
 }

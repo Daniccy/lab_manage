@@ -15,7 +15,7 @@ public class BreakdownDao {
         breakdownMapper.add(breakdown);
     }
 
-    public Breakdown get(int id) {
-        return breakdownMapper.get(id);
+    public List<Breakdown> get() {
+        return breakdownMapper.get();
     }
 }

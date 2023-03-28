@@ -3,5 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.lab.Mapper.UserMapper">
+    <select id="get"  statementType="CALLABLE" parameterType="String" resultType="com.example.lab.Entity.User">
+        {call select_user(#{id})}
+    </select>
 
+    <delete id="delete"  statementType="CALLABLE" parameterType="String">
+        {call delete_user(#{id})}
+    </delete>
+
+
+    <insert id="add"  statementType="CALLABLE" parameterType="com.example.lab.Entity.User">
+        {call add_user(#{userName}, #{userPhone}, #{userMail}, #{userAddress})}
+    </insert>
+
+    <update id="update"  statementType="CALLABLE" parameterType="com.example.lab.Entity.User">
+        {call update_user(#{userId}, #{userPassward}, #{userName}, #{userPhone}, #{userMail}, #{userAddress})}
+    </update>
 </mapper>

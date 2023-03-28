@@ -4,6 +4,8 @@ import com.example.lab.Entity.BorrowReturn;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface BorrowReturnMapper {
@@ -11,6 +13,6 @@ public interface BorrowReturnMapper {
     void insertBorrow(BorrowReturn borrowReturn);
     // 归还设备
     void returnBorrow(BorrowReturn borrowReturn);
-    BorrowReturn get(int id);
+    List<BorrowReturn> get();
     void update(BorrowReturn borrowReturn);
 }

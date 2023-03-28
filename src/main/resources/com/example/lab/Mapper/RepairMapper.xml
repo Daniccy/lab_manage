@@ -7,7 +7,7 @@
         {call insert_repair_equipment(
         #{repairPerson},#{breakdownId,mode=IN})}
     </insert>
-    <select id="get" parameterType="Integer" statementType="CALLABLE">
+    <select id="get"  statementType="CALLABLE" resultType="com.example.lab.Entity.Repair">
         {call select_repair_equipment()}
     </select>
 </mapper>

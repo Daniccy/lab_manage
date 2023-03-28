@@ -33,6 +33,7 @@ class BasicEquipmentControllerTest {
 
     @Test
     void getEquipment() {
+        controller.getEquipment();
     }
 
     @Test
@@ -51,23 +52,22 @@ class BasicEquipmentControllerTest {
     @Test
     void returnBorrow() {
         BorrowReturn b = new BorrowReturn();
-        b.setBorrowId(12);
-        b.setBorrowTime(new Date());
-        b.setNumber(2);
+        b.setBorrowId(7);
+        b.setIsDamage("no");
         controller.returnBorrow(b);
     }
 
     @Test
     void get() {
-        controller.get(1);
+        controller.get();
     }
 
     @Test
     void update() {
         BorrowReturn b = new BorrowReturn();
-        b.setBorrowId(12);
+        b.setBorrowId(7);
         b.setBorrowTime(new Date());
-        b.setNumber(2);
+        b.setNumber(3);
         controller.update(b);
     }
 }

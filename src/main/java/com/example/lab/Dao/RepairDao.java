@@ -6,6 +6,8 @@ import com.example.lab.Mapper.RepairMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 
 public class RepairDao {
@@ -16,7 +18,7 @@ public class RepairDao {
         repairMapper.add(repair);
     }
 
-    public Repair get(int id) {
-        return repairMapper.get(id);
+    public List<Repair> get() {
+        return repairMapper.get();
     }
 }

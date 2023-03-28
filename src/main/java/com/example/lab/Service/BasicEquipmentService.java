@@ -4,6 +4,7 @@ import com.example.lab.Dao.BorrowReturnDao;
 import com.example.lab.Dao.EquipmentDao;
 import com.example.lab.Entity.BorrowReturn;
 import com.example.lab.Entity.Equipment;
+import com.example.lab.common.Ret;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,25 +30,29 @@ public class BasicEquipmentService {
     // 更新设备
     public void updateEquipment(Equipment equipment){
         equipmentDao.update(equipment);
+
     }
 
 
     // 借设备
     public void insertBorrow(BorrowReturn borrowReturn) {
         borrowReturnDao.insertBorrow(borrowReturn);
+
     }
 
     // 还设备
     public void returnBorrow(BorrowReturn borrowReturn) {
         borrowReturnDao.returnBorrow(borrowReturn);
+
     }
 
-    public BorrowReturn get(int id) {
-        return borrowReturnDao.get(id);
+    public List<BorrowReturn> get() {
+        return borrowReturnDao.get();
     }
 
     public void update(BorrowReturn borrowReturn) {
         borrowReturnDao.update(borrowReturn);
+
     }
 
 }

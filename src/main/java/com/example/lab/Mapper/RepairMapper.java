@@ -5,10 +5,12 @@ import com.example.lab.Entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
 
 public interface RepairMapper {
     void add(Repair repair);
-    Repair get(int id);
+    List<Repair> get();
 }

@@ -16,7 +16,7 @@
         {call update_borrow_equipment(
         #{borrowId},#{equipmentId,mode=IN},#{equipmentName,mode=IN},#{number,mode=IN},#{borrower,mode=IN})}
     </update>
-    <select id="get" statementType="CALLABLE">
+    <select id="get" statementType="CALLABLE" resultType="com.example.lab.Entity.BorrowReturn">
         {call select_borrow_return_equipment()}
     </select>
 </mapper>

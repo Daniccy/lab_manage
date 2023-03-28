@@ -3,47 +3,57 @@ package com.example.lab.Controller;
 import com.example.lab.Entity.BorrowReturn;
 import com.example.lab.Entity.Equipment;
 import com.example.lab.Service.BasicEquipmentService;
+import com.example.lab.common.Ret;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
-@Controller
+@Controller("BasicEquipmentController")
 public class BasicEquipmentController {
     @Autowired
     private BasicEquipmentService service;
 
     // 增加设备
-    public void addEquipment(Equipment equipment){
+    public Ret addEquipment(Equipment equipment){
         service.addEquipment(equipment);
+        return new Ret("success",null);
     }
 
     // 获取设备
-    public List<Equipment> getEquipment(){
-        return service.getEquipment();
+    public Ret getEquipment(){
+        return new Ret("success",service.getEquipment());
     }
 
     // 更新设备
-    public void updateEquipment(Equipment equipment){
+    public Ret updateEquipment(Equipment equipment){
         service.updateEquipment(equipment);
+        return new Ret("success",null);
     }
 
 
     // 借设备
-    public void insertBorrow(BorrowReturn borrowReturn) {
+    public Ret insertBorrow(BorrowReturn borrowReturn) {
         service.insertBorrow(borrowReturn);
+        return new Ret("success", null);
     }
 
     // 还设备
-    public void returnBorrow(BorrowReturn borrowReturn) {
+    public Ret returnBorrow(BorrowReturn borrowReturn) {
         service.returnBorrow(borrowReturn);
+        return new Ret("success", null);
     }
 
-    public BorrowReturn get(int id) {
-        return service.get(id);
+
+    // 获取设借出/归还备信息
+    public Ret get() {
+        return new Ret("success", service.get());
     }
 
-    public void update(BorrowReturn borrowReturn) {
+    // 更新借出/归还设备信息
+    public Ret update(BorrowReturn borrowReturn) {
         service.update(borrowReturn);
+        return new Ret("success", null);
     }
 }

@@ -6,13 +6,15 @@ import com.example.lab.Mapper.FeedbackMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 
 public class FeedbackDao {
     @Autowired
     private FeedbackMapper feedbackMapper;
 
-    public Feedback get() {
+    public List<Feedback> get() {
         return feedbackMapper.get();
     }
 }

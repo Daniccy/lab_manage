@@ -3,6 +3,7 @@ package com.example.lab;
 import com.example.lab.Controller.BasicEquipmentController;
 import com.example.lab.Entity.BorrowReturn;
 import com.example.lab.Entity.Equipment;
+import com.example.lab.UI.select_equipment;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,47 +15,15 @@ class LabManageApplicationTests {
 
 	@Autowired
 	private BasicEquipmentController basicEquipmentController;
+	@Autowired
+	private select_equipment select_equipment;
+
 	@Test
 	void contextLoads() {
+		//select_equipment.init();
+		basicEquipmentController.getEquipment();
 	}
 
-
-	@Test
-	void getEquipment(){
-		System.out.println(basicEquipmentController.getEquipment());
-	}
-
-	@Test
-	void addEquipment(){
-		Equipment e = new Equipment();
-		e.setDate(new Date());
-		e.setEquipmentId(111);
-		e.setEquipmentName("hs");
-		e.setEquipmentType("ss");
-		basicEquipmentController.addEquipment(e);
-
-	}
-
-	@Test
-	void updateEquipment(){
-		Equipment e = new Equipment();
-		e.setEquipmentId(12);
-		e.setEquipmentName("has");
-		e.setEquipmentType("ss");
-		e.setNumber(10);
-		e.setRemark("hh");
-		e.setSinglePrice(12.0);
-		e.setFromFactory("ty");
-		basicEquipmentController.updateEquipment(e);
-
-	}
-
-	@Test
-	void insertBorrow(){
-		BorrowReturn b = new BorrowReturn();
-		basicEquipmentController.insertBorrow(b);
-
-	}
 
 
 

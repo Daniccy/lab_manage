@@ -9,7 +9,7 @@ import java.util.Date;
 public class BorrowReturn {
 	private int borrowId;
 	private int equipmentId;
-	private int equipmentName;
+	private String equipmentName;
 	private int number;
 	private String borrower;
 	private Date borrowTime;

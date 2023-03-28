@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 public interface UserMapper {
     void add(User user);
-    void get(String id);
+    User get(String id);
     void update(User user);
+    void delete(String id);
 }

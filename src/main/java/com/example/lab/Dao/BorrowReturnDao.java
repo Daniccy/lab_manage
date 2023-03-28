@@ -5,6 +5,8 @@ import com.example.lab.Mapper.BorrowReturnMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class BorrowReturnDao {
     @Autowired
@@ -19,8 +21,8 @@ public class BorrowReturnDao {
         borrowReturnMapper.returnBorrow(borrowReturn);
     }
 
-    public BorrowReturn get(int id) {
-        return borrowReturnMapper.get(id);
+    public List<BorrowReturn> get() {
+        return borrowReturnMapper.get();
     }
 
     public void update(BorrowReturn borrowReturn) {

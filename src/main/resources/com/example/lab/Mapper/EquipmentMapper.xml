@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.lab.Mapper.EquipmentMapper">
+    <insert id="add" parameterType="com.example.lab.Entity.Equipment" statementType="CALLABLE">
+        {call insert_equipment(
+        #{equipmentName},#{equipmentType,mode=IN},#{number,mode=IN},#{singlePrice,mode=IN},#{fromFactory,mode=IN},#{remark,mode=IN})}
+    </insert>
+    <update id="update" parameterType="com.example.lab.Entity.Equipment" statementType="CALLABLE">
+        {call update_equipment(
+        #{equipmentId},#{equipmentName},#{equipmentType,mode=IN},#{number,mode=IN},#{singlePrice,mode=IN},#{fromFactory,mode=IN},#{remark,mode=IN})}
+    </update>
+    <select id="get"  statementType="CALLABLE" resultType="com.example.lab.Entity.Equipment">
+        {call select_equipment()}
+    </select>
+</mapper>

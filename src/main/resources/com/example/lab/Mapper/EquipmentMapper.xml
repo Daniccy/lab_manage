@@ -14,4 +14,13 @@
     <select id="get"  statementType="CALLABLE" resultType="com.example.lab.Entity.Equipment">
         {call select_equipment()}
     </select>
+
+    <select id="getById" resultType="com.example.lab.Entity.Equipment">
+        select * from equipment where equipment_id = #{id}
+    </select>
+
+<!--    根据设备名称找设备-->
+    <select id="getByName" resultType="com.example.lab.Entity.Equipment">
+        select * from equipment where equipment_name = #{equipmentName}
+    </select>
 </mapper>

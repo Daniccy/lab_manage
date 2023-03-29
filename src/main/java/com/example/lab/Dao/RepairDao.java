@@ -1,5 +1,6 @@
 package com.example.lab.Dao;
 
+import com.example.lab.Entity.Feedback;
 import com.example.lab.Entity.Repair;
 import com.example.lab.Mapper.BreakdownMapper;
 import com.example.lab.Mapper.RepairMapper;
@@ -20,5 +21,9 @@ public class RepairDao {
 
     public List<Repair> get() {
         return repairMapper.get();
+    }
+
+    public Repair getById(int id){
+        return repairMapper.getById(id);
     }
 }

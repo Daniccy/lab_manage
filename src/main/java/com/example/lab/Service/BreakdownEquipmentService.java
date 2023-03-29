@@ -2,6 +2,7 @@ package com.example.lab.Service;
 
 import com.example.lab.Dao.BreakdownDao;
 import com.example.lab.Entity.Breakdown;
+import com.example.lab.Entity.Equipment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +19,9 @@ public class BreakdownEquipmentService {
     // 获取损坏设备
     public List<Breakdown> get(){
         return breakdownDao.get();
+    }
+
+    public Breakdown getById(int id){
+        return breakdownDao.getById(id);
     }
 }

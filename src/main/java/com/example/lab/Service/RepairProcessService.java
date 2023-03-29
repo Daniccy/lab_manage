@@ -1,6 +1,7 @@
 package com.example.lab.Service;
 
 import com.example.lab.Dao.RepairDao;
+import com.example.lab.Entity.Breakdown;
 import com.example.lab.Entity.Repair;
 import com.example.lab.Mapper.RepairMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,10 @@ public class RepairProcessService {
 
     public void add(Repair repair) {
         repairDao.add(repair);
+    }
+
+    public Repair getById(int id){
+        return repairDao.getById(id);
     }
 
 }

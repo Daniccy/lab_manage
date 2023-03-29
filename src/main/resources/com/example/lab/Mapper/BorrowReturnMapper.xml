@@ -19,4 +19,8 @@
     <select id="get" statementType="CALLABLE" resultType="com.example.lab.Entity.BorrowReturn">
         {call select_borrow_return_equipment()}
     </select>
+
+    <select id="getById" resultType="com.example.lab.Entity.BorrowReturn">
+        select * from borrow_return where borrow_id = #{id}
+    </select>
 </mapper>

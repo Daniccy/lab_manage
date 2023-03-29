@@ -1,5 +1,6 @@
 package com.example.lab.Dao;
 
+import com.example.lab.Entity.BorrowReturn;
 import com.example.lab.Entity.Breakdown;
 import com.example.lab.Mapper.BreakdownMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +18,9 @@ public class BreakdownDao {
 
     public List<Breakdown> get() {
         return breakdownMapper.get();
+    }
+
+    public Breakdown getById(int id){
+        return breakdownMapper.getById(id);
     }
 }

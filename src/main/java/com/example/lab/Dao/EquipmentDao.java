@@ -1,5 +1,7 @@
 package com.example.lab.Dao;
 
+import com.example.lab.Entity.BorrowReturn;
+import com.example.lab.Entity.Breakdown;
 import com.example.lab.Entity.Equipment;
 import com.example.lab.Mapper.BreakdownMapper;
 import com.example.lab.Mapper.EquipmentMapper;
@@ -24,5 +26,13 @@ public class EquipmentDao {
 
     public void update(Equipment equipment) {
         equipmentMapper.update(equipment);
+    }
+
+    public Equipment getById(int id){
+        return equipmentMapper.getById(id);
+    }
+
+    public Equipment getByName(String equipmentName){
+        return equipmentMapper.getByName(equipmentName);
     }
 }

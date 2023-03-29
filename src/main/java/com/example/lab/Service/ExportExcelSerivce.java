@@ -2,6 +2,7 @@ package com.example.lab.Service;
 
 import com.alibaba.excel.EasyExcel;
 import com.example.lab.Dao.FeedbackDao;
+import com.example.lab.Entity.Breakdown;
 import com.example.lab.Entity.Feedback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,8 @@ public class ExportExcelSerivce {
         return feedbackDao.get();
     }
 
-
+    public Feedback getById(int id){
+        return feedbackDao.getById(id);
+    }
 
 }

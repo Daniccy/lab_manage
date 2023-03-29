@@ -6,4 +6,8 @@
     <select id="get"  statementType="CALLABLE" resultType="com.example.lab.Entity.Feedback">
         {call select_feedback()}
     </select>
+
+    <select id="getById" resultType="com.example.lab.Entity.BorrowReturn">
+        select * from feedback where feedback_id = #{id}
+    </select>
 </mapper>

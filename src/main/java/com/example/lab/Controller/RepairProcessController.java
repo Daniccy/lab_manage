@@ -1,29 +1,39 @@
 package com.example.lab.Controller;
 
 import com.example.lab.Entity.Repair;
+import com.example.lab.Entity.User;
 import com.example.lab.Service.RepairProcessService;
+import com.example.lab.Service.UserService;
+import com.example.lab.Util.RetUtil;
 import com.example.lab.common.Ret;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller("RepairProcessController")
 
 public class RepairProcessController {
     @Autowired
     private RepairProcessService service;
+    @Autowired
+    private UserService userService;
 
     // 添加维修历史列表
-    public Ret add(Repair repair){
+    public Ret<?> add(Repair repair){
+        User user = userService.get(repair.getRepairPerson());
+        if(Objects.isNull(user)){
+            return RetUtil.failure("维修用户人为空");
+        }
         service.add(repair);
-        return new Ret("success", null);
+        return RetUtil.successWithMsg("添加成功");
 
     }
 
     // 获取维修历史列表
-    public Ret get(){
-        return new Ret("success",service.get());
+    public Ret<?> get(){
+        return RetUtil.success(service.get());
     }
 
 }

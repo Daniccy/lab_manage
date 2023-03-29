@@ -11,4 +11,8 @@
     <select id="get"  statementType="CALLABLE" resultType="com.example.lab.Entity.Breakdown">
         {call select_breakdown_equipment()}
     </select>
+
+    <select id="getById" resultType="com.example.lab.Entity.BorrowReturn">
+        select * from breakdown where breakdown_id = #{id}
+    </select>
 </mapper>

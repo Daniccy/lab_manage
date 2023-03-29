@@ -28,4 +28,8 @@ public class BorrowReturnDao {
     public void update(BorrowReturn borrowReturn) {
         borrowReturnMapper.update(borrowReturn);
     }
+
+    public BorrowReturn getById(int id){
+        return borrowReturnMapper.getById(id);
+    }
 }

@@ -1,8 +1,10 @@
 package com.example.lab.Mapper;
 
+import com.example.lab.Entity.BorrowReturn;
 import com.example.lab.Entity.Breakdown;
 import com.example.lab.Entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,4 +15,6 @@ import java.util.List;
 public interface BreakdownMapper {
     void add(Breakdown breakdown);
     List<Breakdown> get();
+    Breakdown getById(@Param("id") Integer id);
+
 }

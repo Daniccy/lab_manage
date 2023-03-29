@@ -19,4 +19,8 @@
     <update id="update"  statementType="CALLABLE" parameterType="com.example.lab.Entity.User">
         {call update_user(#{userId}, #{userPassward}, #{userName}, #{userPhone}, #{userMail}, #{userAddress})}
     </update>
+
+    <select id="login" resultType ="com.example.lab.Entity.User">
+       SELECT  * FROM user WHERE user_name = #{userName} AND user_passward = #{userPassword}
+    </select>
 </mapper>

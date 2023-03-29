@@ -23,4 +23,9 @@ public class UserService {
     public void delete(String id){
         dao.delete(id);
     }
+
+    public User login(String userName, String userPassword){
+        User user  = dao.login(userName, userPassword);
+        return user;
+    }
 }

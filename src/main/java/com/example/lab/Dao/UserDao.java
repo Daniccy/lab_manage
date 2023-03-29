@@ -23,4 +23,8 @@ public class UserDao {
     public void delete(String id){
         mapper.delete(id);
     }
+
+    public User login(String userName, String userPassword){
+        mapper.login(userName, userPassword);
+    }
 }

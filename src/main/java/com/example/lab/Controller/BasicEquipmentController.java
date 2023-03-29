@@ -20,7 +20,6 @@ public class BasicEquipmentController {
 
     // 增加设备
     public Ret<?> addEquipment(Equipment equipment){
-        // 判断根据equipName筛选是否存在equipment，存在则update 增加数量， 不存在新增
         Equipment oldEquipment = service.getByName(equipment.getEquipmentName());
         if(!Objects.isNull(oldEquipment)){
            return RetUtil.failure("该设备已存在");
@@ -49,7 +48,7 @@ public class BasicEquipmentController {
         if(borrowReturn.getEquipmentId() == 0) {
             return RetUtil.failure("设备ID不允许为空");
         }
-        Equipment equipment = service.getById(borrowReturn.getEquipmentId());
+        Equipment equipment = service.getByName(borrowReturn.getEquipmentName());
         if(Objects.isNull(equipment) || equipment.getNumber() < borrowReturn.getNumber()){
             return RetUtil.failure("不存在该设备或设备数量不足");
         }
@@ -85,7 +84,7 @@ public class BasicEquipmentController {
         // 根据id查找borrowReturn
         // 根据id查找equipment
         BorrowReturn isExistBorrow = service.getWithBorrowById(borrowReturn.getBorrowId());
-        Equipment isExistEquipment = service.getById(borrowReturn.getEquipmentId());
+        Equipment isExistEquipment = service.getByName(borrowReturn.getEquipmentName());
         if(Objects.isNull(isExistBorrow)){
             return RetUtil.successWithMsg("不存在该借用记录");
         }

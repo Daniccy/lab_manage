@@ -7,7 +7,7 @@ public class RetUtil {
 	public static final int FAIL = 1;
 
 	public static Ret<Object> success(){
-		return new Ret<>(RetUtil.SUCCESS, "成功", null);
+		return new Ret<>(RetUtil.SUCCESS, "success", null);
 	}
 	public static Ret<Object> successWithMsg(String info){
 		return new Ret<>(RetUtil.SUCCESS, info, null);
@@ -17,7 +17,7 @@ public class RetUtil {
 		return new Ret<>(RetUtil.SUCCESS, info, data);
 	}
 	public static Ret<Object> success(Object data){
-		return new Ret<>(RetUtil.SUCCESS, "成功", data);
+		return new Ret<>(RetUtil.SUCCESS, "success", data);
 	}
 	public static Ret<Object> failure(String msg){
 		return new Ret<>(RetUtil.FAIL, msg, null);

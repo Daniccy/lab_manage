@@ -27,7 +27,7 @@ public class breakdownEquipmentController {
         if(breakdown.getApplyPerson() == null){
             return RetUtil.failure("申请人不能为空");
         }
-        Equipment equipment = basicEquipmentService.getById(breakdown.getEquipmentId());
+        Equipment equipment = basicEquipmentService.getByName(breakdown.getEquipmentName());
         if(Objects.isNull(equipment)){
             return RetUtil.failure("设备不存在");
         }

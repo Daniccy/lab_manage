@@ -1,11 +1,34 @@
 package com.example.lab.Controller;
 
+import com.example.lab.Dao.UserDao;
+import com.example.lab.Entity.User;
+import com.example.lab.Service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-@Controller
+@Controller("UserController")
+
 public class UserController {
-	// 添加用户
-	// 删除用户
-	// 更改用户信息
-	// 查询用户信息
+    @Autowired
+    private UserService service;
+
+    // 添加用户
+    public void add(User user){
+        service.add(user);
+    }
+
+    // 获取用户信息
+    public User get(String id){
+        return service.get(id);
+    }
+
+    // 更新用户信息
+    public void update(User user){
+        service.update(user);
+    }
+
+    // 删除用户信息
+    public void delete(String id){
+        service.delete(id);
+    }
 }

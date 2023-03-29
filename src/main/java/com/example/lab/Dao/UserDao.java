@@ -1,26 +1,26 @@
-package com.example.lab.Service;
+package com.example.lab.Dao;
 
-import com.example.lab.Dao.UserDao;
 import com.example.lab.Entity.User;
 import com.example.lab.Mapper.UserMapper;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
-@Service
+@Repository
 
-public class UserService {
+public class UserDao {
     @Autowired
-    private UserDao dao;
+    private UserMapper mapper;
     public void add(User user){
-        dao.add(user);
+        mapper.add(user);
     }
     public User get(String id){
-        return dao.get(id);
+        return mapper.get(id);
     }
     public void update(User user){
-        dao.update(user);
+        mapper.update(user);
     }
     public void delete(String id){
-        dao.delete(id);
+        mapper.delete(id);
     }
 }

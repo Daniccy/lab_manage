@@ -78,4 +78,19 @@ public class TokenUtil {
 		return true;
 	}
 
+	/**
+	 * 判断用户身份(0:管理员 1:普通用户)
+	 * @param token
+	 * @return
+	 */
+	public static int personAuth(String token){
+		String userId = null;
+		if(CacheManagerUtil.isContains(token)){
+			userId = TokenUtil.getInfoByToken(token);
+		}
+		if(Objects.isNull(userId)) return -1;
+		if(userId.startsWith("99")) return 0;
+		return 1;
+	}
+
 }

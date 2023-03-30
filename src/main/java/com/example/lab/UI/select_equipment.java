@@ -52,9 +52,6 @@ public class select_equipment extends JFrame {
     public select_equipment printform(select_equipment se) {
         // 表格上的title
         String[] columnNames = new String[]{"设备ID", "设备名称", "设备类型", "入库时间","数量","单价","产地","备注"};
-        // 表格中的内容，是一个二维数组
-        /*String[][] eqs = new String[][];{{"1", "盖伦", "616" + a, "100"},
-                {"2", "提莫", "512", "102"}, {"3", "奎因", "832", "200"}};*/
         /**
          * 对接数据
          * 1、通过ApplicationContextUtil.getBean拿到指定controller的实例
@@ -137,6 +134,13 @@ public class select_equipment extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 init();
+            }
+        });
+        用户管理Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                closepage();
+                new select_users().init();
             }
         });
     }

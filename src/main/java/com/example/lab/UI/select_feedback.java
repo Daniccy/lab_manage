@@ -69,6 +69,13 @@ public class select_feedback {
                 init();
             }
         });
+        用户管理Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                closepage();
+                new select_users().init();
+            }
+        });
     }
 
     public void init() {

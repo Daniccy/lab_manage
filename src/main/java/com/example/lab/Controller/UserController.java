@@ -61,6 +61,6 @@ public class UserController {
         }
         String token = TokenUtil.generateToken(user);
         CacheManagerUtil.putCache(token, user, TIME_OUT);
-        return RetUtil.successWithMsg("登录成功");
+        return RetUtil.success("登录成功", token);
    }
 }

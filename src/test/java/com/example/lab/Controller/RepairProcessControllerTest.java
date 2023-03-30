@@ -13,13 +13,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class RepairProcessControllerTest {
     @Autowired
     private RepairProcessController controller;
+	String token = "eyJUeXBlIjoiand0IiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJleHAiOjE2ODAyMzMyMjYsInVzZXJJZCI6IjAwMTEifQ.vJMOKRcTQsNVoIan8XtVn2GcmnwZ6QZN7osaIl7X4F0";
+
 
     @Test
     void add() {
         Repair r = new Repair();
-        r.setBreakdownId(7);
-        r.setRepairPerson("0014");
-        controller.add(r);
+        r.setBreakdownId(6);
+        controller.add(r, token);
     }
 
     @Test

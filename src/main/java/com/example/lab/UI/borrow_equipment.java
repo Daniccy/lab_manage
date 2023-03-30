@@ -26,6 +26,8 @@ public class borrow_equipment {
     private JButton yes;
     private JTextField num;
 
+    String token;
+
     public borrow_equipment() {
         exit.addActionListener(new ActionListener() {
             @Override
@@ -48,7 +50,7 @@ public class borrow_equipment {
                     br.setEquipmentName(equipment_name);
                     br.setNumber(number);
                     BasicEquipmentController controller = (BasicEquipmentController) ApplicationContextUtil.getBean("BasicEquipmentController");
-                    String info =controller.insertBorrow(br).info;
+                    String info =controller.insertBorrow(br, token).info;
                     if(info.equals("success")){
                         closepage();
                         new borrow_return_equipment().init();

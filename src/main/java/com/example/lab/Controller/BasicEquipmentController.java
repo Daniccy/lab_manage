@@ -4,8 +4,12 @@ import com.example.lab.Entity.BorrowReturn;
 import com.example.lab.Entity.Equipment;
 import com.example.lab.Entity.User;
 import com.example.lab.Service.BasicEquipmentService;
+import com.example.lab.Util.CacheManagerUtil;
 import com.example.lab.Util.RetUtil;
+import com.example.lab.Util.TokenUtil;
 import com.example.lab.common.Ret;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -15,11 +19,15 @@ import java.util.Objects;
 
 @Controller("BasicEquipmentController")
 public class BasicEquipmentController {
+    private final static Logger logger = LoggerFactory.getLogger(BasicEquipmentController.class);
     @Autowired
     private BasicEquipmentService service;
 
     // 增加设备
-    public Ret<?> addEquipment(Equipment equipment){
+    public Ret<?> addEquipment(Equipment equipment,String token){
+        if(!TokenUtil.isPass(token)){
+            return RetUtil.failure("用户失效，请重新登录");
+        }
         Equipment oldEquipment = service.getByName(equipment.getEquipmentName());
         if(!Objects.isNull(oldEquipment)){
            return RetUtil.failure("该设备已存在");
@@ -34,7 +42,10 @@ public class BasicEquipmentController {
     }
 
     // 更新设备
-    public Ret<?> updateEquipment(Equipment equipment){
+    public Ret<?> updateEquipment(Equipment equipment,String token){
+        if(!TokenUtil.isPass(token)){
+            return RetUtil.failure("用户失效，请重新登录");
+        }
         if(equipment.getEquipmentId() == 0){
             return RetUtil.failure("设备ID不允许为空");
         }
@@ -44,20 +55,21 @@ public class BasicEquipmentController {
 
 
     // 借设备
-    public Ret<?> insertBorrow(BorrowReturn borrowReturn) {
-        if(borrowReturn.getEquipmentId() == 0) {
+    public Ret<?> insertBorrow(BorrowReturn borrowReturn,String token) {
+        // 逃过验证（用于测试）
+        CacheManagerUtil.putCache(token, null, 0);
+        if(!TokenUtil.isPass(token)){
+            return RetUtil.failure("用户失效，请重新登录");
+        }
+        if(borrowReturn.getEquipmentName() == null) {
             return RetUtil.failure("设备ID不允许为空");
         }
         Equipment equipment = service.getByName(borrowReturn.getEquipmentName());
         if(Objects.isNull(equipment) || equipment.getNumber() < borrowReturn.getNumber()){
             return RetUtil.failure("不存在该设备或设备数量不足");
         }
-        // 根据用户名字查找用户id 或者直接做缓存数据
-        User user = null;
-        if(Objects.isNull(user)){
-            return RetUtil.failure("借用人不存在");
-        }
-        borrowReturn.setBorrower(user.getUserId());
+        // 用户身份 管理员身份未定
+        borrowReturn.setBorrower(TokenUtil.getInfoByToken(token));
         service.insertBorrow(borrowReturn);
         return RetUtil.success("借用成功");
     }
@@ -80,9 +92,11 @@ public class BasicEquipmentController {
     }
 
     // 更新借出/归还设备信息
-    public Ret<?> update(BorrowReturn borrowReturn) {
-        // 根据id查找borrowReturn
-        // 根据id查找equipment
+    public Ret<?> update(BorrowReturn borrowReturn, String token) {
+        if(!TokenUtil.isPass(token)){
+            return RetUtil.failure("用户失效，请重新登录");
+        }
+
         BorrowReturn isExistBorrow = service.getWithBorrowById(borrowReturn.getBorrowId());
         Equipment isExistEquipment = service.getByName(borrowReturn.getEquipmentName());
         if(Objects.isNull(isExistBorrow)){

@@ -1,22 +1,24 @@
 package com.example.lab.Controller;
 
-import com.example.lab.Dao.UserDao;
-import com.example.lab.Entity.EntityCache;
 import com.example.lab.Entity.User;
 import com.example.lab.Service.UserService;
 import com.example.lab.Util.CacheManagerUtil;
 import com.example.lab.Util.RetUtil;
+import com.example.lab.Util.TokenUtil;
 import com.example.lab.common.Ret;
-import org.omg.CORBA.TIMEOUT;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import java.sql.Timestamp;
 import java.util.Objects;
 
 @Controller("UserController")
 
 public class UserController {
+
+    private final static Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private UserService service;
 
@@ -50,15 +52,15 @@ public class UserController {
      * allWay 存储方式
      * @param userName
      * @param userPassward
-     * @param allWay
      * @return
      */
-   public Ret<?> login(String userName, String userPassward, int allWay){
+   public Ret<?> login(String userName, String userPassward){
         User user = service.login(userName, userPassward);
         if(Objects.isNull(user)){
             return RetUtil.successWithMsg("用户名或密码错误");
         }
-        CacheManagerUtil.putCache(user.getUserId(), user, TIME_OUT);
+        String token = TokenUtil.generateToken(user);
+        CacheManagerUtil.putCache(token, user, TIME_OUT);
         return RetUtil.successWithMsg("登录成功");
    }
 }

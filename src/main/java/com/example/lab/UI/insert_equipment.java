@@ -28,6 +28,8 @@ public class insert_equipment {
     private JTextField remakr;
     private JButton exit_Button;
 
+    String token;
+
     public insert_equipment() {
         exit_Button.addActionListener(new ActionListener() {
             @Override
@@ -50,7 +52,7 @@ public class insert_equipment {
                     String beizhu = remakr.getText();
                     Equipment equipment=new Equipment(eqname,eqtype,number,price,where,beizhu);
                     BasicEquipmentController controller = (BasicEquipmentController) ApplicationContextUtil.getBean("BasicEquipmentController");
-                    String info =controller.addEquipment(equipment).info;
+                    String info =controller.addEquipment(equipment, token).info;
                     if(info.equals("success")){
                         closepage();
                         new select_equipment().init();

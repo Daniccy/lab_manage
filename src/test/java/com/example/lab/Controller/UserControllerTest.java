@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class UserControllerTest {
     @Autowired
@@ -41,4 +39,9 @@ class UserControllerTest {
     void delete() {
         controller.delete("0011");
     }
+
+	@Test
+	void login(){
+		controller.login("陈彤烨", "pwd666");
+	}
 }

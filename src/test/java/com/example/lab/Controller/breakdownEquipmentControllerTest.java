@@ -13,16 +13,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class breakdownEquipmentControllerTest {
     @Autowired
     private breakdownEquipmentController controller;
+	String token = "eyJUeXBlIjoiand0IiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJleHAiOjE2ODAyMzMyMjYsInVzZXJJZCI6IjAwMTEifQ.vJMOKRcTQsNVoIan8XtVn2GcmnwZ6QZN7osaIl7X4F0";
+
 
     @Test
     void add() {
         Breakdown b = new Breakdown();
-        b.setEquipmentId(12);
-        b.setApplyTime(new Date());
+        b.setEquipmentName("办公桌");
         b.setApplyReason("sfsd");
-        b.setApplyPerson("0014");
         b.setNum(2);
-        controller.add(b);
+        controller.add(b, token);
     }
 
     @Test

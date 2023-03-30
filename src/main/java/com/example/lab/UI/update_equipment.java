@@ -24,6 +24,8 @@ public class update_equipment {
     private JTextField eq_name;
     private JButton sure_Button;
 
+    String token;
+
     public void init() {
         frame.setContentPane(new update_equipment().root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,7 +60,7 @@ public class update_equipment {
                     String beizhu = remark.getText();
                     Equipment equipment=new Equipment(eqname,eqtype,number,price,where,beizhu);
                     BasicEquipmentController controller = (BasicEquipmentController) ApplicationContextUtil.getBean("BasicEquipmentController");
-                    String info =controller.updateEquipment(equipment).info;
+                    String info =controller.updateEquipment(equipment, token).info;
                     if(info.equals("success")){
                         closepage();
                         new select_equipment().init();

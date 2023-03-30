@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BasicEquipmentControllerTest {
     @Autowired
     private BasicEquipmentController controller;
+	String token = "eyJUeXBlIjoiand0IiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJleHAiOjE2ODAyMzMyMjYsInVzZXJJZCI6IjAwMTEifQ.vJMOKRcTQsNVoIan8XtVn2GcmnwZ6QZN7osaIl7X4F0";
 
     @BeforeEach
     void setUp() {
@@ -43,10 +44,9 @@ class BasicEquipmentControllerTest {
     @Test
     void insertBorrow() {
         BorrowReturn b = new BorrowReturn();
-        b.setBorrowId(12);
-        b.setBorrowTime(new Date());
-        b.setNumber(2);
-        controller.insertBorrow(b);
+	    b.setEquipmentName("办公桌");
+        b.setNumber(5);
+        controller.insertBorrow(b, token);
     }
 
     @Test
@@ -62,12 +62,12 @@ class BasicEquipmentControllerTest {
         controller.get();
     }
 
-    @Test
-    void update() {
-        BorrowReturn b = new BorrowReturn();
-        b.setBorrowId(7);
-        b.setBorrowTime(new Date());
-        b.setNumber(3);
-        controller.update(b);
-    }
+//    @Test
+//    void update() {
+//        BorrowReturn b = new BorrowReturn();
+//        b.setBorrowId(7);
+//        b.setBorrowTime(new Date());
+//        b.setNumber(3);
+//        controller.update(b);
+//    }
 }

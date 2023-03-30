@@ -24,6 +24,9 @@ public class insert_repair_equipment {
     private JButton exit;
     private JButton sure;
 
+    String token;
+
+
     public insert_repair_equipment() {
         exit.addActionListener(new ActionListener() {
             @Override
@@ -45,7 +48,7 @@ public class insert_repair_equipment {
                     repair.setBreakdownId(breakid);
 
                     RepairProcessController controller = (RepairProcessController) ApplicationContextUtil.getBean("RepairProcessController");
-                    String info =controller.add(repair).info;
+                    String info =controller.add(repair, token).info;
                     if (info.equals("success")){
                         closepage();
                         new repair_equipment().init();

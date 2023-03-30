@@ -117,4 +117,10 @@ public class CacheManagerUtil {
 	public static Set<String>  getAllKeys() {
 		return caches.keySet();
 	}
+
+	public static void refreshTime(String key){
+		if (isContains(key)) {
+			caches.get(key).setLastRefeshTime(System.currentTimeMillis());
+		}
+	}
 }

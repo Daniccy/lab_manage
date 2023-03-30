@@ -26,6 +26,8 @@ public class insert_breakdown_equipment {
     private JButton exit;
     private JPanel panel1;
 
+    String token;
+
     public insert_breakdown_equipment() {
         exit.addActionListener(new ActionListener() {
             @Override
@@ -51,7 +53,7 @@ public class insert_breakdown_equipment {
                     breakdown.setNum(number);
 
                     breakdownEquipmentController controller = (breakdownEquipmentController) ApplicationContextUtil.getBean("breakdownEquipmentController");
-                    String info =controller.add(breakdown).info;
+                    String info =controller.add(breakdown, token).info;
                     if (info.equals("success")){
                         closepage();
                         new breakdown_equipment().init();

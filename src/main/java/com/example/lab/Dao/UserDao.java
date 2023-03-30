@@ -25,6 +25,6 @@ public class UserDao {
     }
 
     public User login(String userName, String userPassword){
-        mapper.login(userName, userPassword);
+       return mapper.login(userName, userPassword);
     }
 }

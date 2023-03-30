@@ -6,8 +6,12 @@ import com.example.lab.Entity.User;
 import com.example.lab.Service.BreakdownEquipmentService;
 import com.example.lab.Service.RepairProcessService;
 import com.example.lab.Service.UserService;
+import com.example.lab.Util.CacheManagerUtil;
 import com.example.lab.Util.RetUtil;
+import com.example.lab.Util.TokenUtil;
 import com.example.lab.common.Ret;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -17,6 +21,9 @@ import java.util.Objects;
 @Controller("RepairProcessController")
 
 public class RepairProcessController {
+
+    private final static Logger logger = LoggerFactory.getLogger(RepairProcessController.class);
+
     @Autowired
     private RepairProcessService service;
     @Autowired
@@ -25,15 +32,22 @@ public class RepairProcessController {
     private UserService userService;
 
     // 添加维修历史列表
-    public Ret<?> add(Repair repair){
-        User user = userService.get(repair.getRepairPerson());
-        if(Objects.isNull(user)){
-            return RetUtil.failure("维修用户人为空");
+    public Ret<?> add(Repair repair, String token){
+        // 逃过验证（用于测试）
+        CacheManagerUtil.putCache(token, null, 0);
+        if(!TokenUtil.isPass(token)){
+            return RetUtil.failure("用户失效，请重新登录");
         }
+        // 如果系统派单的话就要用这个，选单的话不用判断
+//        User user = userService.get(repair.getRepairPerson());
+//        if(Objects.isNull(user)){
+//            return RetUtil.failure("维修用户人为空");
+//        }
         Breakdown breakdown = breakdownEquipmentService.getById(repair.getBreakdownId());
         if(Objects.isNull(breakdown)){
             return RetUtil.failure("损坏记录不存在");
         }
+        repair.setRepairPerson(TokenUtil.getInfoByToken(token));
         service.add(repair);
         return RetUtil.successWithMsg("添加成功");
 

@@ -24,7 +24,7 @@ public class insert_repair_equipment {
     private JButton exit;
     private JButton sure;
 
-    String token;
+
 
 
     public insert_repair_equipment() {
@@ -40,6 +40,7 @@ public class insert_repair_equipment {
             public void actionPerformed(ActionEvent e) {
                 if (break_id.getText().equals("")) {
                     //错误处理
+                    JOptionPane.showMessageDialog(null, "填入数据不可为空");
                 } else {
                     String userid = user_id.getText();
                     int breakid = Integer.parseInt(break_id.getText());
@@ -48,16 +49,17 @@ public class insert_repair_equipment {
                     repair.setBreakdownId(breakid);
 
                     RepairProcessController controller = (RepairProcessController) ApplicationContextUtil.getBean("RepairProcessController");
-                    String info =controller.add(repair, token).info;
-                    if (info.equals("success")){
+                    String info =controller.add(repair, Token.token).info;
+                    if (info.equals("添加成功")){
                         closepage();
                         new repair_equipment().init();
                         return;
                     }else{
                         /**************/
+                        JOptionPane.showMessageDialog(null, info);
                     }
                 }
-                closepage();
+
             }
         });
     }

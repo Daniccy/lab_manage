@@ -28,7 +28,6 @@ public class insert_equipment {
     private JTextField remakr;
     private JButton exit_Button;
 
-    String token;
 
     public insert_equipment() {
         exit_Button.addActionListener(new ActionListener() {
@@ -43,6 +42,7 @@ public class insert_equipment {
             public void actionPerformed(ActionEvent e) {
                 if (num.getText().equals("") || single_price.getText().equals("")) {
                     /******错误弹窗调用***********/
+                    JOptionPane.showMessageDialog(null, "填入数据不可为空");
                 } else {
                     String eqname = eq_name.getText();
                     String eqtype = eq_type.getText();
@@ -52,17 +52,16 @@ public class insert_equipment {
                     String beizhu = remakr.getText();
                     Equipment equipment=new Equipment(eqname,eqtype,number,price,where,beizhu);
                     BasicEquipmentController controller = (BasicEquipmentController) ApplicationContextUtil.getBean("BasicEquipmentController");
-                    String info =controller.addEquipment(equipment, token).info;
-                    if(info.equals("success")){
+                    String info =controller.addEquipment(equipment, Token.token).info;
+                    if(info.equals("添加成功")){
                         closepage();
                         new select_equipment().init();
                         return;
                     }else {
                         /****失败的处理****/
+                        JOptionPane.showMessageDialog(null, info);
                     }
                 }
-                closepage();
-
 
             }
         });

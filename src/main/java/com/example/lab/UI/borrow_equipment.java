@@ -26,7 +26,6 @@ public class borrow_equipment {
     private JButton yes;
     private JTextField num;
 
-    String token;
 
     public borrow_equipment() {
         exit.addActionListener(new ActionListener() {
@@ -41,6 +40,7 @@ public class borrow_equipment {
             public void actionPerformed(ActionEvent e) {
                 if (num.getText().equals("")) {
                     /******错误弹窗调用***********/
+                    JOptionPane.showMessageDialog(null, "填入数据不可为空");
                 } else {
                     String userID = user_id.getText();
                     String equipment_name = eq_name.getText();
@@ -50,16 +50,16 @@ public class borrow_equipment {
                     br.setEquipmentName(equipment_name);
                     br.setNumber(number);
                     BasicEquipmentController controller = (BasicEquipmentController) ApplicationContextUtil.getBean("BasicEquipmentController");
-                    String info =controller.insertBorrow(br, token).info;
-                    if(info.equals("success")){
+                    String info =controller.insertBorrow(br, Token.token).info;
+                    if(info.equals("借用成功")){
                         closepage();
                         new borrow_return_equipment().init();
                         return;
                     }else {
                         /****失败的处理****/
+                        JOptionPane.showMessageDialog(null, info);
                     }
                 }
-                closepage();
             }
         });
     }

@@ -1,5 +1,9 @@
 package com.example.lab.UI;
 
+import com.example.lab.Controller.BasicEquipmentController;
+import com.example.lab.Controller.RepairProcessController;
+import com.example.lab.Entity.Repair;
+import com.example.lab.Util.ApplicationContextUtil;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.jgoodies.forms.layout.CellConstraints;
@@ -35,13 +39,26 @@ public class update_repair {
             public void actionPerformed(ActionEvent e) {
                 if (break_id.getText().equals("") || repair_id.getText().equals("")) {
                     //错误处理
+                    JOptionPane.showMessageDialog(null, "填入数据不可为空");
                 } else {
                     int repairid = Integer.parseInt(repair_id.getText());
                     String userid = user_id.getText();
                     int breakid = Integer.parseInt(break_id.getText());
-                    System.out.println(userid + breakid);
+                    Repair repair=new Repair();
+                    repair.setRepairId(repairid);
+                    repair.setApplyReason(userid);
+                    repair.setBreakdownId(breakid);
+                    RepairProcessController controller = (RepairProcessController) ApplicationContextUtil.getBean("RepairProcessController");
+                    String info =controller.update(repair,Token.token).info;
+                    if(info.equals("更新成功")){
+                        closepage();
+                        new repair_equipment().init();
+                        return;
+                    }else {
+                        JOptionPane.showMessageDialog(null, info);
+                    }
+
                 }
-                closepage();
             }
         });
     }

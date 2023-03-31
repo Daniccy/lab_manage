@@ -1,6 +1,8 @@
 package com.example.lab.UI;
 import com.example.lab.Controller.BasicEquipmentController;
+import com.example.lab.Controller.UserController;
 import com.example.lab.Entity.Equipment;
+import com.example.lab.Entity.User;
 import com.example.lab.Util.ApplicationContextUtil;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
@@ -55,8 +57,9 @@ public class select_users {
     }
 
     public void init() {
-
-        frame.setContentPane(new select_users().root);
+        select_users su=new select_users();
+        su=printform(su);
+        frame.setContentPane(su.root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -64,8 +67,22 @@ public class select_users {
 
     public select_users printform(select_users se) {
         // 表格上的title
-        String[] columnNames = new String[]{"", "设备名称", "设备类型", "入库时间","数量","单价","产地","备注"};
+        String[] columnNames = new String[]{"用户ID", "用户密码", "用户名", "电话号码","用户住址","用户邮箱"};
+        UserController controller = (UserController)ApplicationContextUtil.getBean("UserController");
+        String info =controller.selectAll().info;
+        if (info.equals("success")){
+            List<User> list = (List<User>)controller.selectAll().data;
+            String[][] eqs = new String[list.size()][];
+            int i=0;
+            for (User eq_list:list){
+                String[] eq={eq_list.getUserId(),eq_list.getUserPassward(),eq_list.getUserName(),eq_list.getUserPhone(),eq_list.getUserAddress(),eq_list.getUserMail()};
+                eqs[i++]=eq;
+            }
+            DefaultTableModel dt = new DefaultTableModel(eqs, columnNames);
+            se.table1.setModel(dt);
+        }else{
 
+        }
         return se;
     }
 

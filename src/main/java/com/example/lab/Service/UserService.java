@@ -39,13 +39,20 @@ public class UserService {
      * @param userPassword
      * @return
      */
-    public int login(String userName, String userPassword){
+    public Map<String, Object> login(String userName, String userPassword){
         User user  = dao.login(userName, userPassword);
-        if(Objects.isNull(user)) return -1;
+        if(Objects.isNull(user)) return null;
         String token = TokenUtil.generateToken(user);
         CacheManagerUtil.putCache(token, user, TIME_OUT);
-        if(user.getUserId().startsWith("99")) return 0;
-        return 1;
+        Map<String, Object> map = new ConcurrentHashMap<>();
+        map.put("token", token);
+
+        if(user.getUserId().startsWith("99")) {
+            map.put("auth", 0);
+            return map;
+        };
+        map.put("auth", 1);
+        return map;
     }
 
     public List<User> selectAll(){

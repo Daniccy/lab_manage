@@ -26,7 +26,7 @@ public class update_borrow_equipment {
     private JTextField user_id;
     private JButton exit;
 
-    String token;
+
 
     public update_borrow_equipment() {
         exit.addActionListener(new ActionListener() {
@@ -41,6 +41,7 @@ public class update_borrow_equipment {
             public void actionPerformed(ActionEvent e) {
                 if (borrow_id.getText().equals("") || num.getText().equals("") || eq_id.getText().equals("")) {
                     /******错误弹窗调用***********/
+                    JOptionPane.showMessageDialog(null, "填入数据不可为空");
                 } else {
                     int borrowid = Integer.parseInt(borrow_id.getText());
                     int eqid = Integer.parseInt(eq_id.getText());
@@ -55,16 +56,17 @@ public class update_borrow_equipment {
                     borrowReturn.setNumber(number);
 
                     BasicEquipmentController controller = (BasicEquipmentController) ApplicationContextUtil.getBean("BasicEquipmentController");
-                    String info =controller.update(borrowReturn, token).info;
-                    if (info.equals("success")){
+                    String info =controller.update(borrowReturn, Token.token).info;
+                    if (info.equals("更新成功")){
                         closepage();
                         new borrow_return_equipment().init();
                         return;
                     }else{
                         /**************/
+                        JOptionPane.showMessageDialog(null, info);
                     }
                 }
-                closepage();
+
             }
         });
     }

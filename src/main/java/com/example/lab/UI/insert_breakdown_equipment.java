@@ -26,7 +26,7 @@ public class insert_breakdown_equipment {
     private JButton exit;
     private JPanel panel1;
 
-    String token;
+
 
     public insert_breakdown_equipment() {
         exit.addActionListener(new ActionListener() {
@@ -41,6 +41,7 @@ public class insert_breakdown_equipment {
             public void actionPerformed(ActionEvent e) {
                 if (num.getText().equals("")) {
                     /******错误弹窗调用***********/
+                    JOptionPane.showMessageDialog(null, "填入数据不可为空");
                 } else {
                     String userID = user_id.getText();
                     String equipment_name = eq_name.getText();
@@ -53,16 +54,16 @@ public class insert_breakdown_equipment {
                     breakdown.setNum(number);
 
                     breakdownEquipmentController controller = (breakdownEquipmentController) ApplicationContextUtil.getBean("breakdownEquipmentController");
-                    String info =controller.add(breakdown, token).info;
-                    if (info.equals("success")){
+                    String info =controller.add(breakdown, Token.token).info;
+                    if (info.equals("添加成功")){
                         closepage();
                         new breakdown_equipment().init();
                         return;
                     }else{
                         /**************/
+                        JOptionPane.showMessageDialog(null, info);
                     }
                 }
-                closepage();
             }
         });
     }

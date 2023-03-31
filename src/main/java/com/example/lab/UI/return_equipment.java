@@ -39,6 +39,7 @@ public class return_equipment {
             public void actionPerformed(ActionEvent e) {
                 if(borrow_id.getText().equals("")){
                     /**********/
+                    JOptionPane.showMessageDialog(null, "填入数据不可为空");
                 }else {
                     int borrowid = Integer.parseInt(borrow_id.getText());
                     int damage = comboBox1.getSelectedIndex();//0为no，1为yes
@@ -51,15 +52,15 @@ public class return_equipment {
                     }
                     BasicEquipmentController controller = (BasicEquipmentController) ApplicationContextUtil.getBean("BasicEquipmentController");
                     String info =controller.returnBorrow(borrowReturn).info;
-                    if (info.equals("success")){
+                    if (info.equals("归还成功")){
                         closepage();
                         new borrow_return_equipment().init();
                         return;
                     }else{
                         /**************/
+                        JOptionPane.showMessageDialog(null, info);
                     }
                 }
-                closepage();
             }
         });
     }

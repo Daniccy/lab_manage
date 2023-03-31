@@ -46,9 +46,11 @@ public class BasicEquipmentController {
         if(!TokenUtil.isPass(token)){
             return RetUtil.failure("用户失效，请重新登录");
         }
-        if(equipment.getEquipmentId() == 0){
-            return RetUtil.failure("设备ID不允许为空");
+        Equipment format = service.getByName(equipment.getEquipmentName());
+        if(format == null){
+            return RetUtil.failure("设备不存在");
         }
+        equipment.setEquipmentId(format.getEquipmentId());
         service.updateEquipment(equipment);
         return RetUtil.successWithMsg("更新成功");
     }
@@ -62,14 +64,14 @@ public class BasicEquipmentController {
             return RetUtil.failure("用户失效，请重新登录");
         }
         if(borrowReturn.getEquipmentName() == null) {
-            return RetUtil.failure("设备ID不允许为空");
+            return RetUtil.failure("设备Name不允许为空");
         }
         Equipment equipment = service.getByName(borrowReturn.getEquipmentName());
         if(Objects.isNull(equipment) || equipment.getNumber() < borrowReturn.getNumber()){
             return RetUtil.failure("不存在该设备或设备数量不足");
         }
         service.insertBorrow(borrowReturn, token);
-        return RetUtil.success("借用成功");
+        return RetUtil.successWithMsg("借用成功");
     }
 
     // 还设备
@@ -80,7 +82,7 @@ public class BasicEquipmentController {
             return RetUtil.successWithMsg("不存在该借用记录");
         }
         service.returnBorrow(borrowReturn);
-        return RetUtil.success("归还成功");
+        return RetUtil.successWithMsg("归还成功");
     }
 
 
@@ -101,7 +103,7 @@ public class BasicEquipmentController {
             return RetUtil.successWithMsg("不存在该借用记录");
         }
         if(Objects.isNull(isExistEquipment) || isExistEquipment.getNumber() < borrowReturn.getNumber()){
-            return RetUtil.success("该设备不存在或者设备数量不足");
+            return RetUtil.successWithMsg("该设备不存在或者设备数量不足");
         }
 
         service.update(borrowReturn, token);

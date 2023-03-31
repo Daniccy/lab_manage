@@ -14,7 +14,7 @@ public class LabManageApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(LabManageApplication.class, args);
-		new select_equipment().init();
+		new login().init();
 	}
 
 

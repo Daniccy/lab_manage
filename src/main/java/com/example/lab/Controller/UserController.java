@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Controller("UserController")
@@ -56,12 +57,11 @@ public class UserController {
      * @return
      */
    public Ret<?> login(String userName, String userPassward){
-        int res = service.login(userName, userPassward);
-        if(res == -1){
+        Map<String, Object> res = service.login(userName, userPassward);
+        if(res == null){
             return RetUtil.successWithMsg("用户名或密码错误");
         }
-        if(res == 0) return RetUtil.success("登录成功", 0);
-        return RetUtil.success("登录成功", 1);
+        return RetUtil.success("登录成功", res);
    }
 
    public Ret<?> selectAll(){

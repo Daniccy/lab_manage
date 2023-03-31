@@ -31,7 +31,10 @@ public class RepairProcessService {
         return repairDao.getById(id);
     }
 
-    public void update(Repair repair){
+    public void update(Repair repair, String token){
+        if(repair.getRepairPerson() != null){
+            repair.setRepairPerson(TokenUtil.getInfoByToken(token));
+        }
         repairDao.update(repair);
     }
 

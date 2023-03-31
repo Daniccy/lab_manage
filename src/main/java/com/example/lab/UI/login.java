@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
+import java.util.Map;
 
 public class login {
     static JFrame frame = new JFrame("登录");
@@ -33,10 +34,11 @@ public class login {
                 UserController controller = (UserController) ApplicationContextUtil.getBean("UserController");
                 Ret<?> ret = controller.login(a,b);
                 String info =ret.info;
+                Map<String, Object> data = (Map<String, Object>) ret.data;
                 if(info.equals("登录成功")){
-                    Token.token= (String) ret.data;
+                    Token.token= (String)data.get("token");
                     closepage();
-                    if (TokenUtil.personAuth(Token.token)==0){
+                    if ((int)data.get("auth")==0){
                         new select_equipment().init();
                     }
                     else{
@@ -46,7 +48,7 @@ public class login {
                 }
                 else
                 {
-                    /*****弹窗****/
+                    JOptionPane.showMessageDialog(null, info);
                 }
             }
         });

@@ -24,7 +24,6 @@ public class update_equipment {
     private JTextField eq_name;
     private JButton sure_Button;
 
-    String token;
 
     public void init() {
         frame.setContentPane(new update_equipment().root);
@@ -51,6 +50,8 @@ public class update_equipment {
             public void actionPerformed(ActionEvent e) {
                 if (num.getText().equals("") || single_price.getText().equals("")) {
                     /******错误弹窗调用***********/
+                    JOptionPane.showMessageDialog(null, "填入数据不可为空");
+
                 } else {
                     String eqname = eq_name.getText();
                     String eqtype = eq_type.getText();
@@ -60,13 +61,14 @@ public class update_equipment {
                     String beizhu = remark.getText();
                     Equipment equipment=new Equipment(eqname,eqtype,number,price,where,beizhu);
                     BasicEquipmentController controller = (BasicEquipmentController) ApplicationContextUtil.getBean("BasicEquipmentController");
-                    String info =controller.updateEquipment(equipment, token).info;
-                    if(info.equals("success")){
+                    String info =controller.updateEquipment(equipment, Token.token).info;
+                    if(info.equals("更新成功")){
                         closepage();
                         new select_equipment().init();
                         return;
                     }else {
                         /****失败的处理****/
+                        JOptionPane.showMessageDialog(null, info);
                     }
                 }
                 //closepage();

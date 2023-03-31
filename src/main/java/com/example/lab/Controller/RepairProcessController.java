@@ -57,9 +57,12 @@ public class RepairProcessController {
         return RetUtil.success(service.get());
     }
 
-    public Ret<?> update(Repair repair){
+    public Ret<?> update(Repair repair, String token){
+        if(!TokenUtil.isPass(token)){
+            return RetUtil.failure("用户失效，请重新登录");
+        }
        try {
-           service.update(repair);
+           service.update(repair, token);
        }catch (Exception e){
            e.printStackTrace();
            return RetUtil.failure("更新失败");

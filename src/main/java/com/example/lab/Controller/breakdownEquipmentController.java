@@ -38,8 +38,8 @@ public class breakdownEquipmentController {
         if(Objects.isNull(equipment)){
             return RetUtil.failure("设备不存在");
         }
-        breakdown.setApplyPerson(TokenUtil.getInfoByToken(token));
-        service.add(breakdown);
+
+        service.add(breakdown, token);
         return RetUtil.successWithMsg("添加成功");
     }
     // 获取损坏设备

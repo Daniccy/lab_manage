@@ -6,6 +6,7 @@ import com.example.lab.Entity.BorrowReturn;
 import com.example.lab.Entity.Equipment;
 import com.example.lab.Entity.User;
 import com.example.lab.Util.RetUtil;
+import com.example.lab.Util.TokenUtil;
 import com.example.lab.common.Ret;
 import org.apache.commons.collections4.functors.EqualPredicate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,10 @@ public class BasicEquipmentService {
 
 
     // 借设备
-    public void insertBorrow(BorrowReturn borrowReturn) {
+    public void insertBorrow(BorrowReturn borrowReturn,String token) {
+        if(Objects.isNull(borrowReturn.getBorrower())){
+            borrowReturn.setBorrower(TokenUtil.getInfoByToken(token));
+        }
         borrowReturnDao.insertBorrow(borrowReturn);
     }
 
@@ -53,7 +57,10 @@ public class BasicEquipmentService {
         return borrowReturnDao.get();
     }
 
-    public void update(BorrowReturn borrowReturn) {
+    public void update(BorrowReturn borrowReturn, String token) {
+        if(Objects.isNull(borrowReturn.getBorrower())){
+            borrowReturn.setBorrower(TokenUtil.getInfoByToken(token));
+        }
         borrowReturnDao.update(borrowReturn);
     }
 

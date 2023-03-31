@@ -26,4 +26,8 @@ public class RepairDao {
     public Repair getById(int id){
         return repairMapper.getById(id);
     }
+
+    public void update(Repair repair){
+        repairMapper.update(repair);
+    }
 }

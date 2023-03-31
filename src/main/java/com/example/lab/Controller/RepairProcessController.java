@@ -47,8 +47,7 @@ public class RepairProcessController {
         if(Objects.isNull(breakdown)){
             return RetUtil.failure("损坏记录不存在");
         }
-        repair.setRepairPerson(TokenUtil.getInfoByToken(token));
-        service.add(repair);
+        service.add(repair, token);
         return RetUtil.successWithMsg("添加成功");
 
     }
@@ -56,6 +55,16 @@ public class RepairProcessController {
     // 获取维修历史列表
     public Ret<?> get(){
         return RetUtil.success(service.get());
+    }
+
+    public Ret<?> update(Repair repair){
+       try {
+           service.update(repair);
+       }catch (Exception e){
+           e.printStackTrace();
+           return RetUtil.failure("更新失败");
+       }
+       return RetUtil.successWithMsg("更新成功");
     }
 
 }

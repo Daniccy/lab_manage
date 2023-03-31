@@ -68,9 +68,7 @@ public class BasicEquipmentController {
         if(Objects.isNull(equipment) || equipment.getNumber() < borrowReturn.getNumber()){
             return RetUtil.failure("不存在该设备或设备数量不足");
         }
-        // 用户身份 管理员身份未定
-        borrowReturn.setBorrower(TokenUtil.getInfoByToken(token));
-        service.insertBorrow(borrowReturn);
+        service.insertBorrow(borrowReturn, token);
         return RetUtil.success("借用成功");
     }
 
@@ -105,7 +103,8 @@ public class BasicEquipmentController {
         if(Objects.isNull(isExistEquipment) || isExistEquipment.getNumber() < borrowReturn.getNumber()){
             return RetUtil.success("该设备不存在或者设备数量不足");
         }
-        service.update(borrowReturn);
+
+        service.update(borrowReturn, token);
         return RetUtil.successWithMsg("更新成功");
     }
 }

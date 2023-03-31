@@ -18,4 +18,5 @@ public interface RepairMapper {
     Repair getById(@Param("id") Integer id);
 
 
+    void update(Repair repair);
 }

@@ -14,4 +14,10 @@
     <select id="getById" resultType="com.example.lab.Entity.BorrowReturn">
         select * from repair where repair_id = #{id}
     </select>
+
+    <update id="update" statementType="CALLABLE">
+        {call upadte_repair_equipment(
+        #{repairId}, #{repairPerson}, #{breakdownId})}
+    </update>
+
 </mapper>

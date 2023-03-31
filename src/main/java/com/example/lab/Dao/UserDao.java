@@ -6,6 +6,8 @@ import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 
 public class UserDao {
@@ -26,5 +28,9 @@ public class UserDao {
 
     public User login(String userName, String userPassword){
        return mapper.login(userName, userPassword);
+    }
+
+    public List<User> selectAll(){
+        return mapper.selectAll();
     }
 }

@@ -23,4 +23,8 @@
     <select id="login" resultType ="com.example.lab.Entity.User">
        SELECT  * FROM user WHERE user_name = #{userName} AND user_passward = #{userPassword}
     </select>
+
+    <select id="selectAll" resultType ="java.util.ArrayList">
+        SELECT  * FROM user
+    </select>
 </mapper>

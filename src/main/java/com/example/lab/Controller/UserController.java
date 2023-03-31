@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.util.List;
 import java.util.Objects;
 
 @Controller("UserController")
@@ -55,12 +56,17 @@ public class UserController {
      * @return
      */
    public Ret<?> login(String userName, String userPassward){
-        User user = service.login(userName, userPassward);
-        if(Objects.isNull(user)){
+        int res = service.login(userName, userPassward);
+        if(res == -1){
             return RetUtil.successWithMsg("用户名或密码错误");
         }
-        String token = TokenUtil.generateToken(user);
-        CacheManagerUtil.putCache(token, user, TIME_OUT);
-        return RetUtil.successWithMsg("登录成功");
+        if(res == 0) return RetUtil.success("登录成功", 0);
+        return RetUtil.success("登录成功", 1);
+   }
+
+   public Ret<?> selectAll(){
+       List<User> user = service.selectAll();
+       if(user.size() == 0) return RetUtil.success("没有用户");
+       return RetUtil.success(user);
    }
 }

@@ -3,8 +3,17 @@ package com.example.lab.Service;
 import com.example.lab.Dao.UserDao;
 import com.example.lab.Entity.User;
 import com.example.lab.Mapper.UserMapper;
+import com.example.lab.Util.CacheManagerUtil;
+import com.example.lab.Util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+
+import static com.example.lab.Controller.UserController.TIME_OUT;
 
 @Service
 
@@ -24,8 +33,22 @@ public class UserService {
         dao.delete(id);
     }
 
-    public User login(String userName, String userPassword){
+    /**
+     * 0 表示管理员 1 表示用户 -1 表示用户不存在
+     * @param userName
+     * @param userPassword
+     * @return
+     */
+    public int login(String userName, String userPassword){
         User user  = dao.login(userName, userPassword);
-        return user;
+        if(Objects.isNull(user)) return -1;
+        String token = TokenUtil.generateToken(user);
+        CacheManagerUtil.putCache(token, user, TIME_OUT);
+        if(user.getUserId().startsWith("99")) return 0;
+        return 1;
+    }
+
+    public List<User> selectAll(){
+        return dao.selectAll();
     }
 }

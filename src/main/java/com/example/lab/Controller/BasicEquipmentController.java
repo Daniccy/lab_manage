@@ -38,7 +38,7 @@ public class BasicEquipmentController {
 
     // 获取设备
     public Ret<?> getEquipment(){
-        return RetUtil.success(service.get());
+        return RetUtil.success(service.getEquipment());
     }
 
     // 更新设备

@@ -46,7 +46,7 @@ public class update_repair {
                     int breakid = Integer.parseInt(break_id.getText());
                     Repair repair=new Repair();
                     repair.setRepairId(repairid);
-                    repair.setApplyReason(userid);
+                    repair.setRepairPerson(userid);
                     repair.setBreakdownId(breakid);
                     RepairProcessController controller = (RepairProcessController) ApplicationContextUtil.getBean("RepairProcessController");
                     String info =controller.update(repair,Token.token).info;

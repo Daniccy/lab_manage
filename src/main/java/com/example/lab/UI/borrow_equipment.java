@@ -51,13 +51,11 @@ public class borrow_equipment {
                     br.setNumber(number);
                     BasicEquipmentController controller = (BasicEquipmentController) ApplicationContextUtil.getBean("BasicEquipmentController");
                     String info =controller.insertBorrow(br, Token.token).info;
+                    JOptionPane.showMessageDialog(null, info);
                     if(info.equals("借用成功")){
                         closepage();
                         new borrow_return_equipment().init();
                         return;
-                    }else {
-                        /****失败的处理****/
-                        JOptionPane.showMessageDialog(null, info);
                     }
                 }
             }

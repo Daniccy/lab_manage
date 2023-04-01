@@ -48,13 +48,11 @@ public class userReturn {
                     }
                     BasicEquipmentController controller = (BasicEquipmentController) ApplicationContextUtil.getBean("BasicEquipmentController");
                     String info =controller.returnBorrow(borrowReturn).info;
+                    JOptionPane.showMessageDialog(null, info);
                     if (info.equals("归还成功")){
                         closepage();
                         new user_br_eq().init();
                         return;
-                    }else{
-                        /**************/
-                        JOptionPane.showMessageDialog(null, info);
                     }
                 }
             }

@@ -42,13 +42,13 @@ public class user_information_update {
                 UserController controller = (UserController) ApplicationContextUtil.getBean("UserController");
                 /*******加个toekn***/
                 String info =controller.update(user).info;
+                JOptionPane.showMessageDialog(null, info);
                 if(info.equals("更新成功")){
                     closepage();
                     new user_information().init();
                     return;
                 }
-                /*****************后端***********/
-                closepage();
+
             }
         });
         exit.addActionListener(new ActionListener() {

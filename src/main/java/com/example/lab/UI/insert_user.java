@@ -39,13 +39,14 @@ public class insert_user {
                 user.setUserPhone(userPhone);
                 UserController controller = (UserController) ApplicationContextUtil.getBean("UserController");
                 String info =controller.add(user).info;
+                JOptionPane.showMessageDialog(null, info);
                 if(info.equals("添加用户成功")){
                     closepage();
                     new select_users().init();
                     return;
                 }
                 /*****************后端***********/
-                closepage();
+
             }
         });
         exit.addActionListener(new ActionListener() {

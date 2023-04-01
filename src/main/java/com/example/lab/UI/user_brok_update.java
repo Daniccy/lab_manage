@@ -49,13 +49,11 @@ public class user_brok_update {
                     breakdown.setNum(number);
                     breakdownEquipmentController controller = (breakdownEquipmentController) ApplicationContextUtil.getBean("breakdownEquipmentController");
                     String info =controller.update(breakdown, Token.token).info;
+                    JOptionPane.showMessageDialog(null, info);
                     if (info.equals("更新成功")){
                         closepage();
                         new user_brok_eq().init();
                         return;
-                    }else{
-                        /**************/
-                        JOptionPane.showMessageDialog(null, info);
                     }
                 }
             }

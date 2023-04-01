@@ -52,13 +52,11 @@ public class return_equipment {
                     }
                     BasicEquipmentController controller = (BasicEquipmentController) ApplicationContextUtil.getBean("BasicEquipmentController");
                     String info =controller.returnBorrow(borrowReturn).info;
+                    JOptionPane.showMessageDialog(null, info);
                     if (info.equals("归还成功")){
                         closepage();
                         new borrow_return_equipment().init();
                         return;
-                    }else{
-                        /**************/
-                        JOptionPane.showMessageDialog(null, info);
                     }
                 }
             }

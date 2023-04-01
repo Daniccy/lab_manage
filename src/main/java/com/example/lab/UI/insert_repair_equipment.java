@@ -50,13 +50,11 @@ public class insert_repair_equipment {
 
                     RepairProcessController controller = (RepairProcessController) ApplicationContextUtil.getBean("RepairProcessController");
                     String info =controller.add(repair, Token.token).info;
+                    JOptionPane.showMessageDialog(null, info);
                     if (info.equals("添加成功")){
                         closepage();
                         new repair_equipment().init();
                         return;
-                    }else{
-                        /**************/
-                        JOptionPane.showMessageDialog(null, info);
                     }
                 }
 

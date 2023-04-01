@@ -41,13 +41,11 @@ public class user_rep_insert {
                     repair.setBreakdownId(breakid);
                     RepairProcessController controller = (RepairProcessController) ApplicationContextUtil.getBean("RepairProcessController");
                     String info =controller.add(repair, Token.token).info;
+                    JOptionPane.showMessageDialog(null, info);
                     if (info.equals("添加成功")){
                         closepage();
                         new user_rep_eq().init();
                         return;
-                    }else{
-                        /**************/
-                        JOptionPane.showMessageDialog(null, info);
                     }
                 }
             }

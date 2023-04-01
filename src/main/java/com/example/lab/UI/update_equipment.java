@@ -62,13 +62,11 @@ public class update_equipment {
                     Equipment equipment=new Equipment(eqname,eqtype,number,price,where,beizhu);
                     BasicEquipmentController controller = (BasicEquipmentController) ApplicationContextUtil.getBean("BasicEquipmentController");
                     String info =controller.updateEquipment(equipment, Token.token).info;
+                    JOptionPane.showMessageDialog(null, info);
                     if(info.equals("更新成功")){
                         closepage();
                         new select_equipment().init();
                         return;
-                    }else {
-                        /****失败的处理****/
-                        JOptionPane.showMessageDialog(null, info);
                     }
                 }
                 //closepage();

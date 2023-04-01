@@ -51,13 +51,11 @@ public class userBorrowUpdate {
 
                     BasicEquipmentController controller = (BasicEquipmentController) ApplicationContextUtil.getBean("BasicEquipmentController");
                     String info =controller.update(borrowReturn, Token.token).info;
+                    JOptionPane.showMessageDialog(null, info);
                     if (info.equals("更新成功")){
                         closepage();
                         new user_br_eq().init();
                         return;
-                    }else{
-                        /**************/
-                        JOptionPane.showMessageDialog(null, info);
                     }
                 }
             }

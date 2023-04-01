@@ -44,13 +44,14 @@ public class update_user {
                 user.setUserPhone(userPhone);
                 UserController controller = (UserController) ApplicationContextUtil.getBean("UserController");
                 String info =controller.update(user).info;
+                JOptionPane.showMessageDialog(null, info);
                 if(info.equals("更新成功")){
                     closepage();
                     new select_users().init();
                     return;
                 }
                 /*****************后端***********/
-                closepage();
+
             }
         });
         exit.addActionListener(new ActionListener() {

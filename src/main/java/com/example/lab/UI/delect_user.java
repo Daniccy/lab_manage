@@ -33,13 +33,14 @@ public class delect_user {
                 String userid = eq_name.getText();
                 UserController controller = (UserController) ApplicationContextUtil.getBean("UserController");
                 String info =controller.delete(userid).info;
+                JOptionPane.showMessageDialog(null, info);
                 if(info.equals("删除用户成功")){
                     closepage();
                     new select_users().init();
                     return;
                 }
                 /*********/
-                closepage();
+
             }
         });
     }

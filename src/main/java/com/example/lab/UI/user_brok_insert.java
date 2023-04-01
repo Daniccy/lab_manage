@@ -46,6 +46,7 @@ public class user_brok_insert {
                     breakdown.setNum(number);
                     breakdownEquipmentController controller = (breakdownEquipmentController) ApplicationContextUtil.getBean("breakdownEquipmentController");
                     String info =controller.add(breakdown, Token.token).info;
+
                     if (info.equals("添加成功")){
                         closepage();
                         new user_brok_eq().init();

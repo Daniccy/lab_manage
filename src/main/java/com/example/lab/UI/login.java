@@ -21,7 +21,7 @@ public class login {
     private JPanel panel1;
     private JTextField account;
     private JButton 登录Button;
-    private JTextField password;
+    private JPasswordField password;
     private JButton 取消Button;
 
 
@@ -121,7 +121,8 @@ public class login {
         panel1.add(label4, cc.xy(3, 4, CellConstraints.CENTER, CellConstraints.CENTER));
         account = new JTextField();
         panel1.add(account, cc.xy(4, 3, CellConstraints.FILL, CellConstraints.CENTER));
-        password = new JTextField();
+        password = new JPasswordField();
+        password.setEchoChar('*');
         panel1.add(password, cc.xy(4, 4, CellConstraints.FILL, CellConstraints.CENTER));
         登录Button = new JButton();
         登录Button.setText("登录");

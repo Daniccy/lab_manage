@@ -53,13 +53,11 @@ public class insert_equipment {
                     Equipment equipment=new Equipment(eqname,eqtype,number,price,where,beizhu);
                     BasicEquipmentController controller = (BasicEquipmentController) ApplicationContextUtil.getBean("BasicEquipmentController");
                     String info =controller.addEquipment(equipment, Token.token).info;
+                    JOptionPane.showMessageDialog(null, info);
                     if(info.equals("添加成功")){
                         closepage();
                         new select_equipment().init();
                         return;
-                    }else {
-                        /****失败的处理****/
-                        JOptionPane.showMessageDialog(null, info);
                     }
                 }
 

@@ -55,13 +55,11 @@ public class insert_breakdown_equipment {
 
                     breakdownEquipmentController controller = (breakdownEquipmentController) ApplicationContextUtil.getBean("breakdownEquipmentController");
                     String info =controller.add(breakdown, Token.token).info;
+                    JOptionPane.showMessageDialog(null, info);
                     if (info.equals("添加成功")){
                         closepage();
                         new breakdown_equipment().init();
                         return;
-                    }else{
-                        /**************/
-                        JOptionPane.showMessageDialog(null, info);
                     }
                 }
             }

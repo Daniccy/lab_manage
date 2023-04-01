@@ -43,12 +43,11 @@ public class user_rep_update {
                     repair.setBreakdownId(breakid);
                     RepairProcessController controller = (RepairProcessController) ApplicationContextUtil.getBean("RepairProcessController");
                     String info =controller.update(repair,Token.token).info;
+                    JOptionPane.showMessageDialog(null, info);
                     if(info.equals("更新成功")){
                         closepage();
                         new user_rep_eq().init();
                         return;
-                    }else {
-                        JOptionPane.showMessageDialog(null, info);
                     }
 
                 }

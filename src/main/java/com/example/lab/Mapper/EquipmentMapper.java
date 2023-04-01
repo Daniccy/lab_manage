@@ -17,7 +17,7 @@ public interface EquipmentMapper {
     void add(Equipment equipment);
     List<Equipment> get();
     void update(Equipment equipment);
-    Equipment getById(@Param("id") Integer id);
+    List<Equipment> getById(@Param("id") String id);
 
     Equipment getByName(@Param("equipmentName") String equipmentName);
 

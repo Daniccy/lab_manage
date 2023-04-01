@@ -35,4 +35,9 @@ public class BreakdownEquipmentService {
         }
         breakdownDao.update(breakdown);
     }
+
+    // 获取用户损坏设备
+    public List<Breakdown> getByUserId(String id){
+        return breakdownDao.getByUserId(id);
+    }
 }

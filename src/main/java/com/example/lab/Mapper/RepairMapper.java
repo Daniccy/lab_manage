@@ -15,7 +15,7 @@ import java.util.List;
 public interface RepairMapper {
     void add(Repair repair);
     List<Repair> get();
-    Repair getById(@Param("id") Integer id);
+    List<Repair> getById(@Param("id") String id);
 
 
     void update(Repair repair);

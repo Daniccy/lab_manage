@@ -29,7 +29,10 @@ public class BreakdownEquipmentService {
         return breakdownDao.getById(id);
     }
 
-    public void update(Breakdown breakdown){
+    public void update(Breakdown breakdown, String token){
+        if(breakdown.getApplyPerson() == null){
+            breakdown.setApplyPerson(TokenUtil.getInfoByToken(token));
+        }
         breakdownDao.update(breakdown);
     }
 }

@@ -21,7 +21,7 @@ public class RepairProcessService {
     }
 
     public void add(Repair repair, String token) {
-        if(repair.getRepairPerson() != null){
+        if(repair.getRepairPerson() == null){
             repair.setRepairPerson(TokenUtil.getInfoByToken(token));
         }
         repairDao.add(repair);
@@ -32,7 +32,7 @@ public class RepairProcessService {
     }
 
     public void update(Repair repair, String token){
-        if(repair.getRepairPerson() != null){
+        if(repair.getRepairPerson() == null){
             repair.setRepairPerson(TokenUtil.getInfoByToken(token));
         }
         repairDao.update(repair);

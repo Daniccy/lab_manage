@@ -61,7 +61,7 @@ public class breakdownEquipmentController {
             return RetUtil.failure("设备不存在");
         }
         breakdown.setEquipmentId(equipment.getEquipmentId());
-        service.update(breakdown);
+        service.update(breakdown, token);
         return RetUtil.successWithMsg("更新成功");
     }
 

@@ -27,7 +27,7 @@ public class RepairProcessService {
         repairDao.add(repair);
     }
 
-    public Repair getById(int id){
+    public List<Repair> get(String id){
         return repairDao.getById(id);
     }
 

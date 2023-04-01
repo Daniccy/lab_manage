@@ -4,6 +4,7 @@ import com.example.lab.Dao.BorrowReturnDao;
 import com.example.lab.Dao.EquipmentDao;
 import com.example.lab.Entity.BorrowReturn;
 import com.example.lab.Entity.Equipment;
+import com.example.lab.Entity.Repair;
 import com.example.lab.Entity.User;
 import com.example.lab.Util.RetUtil;
 import com.example.lab.Util.TokenUtil;
@@ -64,7 +65,7 @@ public class BasicEquipmentService {
         borrowReturnDao.update(borrowReturn);
     }
 
-    public Equipment getById(int id){
+    public List<Equipment> getById(String id){
         return equipmentDao.getById(id);
     }
 

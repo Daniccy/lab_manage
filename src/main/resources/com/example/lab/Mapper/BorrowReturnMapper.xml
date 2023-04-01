@@ -21,6 +21,6 @@
     </select>
 
     <select id="getById" resultType="com.example.lab.Entity.BorrowReturn">
-        select * from borrow_return where borrow_id = #{id}
+        select * from borrow_return where borrower = #{id}
     </select>
 </mapper>

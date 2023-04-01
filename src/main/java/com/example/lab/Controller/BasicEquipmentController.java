@@ -109,4 +109,11 @@ public class BasicEquipmentController {
         service.update(borrowReturn, token);
         return RetUtil.successWithMsg("更新成功");
     }
+
+
+    public Ret<?> get(String token) {
+        String userId = TokenUtil.getInfoByToken(token);
+        return RetUtil.success(service.getById(userId));
+    }
+
 }

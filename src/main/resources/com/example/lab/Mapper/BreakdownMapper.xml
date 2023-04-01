@@ -19,4 +19,9 @@
     <update id="update" statementType="CALLABLE" parameterType="com.example.lab.Entity.Breakdown">
         {call upadte_breakdown_equipment(#{breakdownId}, #{equipmentId}, #{applyReason}, #{applyPerson}, #{num})}
     </update>
+
+    <select id="getByUserId" resultType="com.example.lab.Entity.Breakdown">
+        select * from breakdown where apply_person= #{id}
+    </select>
+
 </mapper>

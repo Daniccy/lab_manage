@@ -23,7 +23,7 @@ public class RepairDao {
         return repairMapper.get();
     }
 
-    public Repair getById(int id){
+    public List<Repair> getById(String id){
         return repairMapper.getById(id);
     }
 

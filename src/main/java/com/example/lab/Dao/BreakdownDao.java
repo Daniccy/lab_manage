@@ -27,4 +27,8 @@ public class BreakdownDao {
     public void update(Breakdown breakdown){
         breakdownMapper.update(breakdown);
     }
+
+    public List<Breakdown> getByUserId(String id){
+        return breakdownMapper.getByUserId(id);
+    }
 }

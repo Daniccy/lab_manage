@@ -16,5 +16,6 @@ public interface BreakdownMapper {
     void add(Breakdown breakdown);
     List<Breakdown> get();
     Breakdown getById(@Param("id") Integer id);
+    void update(Breakdown breakdown);
 
 }

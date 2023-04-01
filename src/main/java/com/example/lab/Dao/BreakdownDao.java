@@ -23,4 +23,8 @@ public class BreakdownDao {
     public Breakdown getById(int id){
         return breakdownMapper.getById(id);
     }
+
+    public void update(Breakdown breakdown){
+        breakdownMapper.update(breakdown);
+    }
 }

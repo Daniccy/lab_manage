@@ -1,5 +1,5 @@
 设备更新：不存在的设备名称去更新无返回提示
-损坏设备的插入：Incorrect integer value: '烧杯' for column 'eq_id' at row 1
+损坏设备的插入：Incorrect integer value: '烧杯' for column 'eq_id' at row 1 --->finish
 
 没解决的：
 损坏设备的更新：Column 'equipment_id' cannot be null
@@ -7,4 +7,4 @@
 维修的更新：更新后这条维修数据都没了。
 
 /*****数据库问题**/
-借的更新：没有同步总表数量的触发器；
+借的更新：没有同步总表数量的触发器；--->finish

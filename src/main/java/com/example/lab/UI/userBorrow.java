@@ -1,9 +1,7 @@
 package com.example.lab.UI;
 import com.example.lab.Controller.BasicEquipmentController;
-import com.example.lab.Controller.UserController;
+import com.example.lab.Entity.BorrowReturn;
 import com.example.lab.Util.ApplicationContextUtil;
-import com.example.lab.Util.TokenUtil;
-import com.example.lab.common.Ret;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
@@ -14,67 +12,65 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
-import java.util.Map;
 
-public class login {
-    static JFrame frame = new JFrame("登录");
+public class userBorrow {
+    static JFrame frame = new JFrame("userBorrow");
+    private JPanel root;
     private JPanel panel1;
-    private JTextField account;
-    private JButton 登录Button;
-    private JTextField password;
-    private JButton 取消Button;
+    private JTextField eq_name;
+    private JTextField num;
+    private JButton yes;
+    private JButton exit;
 
-
-    public login() {
-        登录Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String a = account.getText();
-                String b = password.getText();
-                UserController controller = (UserController) ApplicationContextUtil.getBean("UserController");
-                Ret<?> ret = controller.login(a,b);
-                String info =ret.info;
-                Map<String, Object> data = (Map<String, Object>) ret.data;
-                if(info.equals("登录成功")){
-                    Token.token= (String)data.get("token");
-                    closepage();
-                    if ((int)data.get("auth")==0){
-                        new select_equipment().init();
-                    }
-                    else{
-                        /******用户的首届面***/
-                        new user_sl_equipment().init();
-                    }
-
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, info);
-                }
-            }
-        });
-        取消Button.addActionListener(new ActionListener() {
+    public userBorrow() {
+        exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 closepage();
+                new user_br_eq().init();
             }
         });
+        yes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (num.getText().equals("")) {
+                    /******错误弹窗调用***********/
+                    JOptionPane.showMessageDialog(null, "填入数据不可为空");
+                } else {
+                    String equipment_name = eq_name.getText();
+                    int number = Integer.parseInt(num.getText());
+                    BorrowReturn br=new BorrowReturn();
+                    br.setEquipmentName(equipment_name);
+                    br.setNumber(number);
+                    BasicEquipmentController controller = (BasicEquipmentController) ApplicationContextUtil.getBean("BasicEquipmentController");
+                    String info =controller.insertBorrow(br, Token.token).info;
+                    if(info.equals("借用成功")){
+                        closepage();
+                        new user_br_eq().init();
+                        return;
+                    }else {
+                        /****失败的处理****/
+                        JOptionPane.showMessageDialog(null, info);
+                    }
+                }
+            }
+        });
+
     }
 
-    public  void init() {
-        frame.setContentPane(new login().panel1);
+    public void init() {
+        frame.setContentPane(new userBorrow().root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setBounds(1100, 600, 800, 400);
         frame.pack();
         frame.setVisible(true);
     }
+
     public void closepage() {
         frame.dispose();
-
     }
 
     public static void main(String[] args) {
-        new login().init();
+        new userBorrow().init();
     }
 
     {
@@ -92,43 +88,47 @@ public class login {
      * @noinspection ALL
      */
     private void $$$setupUI$$$() {
+        root = new JPanel();
+        root.setLayout(new FormLayout("fill:d:grow", "center:d:grow"));
         panel1 = new JPanel();
-        panel1.setLayout(new FormLayout("fill:max(d;4px):noGrow,left:68dlu:noGrow,left:50dlu:noGrow,left:103dlu:noGrow,fill:93px:noGrow,left:69dlu:noGrow,fill:max(d;4px):noGrow", "center:61px:noGrow,top:22dlu:noGrow,top:28dlu:noGrow,center:66px:noGrow,center:max(d;4px):noGrow,top:28dlu:noGrow,center:61px:noGrow,top:17dlu:noGrow,center:max(d;4px):noGrow"));
+        panel1.setLayout(new FormLayout("fill:max(d;4px):noGrow,left:68dlu:noGrow,left:50dlu:noGrow,left:103dlu:noGrow,fill:93px:noGrow,left:69dlu:noGrow,fill:max(d;4px):noGrow", "center:61px:noGrow,top:20dlu:noGrow,center:28dlu:noGrow,top:28dlu:noGrow,center:max(d;4px):noGrow,top:35dlu:noGrow,center:29px:noGrow"));
         panel1.setBackground(new Color(-4272661));
         panel1.setForeground(new Color(-5922902));
+        CellConstraints cc = new CellConstraints();
+        root.add(panel1, cc.xy(1, 1, CellConstraints.DEFAULT, CellConstraints.FILL));
         final JLabel label1 = new JLabel();
         label1.setForeground(new Color(-4928789));
         label1.setText("Label");
-        CellConstraints cc = new CellConstraints();
         panel1.add(label1, cc.xy(2, 1));
         final JLabel label2 = new JLabel();
-        Font label2Font = this.$$$getFont$$$(null, Font.BOLD | Font.ITALIC, 28, label2.getFont());
+        Font label2Font = this.$$$getFont$$$(null, Font.BOLD, 26, label2.getFont());
         if (label2Font != null) label2.setFont(label2Font);
-        label2.setForeground(new Color(-8878906));
-        label2.setText("实验室设备管理系统");
+        label2.setForeground(new Color(-3771247));
+        label2.setText("借用设备");
         panel1.add(label2, cc.xyw(3, 1, 3, CellConstraints.CENTER, CellConstraints.DEFAULT));
         final JLabel label3 = new JLabel();
-        Font label3Font = this.$$$getFont$$$(null, Font.PLAIN, 22, label3.getFont());
+        Font label3Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label3.getFont());
         if (label3Font != null) label3.setFont(label3Font);
         label3.setForeground(new Color(-5409849));
-        label3.setText("账号");
+        label3.setText("设备名称");
         panel1.add(label3, cc.xy(3, 3, CellConstraints.CENTER, CellConstraints.CENTER));
+        eq_name = new JTextField();
+        panel1.add(eq_name, cc.xy(4, 3, CellConstraints.FILL, CellConstraints.CENTER));
         final JLabel label4 = new JLabel();
-        Font label4Font = this.$$$getFont$$$(null, Font.PLAIN, 22, label4.getFont());
+        Font label4Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label4.getFont());
         if (label4Font != null) label4.setFont(label4Font);
         label4.setForeground(new Color(-5409849));
-        label4.setText("密码");
+        label4.setText("借用数量");
         panel1.add(label4, cc.xy(3, 4, CellConstraints.CENTER, CellConstraints.CENTER));
-        account = new JTextField();
-        panel1.add(account, cc.xy(4, 3, CellConstraints.FILL, CellConstraints.CENTER));
-        password = new JTextField();
-        panel1.add(password, cc.xy(4, 4, CellConstraints.FILL, CellConstraints.CENTER));
-        登录Button = new JButton();
-        登录Button.setText("登录");
-        panel1.add(登录Button, cc.xy(3, 7, CellConstraints.CENTER, CellConstraints.DEFAULT));
-        取消Button = new JButton();
-        取消Button.setText("取消");
-        panel1.add(取消Button, cc.xy(5, 7, CellConstraints.CENTER, CellConstraints.DEFAULT));
+        num = new JTextField();
+        num.setText("");
+        panel1.add(num, cc.xy(4, 4, CellConstraints.FILL, CellConstraints.CENTER));
+        yes = new JButton();
+        yes.setText("确定");
+        panel1.add(yes, cc.xy(3, 6, CellConstraints.RIGHT, CellConstraints.CENTER));
+        exit = new JButton();
+        exit.setText("返回");
+        panel1.add(exit, cc.xy(5, 6, CellConstraints.LEFT, CellConstraints.CENTER));
     }
 
     /**
@@ -157,7 +157,7 @@ public class login {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() {
-        return panel1;
+        return root;
     }
 
 }

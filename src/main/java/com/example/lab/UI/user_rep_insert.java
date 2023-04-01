@@ -1,8 +1,7 @@
 package com.example.lab.UI;
-import com.example.lab.Controller.UserController;
+import com.example.lab.Controller.RepairProcessController;
+import com.example.lab.Entity.Repair;
 import com.example.lab.Util.ApplicationContextUtil;
-import com.example.lab.Util.TokenUtil;
-import com.example.lab.common.Ret;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
@@ -14,48 +13,60 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
 
-public class manager {
-    static JFrame frame = new JFrame("manager");
-    private JPanel root;
+public class user_rep_insert {
+    static JFrame frame = new JFrame("user_rep_insert");
     private JPanel panel1;
-    private JButton 设备管理Button;
-    private JButton 用户管理Button;
-    private JButton 返回Button;
+    private JTextField break_id;
+    private JButton exit;
+    private JButton sure;
+    private JPanel root;
 
-    public manager() {
-        设备管理Button.addActionListener(new ActionListener() {
+    public user_rep_insert() {
+        exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 closepage();
-                new select_equipment().init();
+                new user_rep_eq().init();
             }
         });
-        用户管理Button.addActionListener(new ActionListener() {
+        sure.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                closepage();
-                new select_users().init();
-            }
-        });
-        返回Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                closepage();
-                new login().init();
+                if (break_id.getText().equals("")) {
+                    //错误处理
+                    JOptionPane.showMessageDialog(null, "填入数据不可为空");
+                } else {
+                    int breakid = Integer.parseInt(break_id.getText());
+                    Repair repair=new Repair();
+                    repair.setBreakdownId(breakid);
+                    RepairProcessController controller = (RepairProcessController) ApplicationContextUtil.getBean("RepairProcessController");
+                    String info =controller.add(repair, Token.token).info;
+                    if (info.equals("添加成功")){
+                        closepage();
+                        new user_rep_eq().init();
+                        return;
+                    }else{
+                        /**************/
+                        JOptionPane.showMessageDialog(null, info);
+                    }
+                }
             }
         });
     }
 
     public void init() {
-        frame.setContentPane(new manager().root);
+        frame.setContentPane(new user_rep_insert().root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setBounds(1000, 600, 800, 400);
         frame.pack();
         frame.setVisible(true);
     }
+
     public void closepage() {
         frame.dispose();
+    }
 
+    public static void main(String[] args) {
+        new user_rep_insert().init();
     }
 
     {
@@ -74,32 +85,37 @@ public class manager {
      */
     private void $$$setupUI$$$() {
         root = new JPanel();
-        root.setLayout(new BorderLayout(0, 0));
+        root.setLayout(new FormLayout("fill:d:grow", "center:d:grow"));
         panel1 = new JPanel();
-        panel1.setLayout(new FormLayout("fill:max(d;4px):noGrow,left:68dlu:noGrow,left:50dlu:noGrow,left:103dlu:noGrow,fill:93px:noGrow,left:69dlu:noGrow,fill:max(d;4px):noGrow", "center:61px:noGrow,top:13dlu:noGrow,center:40dlu:noGrow,center:40dlu:noGrow,top:40dlu:noGrow,center:max(d;4px):noGrow"));
+        panel1.setLayout(new FormLayout("fill:max(d;4px):noGrow,left:68dlu:noGrow,left:50dlu:noGrow,left:103dlu:noGrow,fill:93px:noGrow,left:69dlu:noGrow,fill:max(d;4px):noGrow", "center:61px:noGrow,top:22dlu:noGrow,center:67px:noGrow,center:61px:noGrow,top:31dlu:noGrow,center:max(d;4px):noGrow"));
         panel1.setBackground(new Color(-4272661));
         panel1.setForeground(new Color(-5922902));
-        root.add(panel1, BorderLayout.CENTER);
+        CellConstraints cc = new CellConstraints();
+        root.add(panel1, cc.xy(1, 1, CellConstraints.DEFAULT, CellConstraints.FILL));
         final JLabel label1 = new JLabel();
         label1.setForeground(new Color(-4928789));
         label1.setText("Label");
-        CellConstraints cc = new CellConstraints();
         panel1.add(label1, cc.xy(2, 1));
         final JLabel label2 = new JLabel();
         Font label2Font = this.$$$getFont$$$(null, Font.BOLD, 26, label2.getFont());
         if (label2Font != null) label2.setFont(label2Font);
         label2.setForeground(new Color(-3771247));
-        label2.setText("管理员界面");
+        label2.setText("损坏设备报修");
         panel1.add(label2, cc.xyw(3, 1, 3, CellConstraints.CENTER, CellConstraints.DEFAULT));
-        设备管理Button = new JButton();
-        设备管理Button.setText("设备管理");
-        panel1.add(设备管理Button, cc.xy(4, 4, CellConstraints.FILL, CellConstraints.DEFAULT));
-        用户管理Button = new JButton();
-        用户管理Button.setText("用户管理");
-        panel1.add(用户管理Button, cc.xy(4, 3, CellConstraints.FILL, CellConstraints.DEFAULT));
-        返回Button = new JButton();
-        返回Button.setText("返回");
-        panel1.add(返回Button, cc.xy(4, 5, CellConstraints.CENTER, CellConstraints.CENTER));
+        final JLabel label3 = new JLabel();
+        Font label3Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label3.getFont());
+        if (label3Font != null) label3.setFont(label3Font);
+        label3.setForeground(new Color(-5409849));
+        label3.setText("损坏表id");
+        panel1.add(label3, cc.xy(3, 3, CellConstraints.CENTER, CellConstraints.CENTER));
+        break_id = new JTextField();
+        panel1.add(break_id, cc.xy(4, 3, CellConstraints.FILL, CellConstraints.CENTER));
+        exit = new JButton();
+        exit.setText("返回");
+        panel1.add(exit, cc.xy(5, 4, CellConstraints.LEFT, CellConstraints.DEFAULT));
+        sure = new JButton();
+        sure.setText("确定");
+        panel1.add(sure, cc.xy(3, 4, CellConstraints.RIGHT, CellConstraints.DEFAULT));
     }
 
     /**
@@ -130,5 +146,4 @@ public class manager {
     public JComponent $$$getRootComponent$$$() {
         return root;
     }
-
 }

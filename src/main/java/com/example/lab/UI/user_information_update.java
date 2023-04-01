@@ -1,7 +1,6 @@
 package com.example.lab.UI;
-
-import com.example.lab.Controller.breakdownEquipmentController;
-import com.example.lab.Entity.Breakdown;
+import com.example.lab.Controller.UserController;
+import com.example.lab.Entity.User;
 import com.example.lab.Util.ApplicationContextUtil;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
@@ -14,61 +13,55 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
 
-public class update_breakdown {
-    static JFrame frame = new JFrame("update_breakdown");
-    private JPanel root;
-    private JButton 确定Button;
-    private JTextField breakdown_id;
-    private JTextField eq_name;
-    private JTextField reason;
-    private JTextField user_id;
-    private JTextField num;
+public class user_information_update {
+    static JFrame frame = new JFrame("user_information_update");
+    private JTextField user_name;
+    private JTextField pw_user;
+    private JTextField user_phone;
+    private JTextField user_email;
     private JButton exit;
+    private JButton 确定Button;
+    private JTextField user_adress;
+    private JPanel root;
 
-    public update_breakdown() {
-        exit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                closepage();
-                new breakdown_equipment().init();
-            }
-        });
+    public user_information_update() {
         确定Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (num.getText().equals("") || breakdown_id.getText().equals("")) {
-                    /******错误弹窗调用***********/
-                    JOptionPane.showMessageDialog(null, "填入数据不可为空");
-                } else {
-                    int breakid = Integer.parseInt(breakdown_id.getText());
-                    String userID = user_id.getText();
-                    String equipment_name = eq_name.getText();
-                    String reasons = reason.getText();
-                    int number = Integer.parseInt(num.getText());
-                    Breakdown breakdown=new Breakdown();
-                    breakdown.setBreakdownId(breakid);
-                    breakdown.setApplyReason(userID);
-                    breakdown.setEquipmentName(equipment_name);
-                    breakdown.setApplyReason(reasons);
-                    breakdown.setNum(number);
-                    breakdownEquipmentController controller = (breakdownEquipmentController) ApplicationContextUtil.getBean("breakdownEquipmentController");
-                    String info =controller.update(breakdown, Token.token).info;
-                    if (info.equals("更新成功")){
-                        closepage();
-                        new breakdown_equipment().init();
-                        return;
-                    }else{
-                        /**************/
-                        JOptionPane.showMessageDialog(null, info);
-                    }
+                String userName = user_name.getText();
+                String userpw = pw_user.getText();
+                String userEmail = user_email.getText();
+                String userAdress = user_adress.getText();
+                String userPhone = user_phone.getText();
+                User user=new User();
+                user.setUserPassward(userpw);
+                user.setUserName(userName);
+                user.setUserMail(userEmail);
+                user.setUserAddress(userAdress);
+                user.setUserPhone(userPhone);
+                UserController controller = (UserController) ApplicationContextUtil.getBean("UserController");
+                /*******加个toekn***/
+                String info =controller.update(user).info;
+                if(info.equals("更新成功")){
+                    closepage();
+                    new user_information().init();
+                    return;
                 }
+                /*****************后端***********/
+                closepage();
+            }
+        });
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new user_information().init();
+                closepage();
             }
         });
     }
 
     public void init() {
-
-        frame.setContentPane(new update_breakdown().root);
+        frame.setContentPane(new user_information_update().root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -80,7 +73,7 @@ public class update_breakdown {
     }
 
     public static void main(String[] args) {
-        new update_breakdown().init();
+        new user_information_update().init();
     }
 
     {
@@ -101,7 +94,7 @@ public class update_breakdown {
         root = new JPanel();
         root.setLayout(new FormLayout("fill:d:grow", "center:d:grow"));
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(new FormLayout("fill:max(d;4px):noGrow,left:68dlu:noGrow,left:50dlu:noGrow,left:103dlu:noGrow,fill:93px:noGrow,left:69dlu:noGrow,fill:max(d;4px):noGrow", "center:61px:noGrow,top:22dlu:noGrow,top:28dlu:noGrow,center:28dlu:noGrow,center:28dlu:noGrow,top:28dlu:noGrow,center:49px:noGrow,top:30dlu:noGrow,center:23px:noGrow"));
+        panel1.setLayout(new FormLayout("fill:max(d;4px):noGrow,left:49dlu:noGrow,left:50dlu:noGrow,left:93dlu:noGrow,fill:93px:noGrow,left:45dlu:noGrow,fill:max(d;4px):noGrow", "center:61px:noGrow,top:28dlu:noGrow,center:28dlu:noGrow,center:28dlu:noGrow,top:29dlu:noGrow,top:28dlu:noGrow,center:max(d;4px):noGrow,center:61px:noGrow,top:20dlu:noGrow,center:max(d;4px):noGrow"));
         panel1.setBackground(new Color(-4272661));
         panel1.setForeground(new Color(-5922902));
         CellConstraints cc = new CellConstraints();
@@ -114,54 +107,54 @@ public class update_breakdown {
         Font label2Font = this.$$$getFont$$$(null, Font.BOLD, 26, label2.getFont());
         if (label2Font != null) label2.setFont(label2Font);
         label2.setForeground(new Color(-3771247));
-        label2.setText("更新损坏设备信息");
+        label2.setText("修改用户信息");
         panel1.add(label2, cc.xyw(3, 1, 3, CellConstraints.CENTER, CellConstraints.DEFAULT));
+        user_name = new JTextField();
+        panel1.add(user_name, cc.xy(4, 3, CellConstraints.FILL, CellConstraints.CENTER));
+        pw_user = new JTextField();
+        panel1.add(pw_user, cc.xy(4, 2, CellConstraints.FILL, CellConstraints.CENTER));
+        user_phone = new JTextField();
+        panel1.add(user_phone, cc.xy(4, 4, CellConstraints.FILL, CellConstraints.CENTER));
+        user_email = new JTextField();
+        panel1.add(user_email, cc.xy(4, 5, CellConstraints.FILL, CellConstraints.CENTER));
+        exit = new JButton();
+        exit.setText("返回");
+        panel1.add(exit, cc.xy(5, 8, CellConstraints.LEFT, CellConstraints.DEFAULT));
+        确定Button = new JButton();
+        确定Button.setText("确定");
+        panel1.add(确定Button, cc.xy(3, 8, CellConstraints.RIGHT, CellConstraints.DEFAULT));
         final JLabel label3 = new JLabel();
         Font label3Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label3.getFont());
         if (label3Font != null) label3.setFont(label3Font);
         label3.setForeground(new Color(-5409849));
-        label3.setText("损坏表id");
-        panel1.add(label3, cc.xy(3, 3, CellConstraints.CENTER, CellConstraints.CENTER));
+        label3.setText("用户地址");
+        panel1.add(label3, cc.xy(3, 6, CellConstraints.CENTER, CellConstraints.CENTER));
         final JLabel label4 = new JLabel();
         Font label4Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label4.getFont());
         if (label4Font != null) label4.setFont(label4Font);
         label4.setForeground(new Color(-5409849));
-        label4.setText("设备名称");
-        panel1.add(label4, cc.xy(3, 4, CellConstraints.CENTER, CellConstraints.CENTER));
-        eq_name = new JTextField();
-        panel1.add(eq_name, cc.xy(4, 4, CellConstraints.FILL, CellConstraints.CENTER));
-        breakdown_id = new JTextField();
-        panel1.add(breakdown_id, cc.xy(4, 3, CellConstraints.FILL, CellConstraints.CENTER));
+        label4.setText("用户邮箱");
+        panel1.add(label4, cc.xy(3, 5, CellConstraints.CENTER, CellConstraints.CENTER));
         final JLabel label5 = new JLabel();
         Font label5Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label5.getFont());
         if (label5Font != null) label5.setFont(label5Font);
         label5.setForeground(new Color(-5409849));
-        label5.setText("更新原因");
-        panel1.add(label5, cc.xy(3, 5, CellConstraints.CENTER, CellConstraints.CENTER));
-        reason = new JTextField();
-        panel1.add(reason, cc.xy(4, 5, CellConstraints.FILL, CellConstraints.CENTER));
+        label5.setText("用户电话");
+        panel1.add(label5, cc.xy(3, 4, CellConstraints.CENTER, CellConstraints.CENTER));
         final JLabel label6 = new JLabel();
         Font label6Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label6.getFont());
         if (label6Font != null) label6.setFont(label6Font);
         label6.setForeground(new Color(-5409849));
-        label6.setText("更新人id");
-        panel1.add(label6, cc.xy(3, 6, CellConstraints.CENTER, CellConstraints.CENTER));
-        user_id = new JTextField();
-        panel1.add(user_id, cc.xy(4, 6, CellConstraints.FILL, CellConstraints.CENTER));
+        label6.setText("用户名字");
+        panel1.add(label6, cc.xy(3, 3, CellConstraints.CENTER, CellConstraints.CENTER));
         final JLabel label7 = new JLabel();
         Font label7Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label7.getFont());
         if (label7Font != null) label7.setFont(label7Font);
         label7.setForeground(new Color(-5409849));
-        label7.setText("数量");
-        panel1.add(label7, cc.xy(3, 7, CellConstraints.CENTER, CellConstraints.CENTER));
-        num = new JTextField();
-        panel1.add(num, cc.xy(4, 7, CellConstraints.FILL, CellConstraints.CENTER));
-        exit = new JButton();
-        exit.setText("返回");
-        panel1.add(exit, cc.xy(5, 8, CellConstraints.LEFT, CellConstraints.CENTER));
-        确定Button = new JButton();
-        确定Button.setText("确定");
-        panel1.add(确定Button, cc.xy(3, 8, CellConstraints.RIGHT, CellConstraints.CENTER));
+        label7.setText("新密码");
+        panel1.add(label7, cc.xy(3, 2, CellConstraints.CENTER, CellConstraints.CENTER));
+        user_adress = new JTextField();
+        panel1.add(user_adress, cc.xy(4, 6, CellConstraints.FILL, CellConstraints.CENTER));
     }
 
     /**
@@ -192,5 +185,4 @@ public class update_breakdown {
     public JComponent $$$getRootComponent$$$() {
         return root;
     }
-
 }

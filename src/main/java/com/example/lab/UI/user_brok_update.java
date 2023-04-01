@@ -1,5 +1,4 @@
 package com.example.lab.UI;
-
 import com.example.lab.Controller.breakdownEquipmentController;
 import com.example.lab.Entity.Breakdown;
 import com.example.lab.Util.ApplicationContextUtil;
@@ -14,23 +13,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
 
-public class update_breakdown {
-    static JFrame frame = new JFrame("update_breakdown");
-    private JPanel root;
-    private JButton 确定Button;
-    private JTextField breakdown_id;
+public class user_brok_update {
+    static JFrame frame = new JFrame("user_brok_update");
     private JTextField eq_name;
+    private JTextField breakdown_id;
     private JTextField reason;
-    private JTextField user_id;
     private JTextField num;
     private JButton exit;
+    private JButton 确定Button;
+    private JPanel root;
 
-    public update_breakdown() {
+    public user_brok_update() {
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 closepage();
-                new breakdown_equipment().init();
+                new user_brok_eq().init();
             }
         });
         确定Button.addActionListener(new ActionListener() {
@@ -41,13 +39,11 @@ public class update_breakdown {
                     JOptionPane.showMessageDialog(null, "填入数据不可为空");
                 } else {
                     int breakid = Integer.parseInt(breakdown_id.getText());
-                    String userID = user_id.getText();
                     String equipment_name = eq_name.getText();
                     String reasons = reason.getText();
                     int number = Integer.parseInt(num.getText());
                     Breakdown breakdown=new Breakdown();
                     breakdown.setBreakdownId(breakid);
-                    breakdown.setApplyReason(userID);
                     breakdown.setEquipmentName(equipment_name);
                     breakdown.setApplyReason(reasons);
                     breakdown.setNum(number);
@@ -55,7 +51,7 @@ public class update_breakdown {
                     String info =controller.update(breakdown, Token.token).info;
                     if (info.equals("更新成功")){
                         closepage();
-                        new breakdown_equipment().init();
+                        new user_brok_eq().init();
                         return;
                     }else{
                         /**************/
@@ -67,8 +63,7 @@ public class update_breakdown {
     }
 
     public void init() {
-
-        frame.setContentPane(new update_breakdown().root);
+        frame.setContentPane(new user_brok_update().root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -80,7 +75,7 @@ public class update_breakdown {
     }
 
     public static void main(String[] args) {
-        new update_breakdown().init();
+        new user_brok_update().init();
     }
 
     {
@@ -101,7 +96,7 @@ public class update_breakdown {
         root = new JPanel();
         root.setLayout(new FormLayout("fill:d:grow", "center:d:grow"));
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(new FormLayout("fill:max(d;4px):noGrow,left:68dlu:noGrow,left:50dlu:noGrow,left:103dlu:noGrow,fill:93px:noGrow,left:69dlu:noGrow,fill:max(d;4px):noGrow", "center:61px:noGrow,top:22dlu:noGrow,top:28dlu:noGrow,center:28dlu:noGrow,center:28dlu:noGrow,top:28dlu:noGrow,center:49px:noGrow,top:30dlu:noGrow,center:23px:noGrow"));
+        panel1.setLayout(new FormLayout("fill:max(d;4px):noGrow,left:68dlu:noGrow,left:50dlu:noGrow,left:103dlu:noGrow,fill:93px:noGrow,left:69dlu:noGrow,fill:max(d;4px):noGrow", "center:61px:noGrow,top:22dlu:noGrow,top:28dlu:noGrow,center:28dlu:noGrow,center:28dlu:noGrow,center:49px:noGrow,top:30dlu:noGrow,center:23px:noGrow"));
         panel1.setBackground(new Color(-4272661));
         panel1.setForeground(new Color(-5922902));
         CellConstraints cc = new CellConstraints();
@@ -144,24 +139,16 @@ public class update_breakdown {
         Font label6Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label6.getFont());
         if (label6Font != null) label6.setFont(label6Font);
         label6.setForeground(new Color(-5409849));
-        label6.setText("更新人id");
+        label6.setText("数量");
         panel1.add(label6, cc.xy(3, 6, CellConstraints.CENTER, CellConstraints.CENTER));
-        user_id = new JTextField();
-        panel1.add(user_id, cc.xy(4, 6, CellConstraints.FILL, CellConstraints.CENTER));
-        final JLabel label7 = new JLabel();
-        Font label7Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label7.getFont());
-        if (label7Font != null) label7.setFont(label7Font);
-        label7.setForeground(new Color(-5409849));
-        label7.setText("数量");
-        panel1.add(label7, cc.xy(3, 7, CellConstraints.CENTER, CellConstraints.CENTER));
         num = new JTextField();
-        panel1.add(num, cc.xy(4, 7, CellConstraints.FILL, CellConstraints.CENTER));
+        panel1.add(num, cc.xy(4, 6, CellConstraints.FILL, CellConstraints.CENTER));
         exit = new JButton();
         exit.setText("返回");
-        panel1.add(exit, cc.xy(5, 8, CellConstraints.LEFT, CellConstraints.CENTER));
+        panel1.add(exit, cc.xy(5, 7, CellConstraints.LEFT, CellConstraints.CENTER));
         确定Button = new JButton();
         确定Button.setText("确定");
-        panel1.add(确定Button, cc.xy(3, 8, CellConstraints.RIGHT, CellConstraints.CENTER));
+        panel1.add(确定Button, cc.xy(3, 7, CellConstraints.RIGHT, CellConstraints.CENTER));
     }
 
     /**
@@ -192,5 +179,4 @@ public class update_breakdown {
     public JComponent $$$getRootComponent$$$() {
         return root;
     }
-
 }

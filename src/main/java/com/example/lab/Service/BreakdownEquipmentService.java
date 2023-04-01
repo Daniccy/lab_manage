@@ -28,4 +28,8 @@ public class BreakdownEquipmentService {
     public Breakdown getById(int id){
         return breakdownDao.getById(id);
     }
+
+    public void update(Breakdown breakdown){
+        breakdownDao.update(breakdown);
+    }
 }

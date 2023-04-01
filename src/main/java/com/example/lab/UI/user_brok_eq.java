@@ -1,16 +1,12 @@
 package com.example.lab.UI;
-
-import com.example.lab.Controller.RepairProcessController;
 import com.example.lab.Controller.breakdownEquipmentController;
 import com.example.lab.Entity.Breakdown;
-import com.example.lab.Entity.Repair;
 import com.example.lab.Util.ApplicationContextUtil;
-import com.intellij.uiDesigner.core.GridConstraints;
-import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.StyleContext;
@@ -20,111 +16,112 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Locale;
 
-public class repair_equipment {
-    static JFrame frame = new JFrame("repair_equipment");
+public class user_brok_eq {
+    static JFrame frame = new JFrame("user_brok_eq");
     private JPanel root;
     private JPanel panel1;
-    private JButton eq;
-    private JButton insert;
-    private JButton update;
-    private JButton break_eq;
-    private JButton repair_eq;
-    private JButton bore_eq;
-    private JButton feedback;
-    private JButton 用户管理Button;
+    private JButton eq_Button;
+    private JButton bd_eq;
+    private JButton re_eq;
+    private JButton br_eq;
+    private JButton information;
+    private JButton 返回Button;
     private JTable table1;
-    private JButton 维修设备Button;
-    private JButton 借还设备Button;
-    private JButton 故障设备Button;
-    private JButton 查看报表Button;
+    private JButton 申请;
+    private JButton 更新Button;
 
-    public repair_equipment() {
-        eq.addActionListener(new ActionListener() {
+
+    public user_brok_eq() {
+        eq_Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 closepage();
-                new select_equipment().init();
+                new user_sl_equipment().init();
             }
         });
-        break_eq.addActionListener(new ActionListener() {
+        bd_eq.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 closepage();
-                new breakdown_equipment().init();
+                new user_brok_eq().init();
             }
         });
-        bore_eq.addActionListener(new ActionListener() {
+        br_eq.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 closepage();
-                new borrow_return_equipment().init();
+                new user_br_eq().init();
             }
         });
-        feedback.addActionListener(new ActionListener() {
+        re_eq.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 closepage();
-                new select_feedback().init();
+                new user_rep_eq().init();
             }
         });
-        insert.addActionListener(new ActionListener() {
+        返回Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 closepage();
-                new insert_repair_equipment().init();
+                new user_menu().init();
+
             }
         });
-        update.addActionListener(new ActionListener() {
+        information.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 closepage();
-                new update_repair().init();
+                new user_information().init();
             }
         });
-        repair_eq.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                init();
-            }
-        });
-        用户管理Button.addActionListener(new ActionListener() {
+        申请.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 closepage();
-                new select_users().init();
+                new user_brok_insert().init();
+            }
+        });
+        更新Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                closepage();
+                new user_brok_update().init();
             }
         });
     }
 
     public void init() {
-        repair_equipment re = new repair_equipment();
-        re = printform(re);
-        frame.setContentPane(re.root);
+        user_brok_eq ube=new user_brok_eq();
+        ube=printform(ube);
+        frame.setContentPane(ube.root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
 
-    public repair_equipment printform(repair_equipment se) {
+    public user_brok_eq printform(user_brok_eq se) {
         // 表格上的title
-        String[] columnNames = new String[]{"维修表ID", "申请人", "损坏表ID", "设备ID","设备名称","申请原因","维修时间"};
-        // 表格中的内容，是一个二维数组
-        RepairProcessController controller = (RepairProcessController) ApplicationContextUtil.getBean("RepairProcessController");
+        String[] columnNames = new String[]{"损坏表id", "设备名称", "数量", "申请原因","申请人","申请时间"};
+        /******改这个方法***/
+        breakdownEquipmentController controller = (breakdownEquipmentController) ApplicationContextUtil.getBean("breakdownEquipmentController");
         String info =controller.get().info;
         if (info.equals("success")){
-            java.util.List<Repair> list = (List<Repair>)controller.get().data;
+            java.util.List<Breakdown> list = (List<Breakdown>)controller.get().data;
             String[][] eqs = new String[list.size()][];
             int i=0;
-            for (Repair eq_list:list){
-                String[] eq={String.valueOf(eq_list.getRepairId()),eq_list.getRepairPerson(), String.valueOf(eq_list.getBreakdownId()), String.valueOf(eq_list.getEquipmentId()),eq_list.getEquipmentName(),eq_list.getApplyReason(), String.valueOf(eq_list.getRepairTime())};
+            for (Breakdown eq_list:list){
+                String[] eq={String.valueOf(eq_list.getBreakdownId()),eq_list.getEquipmentName(), String.valueOf(eq_list.getNum()),eq_list.getApplyReason(),eq_list.getApplyPerson(), String.valueOf(eq_list.getApplyTime())};
                 eqs[i++]=eq;
             }
             DefaultTableModel dt = new DefaultTableModel(eqs, columnNames);
             se.table1.setModel(dt);
         }else{
-
+            DefaultTableModel dt = new DefaultTableModel(null, columnNames);
+            se.table1.setModel(dt);
         }
         return se;
+
     }
 
     public void closepage() {
@@ -132,9 +129,9 @@ public class repair_equipment {
 
     }
 
-
     public static void main(String[] args) {
-        new repair_equipment().init();
+
+        new user_brok_eq().init();
     }
 
     {
@@ -153,46 +150,53 @@ public class repair_equipment {
      */
     private void $$$setupUI$$$() {
         root = new JPanel();
-        root.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        root.setLayout(new FormLayout("fill:d:grow", "center:d:grow"));
         panel1 = new JPanel();
-        panel1.setLayout(new FormLayout("fill:110px:noGrow,left:4dlu:noGrow,left:150dlu:noGrow,fill:8px:noGrow,fill:150dlu:noGrow", "center:79px:noGrow,top:30dlu:noGrow,top:30dlu:noGrow,center:30dlu:noGrow,top:30dlu:noGrow,center:29dlu:noGrow,top:27dlu:noGrow,center:max(d;4px):noGrow,center:30dlu:noGrow"));
+        panel1.setLayout(new FormLayout("fill:110px:noGrow,left:4dlu:noGrow,left:150dlu:noGrow,fill:8px:noGrow,fill:150dlu:noGrow", "center:79px:noGrow,top:30dlu:noGrow,top:30dlu:noGrow,center:30dlu:noGrow,top:30dlu:noGrow,center:29dlu:noGrow,center:30dlu:noGrow,top:30dlu:noGrow,center:max(d;4px):noGrow"));
         panel1.setBackground(new Color(-4272661));
-        root.add(panel1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        eq = new JButton();
-        eq.setText("基本设备");
         CellConstraints cc = new CellConstraints();
-        panel1.add(eq, cc.xy(1, 2, CellConstraints.CENTER, CellConstraints.CENTER));
-        break_eq = new JButton();
-        break_eq.setText("损坏设备");
-        panel1.add(break_eq, cc.xy(1, 3, CellConstraints.CENTER, CellConstraints.CENTER));
-        repair_eq = new JButton();
-        repair_eq.setText("维修设备");
-        panel1.add(repair_eq, cc.xy(1, 4, CellConstraints.CENTER, CellConstraints.CENTER));
-        bore_eq = new JButton();
-        bore_eq.setText("借还设备");
-        panel1.add(bore_eq, cc.xy(1, 5, CellConstraints.CENTER, CellConstraints.CENTER));
-        feedback = new JButton();
-        feedback.setText("查看报表");
-        panel1.add(feedback, cc.xy(1, 6, CellConstraints.CENTER, CellConstraints.CENTER));
+        root.add(panel1, cc.xy(1, 1));
+        eq_Button = new JButton();
+        eq_Button.setText("基本设备");
+        panel1.add(eq_Button, cc.xy(1, 2, CellConstraints.CENTER, CellConstraints.CENTER));
+        bd_eq = new JButton();
+        bd_eq.setText("损坏设备");
+        panel1.add(bd_eq, cc.xy(1, 3, CellConstraints.CENTER, CellConstraints.CENTER));
+        re_eq = new JButton();
+        re_eq.setText("维修设备");
+        panel1.add(re_eq, cc.xy(1, 4, CellConstraints.CENTER, CellConstraints.CENTER));
+        br_eq = new JButton();
+        br_eq.setText("借还设备");
+        panel1.add(br_eq, cc.xy(1, 5, CellConstraints.CENTER, CellConstraints.CENTER));
+        information = new JButton();
+        information.setText("个人信息");
+        panel1.add(information, cc.xy(1, 6, CellConstraints.CENTER, CellConstraints.CENTER));
         final JLabel label1 = new JLabel();
         Font label1Font = this.$$$getFont$$$(null, Font.BOLD, 26, label1.getFont());
         if (label1Font != null) label1.setFont(label1Font);
         label1.setForeground(new Color(-3770255));
-        label1.setText("维修设备");
+        label1.setText("损坏设备");
         panel1.add(label1, cc.xyw(3, 1, 3, CellConstraints.CENTER, CellConstraints.DEFAULT));
-        insert = new JButton();
-        insert.setText("申请");
-        panel1.add(insert, cc.xy(3, 9, CellConstraints.CENTER, CellConstraints.DEFAULT));
-        update = new JButton();
-        update.setText("更新");
-        panel1.add(update, cc.xy(5, 9, CellConstraints.CENTER, CellConstraints.DEFAULT));
-        用户管理Button = new JButton();
-        用户管理Button.setText("用户管理");
-        panel1.add(用户管理Button, cc.xy(1, 7, CellConstraints.CENTER, CellConstraints.CENTER));
+        返回Button = new JButton();
+        返回Button.setText("返回");
+        panel1.add(返回Button, cc.xy(1, 7, CellConstraints.CENTER, CellConstraints.CENTER));
         final JScrollPane scrollPane1 = new JScrollPane();
+        scrollPane1.setForeground(new Color(-12369221));
         panel1.add(scrollPane1, cc.xywh(3, 2, 3, 6, CellConstraints.FILL, CellConstraints.FILL));
+        scrollPane1.setBorder(BorderFactory.createTitledBorder(null, "", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         table1 = new JTable();
+        table1.setDragEnabled(true);
+        Font table1Font = this.$$$getFont$$$(null, Font.BOLD, -1, table1.getFont());
+        if (table1Font != null) table1.setFont(table1Font);
+        table1.setForeground(new Color(-3770255));
+        table1.putClientProperty("terminateEditOnFocusLost", Boolean.FALSE);
         scrollPane1.setViewportView(table1);
+        申请 = new JButton();
+        申请.setText("申请");
+        panel1.add(申请, cc.xy(3, 8, CellConstraints.CENTER, CellConstraints.CENTER));
+        更新Button = new JButton();
+        更新Button.setText("更新");
+        panel1.add(更新Button, cc.xy(5, 8, CellConstraints.CENTER, CellConstraints.CENTER));
     }
 
     /**
@@ -223,5 +227,4 @@ public class repair_equipment {
     public JComponent $$$getRootComponent$$$() {
         return root;
     }
-
 }

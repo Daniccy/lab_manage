@@ -5,7 +5,7 @@
 <mapper namespace="com.example.lab.Mapper.BreakdownMapper">
     <insert id="add" parameterType="com.example.lab.Entity.Breakdown" statementType="CALLABLE">
         {call insert_breakdown_equipment(
-        #{equipmentName},#{applyReason,mode=IN},#{applyPerson,mode=IN},#{num,mode=IN})}
+        #{equipmentId},#{applyReason,mode=IN},#{applyPerson,mode=IN},#{num,mode=IN})}
     </insert>
 <!--    获取损坏的设备-->
     <select id="get"  statementType="CALLABLE" resultType="com.example.lab.Entity.Breakdown">
@@ -15,4 +15,8 @@
     <select id="getById" resultType="com.example.lab.Entity.Breakdown">
         select * from breakdown where breakdown_id = #{id}
     </select>
+
+    <update id="update" statementType="CALLABLE" parameterType="com.example.lab.Entity.Breakdown">
+        {call upadte_breakdown_equipment(#{breakdownId}, #{equipmentId}, #{applyReason}, #{applyPerson}, #{num})}
+    </update>
 </mapper>

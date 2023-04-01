@@ -38,7 +38,7 @@ public class breakdownEquipmentController {
         if(Objects.isNull(equipment)){
             return RetUtil.failure("设备不存在");
         }
-
+        breakdown.setEquipmentId(equipment.getEquipmentId());
         service.add(breakdown, token);
         return RetUtil.successWithMsg("添加成功");
     }
@@ -46,4 +46,23 @@ public class breakdownEquipmentController {
     public Ret<?> get(){
         return RetUtil.success(service.get());
     }
+
+    // 更新
+    public Ret<?> update(Breakdown breakdown, String token){
+        CacheManagerUtil.putCache(token, null, 0);
+        if(!TokenUtil.isPass(token)){
+            return RetUtil.failure("用户失效，请重新登录");
+        }
+        if(breakdown.getEquipmentName() == null){
+            return RetUtil.failure("设备名称不允许为空");
+        }
+        Equipment equipment = basicEquipmentService.getByName(breakdown.getEquipmentName());
+        if(Objects.isNull(equipment)){
+            return RetUtil.failure("设备不存在");
+        }
+        breakdown.setEquipmentId(equipment.getEquipmentId());
+        service.update(breakdown);
+        return RetUtil.successWithMsg("更新成功");
+    }
+
 }

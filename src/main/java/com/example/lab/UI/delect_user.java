@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.util.Locale;
 
 public class delect_user {
-    static JFrame frame = new JFrame("delect_user");
+    static JFrame frame = new JFrame("实验室设备管理系统");
     private JPanel root;
     private JTextField eq_name;
     private JButton exit;
@@ -48,6 +48,7 @@ public class delect_user {
     public void init() {
         frame.setContentPane(new delect_user().root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(620, 320, 800, 400);
         frame.pack();
         frame.setVisible(true);
     }
@@ -78,7 +79,8 @@ public class delect_user {
     private void $$$setupUI$$$() {
         root = new JPanel();
         root.setLayout(new FormLayout("fill:d:grow", "center:d:grow"));
-        final JPanel panel1 = new JPanel();
+        final BackgroundPanel panel1 = new BackgroundPanel();
+        panel1.setImagestr("src/main/resources/picture/AA.png");
         panel1.setLayout(new FormLayout("fill:50dlu:noGrow,left:50dlu:noGrow,left:93dlu:noGrow,fill:54dlu:noGrow,left:45dlu:noGrow,fill:max(d;4px):noGrow", "center:61px:noGrow,top:10dlu:noGrow,top:28dlu:noGrow,center:28dlu:noGrow,center:28dlu:noGrow,top:28dlu:noGrow,center:17px:noGrow"));
         panel1.setBackground(new Color(-4272661));
         panel1.setForeground(new Color(-5922902));
@@ -91,9 +93,9 @@ public class delect_user {
         label1.setText("删除用户");
         panel1.add(label1, cc.xyw(2, 1, 3, CellConstraints.CENTER, CellConstraints.DEFAULT));
         final JLabel label2 = new JLabel();
-        Font label2Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label2.getFont());
+        Font label2Font = this.$$$getFont$$$(null, Font.BOLD, 20, label2.getFont());
         if (label2Font != null) label2.setFont(label2Font);
-        label2.setForeground(new Color(-5409849));
+        label2.setForeground(new Color(-0));
         label2.setText("用户id");
         panel1.add(label2, cc.xy(2, 4, CellConstraints.CENTER, CellConstraints.CENTER));
         eq_name = new JTextField();
@@ -103,6 +105,8 @@ public class delect_user {
         panel1.add(确定Button, cc.xy(2, 6, CellConstraints.RIGHT, CellConstraints.DEFAULT));
         exit = new JButton();
         exit.setText("返回");
+        确定Button.setBackground(new Color(230,230,250));
+        exit.setBackground(new Color(230,230,250));
         panel1.add(exit, cc.xy(4, 6, CellConstraints.LEFT, CellConstraints.DEFAULT));
     }
 

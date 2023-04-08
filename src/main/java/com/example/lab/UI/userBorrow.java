@@ -14,9 +14,9 @@ import java.awt.event.ActionListener;
 import java.util.Locale;
 
 public class userBorrow {
-    static JFrame frame = new JFrame("userBorrow");
+    static JFrame frame = new JFrame("实验室设备管理系统");
     private JPanel root;
-    private JPanel panel1;
+    private BackgroundPanel panel1;
     private JTextField eq_name;
     private JTextField num;
     private JButton yes;
@@ -59,6 +59,7 @@ public class userBorrow {
     public void init() {
         frame.setContentPane(new userBorrow().root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(620, 320, 800, 400);
         frame.pack();
         frame.setVisible(true);
     }
@@ -88,7 +89,8 @@ public class userBorrow {
     private void $$$setupUI$$$() {
         root = new JPanel();
         root.setLayout(new FormLayout("fill:d:grow", "center:d:grow"));
-        panel1 = new JPanel();
+        panel1 = new BackgroundPanel();
+        panel1.setImagestr("src/main/resources/picture/AA.png");
         panel1.setLayout(new FormLayout("fill:max(d;4px):noGrow,left:68dlu:noGrow,left:50dlu:noGrow,left:103dlu:noGrow,fill:93px:noGrow,left:69dlu:noGrow,fill:max(d;4px):noGrow", "center:61px:noGrow,top:20dlu:noGrow,center:28dlu:noGrow,top:28dlu:noGrow,center:max(d;4px):noGrow,top:35dlu:noGrow,center:29px:noGrow"));
         panel1.setBackground(new Color(-4272661));
         panel1.setForeground(new Color(-5922902));
@@ -96,7 +98,6 @@ public class userBorrow {
         root.add(panel1, cc.xy(1, 1, CellConstraints.DEFAULT, CellConstraints.FILL));
         final JLabel label1 = new JLabel();
         label1.setForeground(new Color(-4928789));
-        label1.setText("Label");
         panel1.add(label1, cc.xy(2, 1));
         final JLabel label2 = new JLabel();
         Font label2Font = this.$$$getFont$$$(null, Font.BOLD, 26, label2.getFont());
@@ -105,17 +106,17 @@ public class userBorrow {
         label2.setText("借用设备");
         panel1.add(label2, cc.xyw(3, 1, 3, CellConstraints.CENTER, CellConstraints.DEFAULT));
         final JLabel label3 = new JLabel();
-        Font label3Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label3.getFont());
+        Font label3Font = this.$$$getFont$$$(null, Font.BOLD, 20, label3.getFont());
         if (label3Font != null) label3.setFont(label3Font);
-        label3.setForeground(new Color(-5409849));
+        label3.setForeground(new Color(-0));
         label3.setText("设备名称");
         panel1.add(label3, cc.xy(3, 3, CellConstraints.CENTER, CellConstraints.CENTER));
         eq_name = new JTextField();
         panel1.add(eq_name, cc.xy(4, 3, CellConstraints.FILL, CellConstraints.CENTER));
         final JLabel label4 = new JLabel();
-        Font label4Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label4.getFont());
+        Font label4Font = this.$$$getFont$$$(null, Font.BOLD, 20, label4.getFont());
         if (label4Font != null) label4.setFont(label4Font);
-        label4.setForeground(new Color(-5409849));
+        label4.setForeground(new Color(-0));
         label4.setText("借用数量");
         panel1.add(label4, cc.xy(3, 4, CellConstraints.CENTER, CellConstraints.CENTER));
         num = new JTextField();
@@ -127,6 +128,9 @@ public class userBorrow {
         exit = new JButton();
         exit.setText("返回");
         panel1.add(exit, cc.xy(5, 6, CellConstraints.LEFT, CellConstraints.CENTER));
+        yes.setBackground(new Color(230,230,250));
+        exit.setBackground(new Color(230,230,250));
+
     }
 
     /**

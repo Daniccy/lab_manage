@@ -111,7 +111,7 @@ public class BasicEquipmentController {
     }
 
 
-    public Ret<?> get(String token) {
+    public Ret<?> getByUserId(String token) {
         String userId = TokenUtil.getInfoByToken(token);
         return RetUtil.success(service.getById(userId));
     }

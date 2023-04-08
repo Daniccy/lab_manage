@@ -11,8 +11,9 @@
         {call select_repair_equipment()}
     </select>
 
-    <select id="getById" resultType="com.example.lab.Entity.BorrowReturn">
-        select * from repair where repair_person = #{id}
+    <select id="getById" resultType="com.example.lab.Entity.Repair">
+        {call select_repair_equipment_byUserID(
+        #{id})}
     </select>
 
     <update id="update" statementType="CALLABLE">

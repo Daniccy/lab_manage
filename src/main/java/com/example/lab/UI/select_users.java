@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class select_users {
-    static JFrame frame = new JFrame("select_users");
+    static JFrame frame = new JFrame("实验室设备管理系统");
     private JButton is_user;
     private JButton dl_user;
     private JButton ud_user;
@@ -61,6 +61,7 @@ public class select_users {
         su=printform(su);
         frame.setContentPane(su.root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(600, 300, 800, 400);
         frame.pack();
         frame.setVisible(true);
     }
@@ -112,26 +113,32 @@ public class select_users {
     private void $$$setupUI$$$() {
         root = new JPanel();
         root.setLayout(new FormLayout("fill:d:grow", "center:d:grow"));
-        final JPanel panel1 = new JPanel();
+        final BackgroundPanel panel1 = new BackgroundPanel();
+        panel1.setImagestr("src/main/resources/picture/bg.jpg");
         panel1.setLayout(new FormLayout("fill:120px:noGrow,left:4dlu:noGrow,fill:max(d;4px):noGrow,left:150dlu:noGrow,fill:8px:noGrow,fill:151dlu:noGrow", "center:79px:noGrow,top:43dlu:noGrow,top:36dlu:noGrow,center:40dlu:noGrow,top:15dlu:noGrow,center:13dlu:noGrow,top:30dlu:noGrow,center:max(d;4px):noGrow,center:max(d;4px):noGrow"));
         panel1.setBackground(new Color(-4272661));
         CellConstraints cc = new CellConstraints();
         root.add(panel1, cc.xy(1, 1, CellConstraints.DEFAULT, CellConstraints.FILL));
         is_user = new JButton();
         is_user.setText("新增用户");
+        is_user.setBackground(new Color(230,230,250));
         panel1.add(is_user, cc.xy(1, 2, CellConstraints.FILL, CellConstraints.CENTER));
         dl_user = new JButton();
         dl_user.setText("删除用户");
+        dl_user.setBackground(new Color(230,230,250));
         panel1.add(dl_user, cc.xy(1, 3, CellConstraints.FILL, CellConstraints.CENTER));
         final JScrollPane scrollPane1 = new JScrollPane();
         panel1.add(scrollPane1, cc.xywh(4, 2, 3, 6, CellConstraints.FILL, CellConstraints.FILL));
         table1 = new JTable();
+        table1.setForeground(new Color(-3770255));
         scrollPane1.setViewportView(table1);
         返回Button = new JButton();
         返回Button.setText("返回");
+        返回Button.setBackground(new Color(230,230,250));
         panel1.add(返回Button, cc.xy(1, 7, CellConstraints.CENTER, CellConstraints.CENTER));
         ud_user = new JButton();
         ud_user.setText("修改用户信息");
+        ud_user.setBackground(new Color(230,230,250));
         panel1.add(ud_user, cc.xy(1, 4, CellConstraints.FILL, CellConstraints.CENTER));
         final JLabel label1 = new JLabel();
         Font label1Font = this.$$$getFont$$$(null, Font.BOLD, 26, label1.getFont());

@@ -1,4 +1,8 @@
 package com.example.lab.UI;
+import com.example.lab.Controller.UserController;
+import com.example.lab.Entity.User;
+import com.example.lab.Util.ApplicationContextUtil;
+import com.example.lab.common.Ret;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
@@ -8,11 +12,12 @@ import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.Locale;
 
 public class user_information {
-    static JFrame frame = new JFrame("user_information");
-    private JPanel panel1;
+    static JFrame frame = new JFrame("实验室设备管理系统");
+    private BackgroundPanel panel1;
     private JButton 返回Button;
     private JButton update;
     private JPanel root;
@@ -24,7 +29,15 @@ public class user_information {
             @Override
             public void actionPerformed(ActionEvent e) {
                 /**********个人信息获取************/
-                JOptionPane.showMessageDialog(null, "这里打印个人信息");
+
+                UserController controller = (UserController) ApplicationContextUtil.getBean("UserController");
+                Ret<?> ret=controller.get(Token.token);
+                String info = ret.info;
+                User eq_list = (User) ret.data;
+                //String[] eq={eq_list.getUserId(),eq_list.getUserPassward(),eq_list.getUserName(),eq_list.getUserPhone(),eq_list.getUserAddress(),eq_list.getUserMail()};
+                String eq_information="用户账号  :   "+eq_list.getUserId()+"\n\n"+"用户姓名  :   "+eq_list.getUserName()+"\n\n"+"用户电话  :   "+eq_list.getUserPhone()+"\n\n"+"用户地址  :   "+eq_list.getUserAddress()+"\n\n"+"用户邮箱  :   "+eq_list.getUserMail()+"\n\n";
+                JOptionPane.showMessageDialog(null, eq_information);
+
             }
         });
 
@@ -47,6 +60,7 @@ public class user_information {
     public void init() {
         frame.setContentPane(new user_information().root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(620, 320, 800, 400);
         frame.pack();
         frame.setVisible(true);
     }
@@ -78,26 +92,30 @@ public class user_information {
     private void $$$setupUI$$$() {
         root = new JPanel();
         root.setLayout(new FormLayout("fill:d:grow", "center:d:grow"));
-        panel1 = new JPanel();
+        panel1 = new BackgroundPanel();
+        panel1.setImagestr("src/main/resources/picture/bg.jpg");
         panel1.setLayout(new FormLayout("fill:max(d;4px):noGrow,left:50dlu:noGrow,left:50dlu:noGrow,left:103dlu:noGrow,fill:93px:noGrow,left:50dlu:noGrow,fill:max(d;4px):noGrow", "center:61px:noGrow,top:13dlu:noGrow,center:30dlu:noGrow,top:30dlu:noGrow,center:max(d;4px):noGrow,top:40dlu:noGrow,center:max(d;4px):noGrow"));
         panel1.setBackground(new Color(-4272661));
         panel1.setForeground(new Color(-5922902));
         CellConstraints cc = new CellConstraints();
         root.add(panel1, cc.xy(1, 1, CellConstraints.DEFAULT, CellConstraints.FILL));
         final JLabel label1 = new JLabel();
-        Font label1Font = this.$$$getFont$$$(null, Font.BOLD, 26, label1.getFont());
+        Font label1Font = this.$$$getFont$$$(null, Font.PLAIN, 26, label1.getFont());
         if (label1Font != null) label1.setFont(label1Font);
         label1.setForeground(new Color(-3771247));
         label1.setText("个人信息");
         panel1.add(label1, cc.xyw(3, 1, 3, CellConstraints.CENTER, CellConstraints.DEFAULT));
         返回Button = new JButton();
         返回Button.setText("返回");
+        返回Button.setBackground(new Color(230,230,250));
         panel1.add(返回Button, cc.xy(4, 6, CellConstraints.CENTER, CellConstraints.CENTER));
         update = new JButton();
         update.setText("个人信息修改");
+        update.setBackground(new Color(230,230,250));
         panel1.add(update, cc.xy(4, 4, CellConstraints.FILL, CellConstraints.CENTER));
         select = new JButton();
         select.setText("个人信息查看");
+        select.setBackground(new Color(230,230,250));
         panel1.add(select, cc.xy(4, 3, CellConstraints.FILL, CellConstraints.DEFAULT));
     }
 

@@ -21,7 +21,7 @@
     </update>
 
     <select id="getByUserId" resultType="com.example.lab.Entity.Breakdown">
-        select * from breakdown where apply_person= #{id}
+        {call select_breakdown_equipment_byUserID(#{id})}
     </select>
 
 </mapper>

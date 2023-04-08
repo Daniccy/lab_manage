@@ -18,8 +18,8 @@ import java.util.Locale;
 
 public class update_equipment {
 
-    static JFrame frame = new JFrame("update_equipment");
-    private JPanel panel1;
+    static JFrame frame = new JFrame("实验室设备管理系统");
+    private BackgroundPanel panel1;
     private JTextField eq_type;
     private JTextField eq_name;
     private JButton sure_Button;
@@ -28,6 +28,7 @@ public class update_equipment {
     public void init() {
         frame.setContentPane(new update_equipment().root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(620, 320, 800, 400);
         frame.pack();
         frame.setVisible(true);
     }
@@ -107,14 +108,14 @@ public class update_equipment {
     private void $$$setupUI$$$() {
         root = new JPanel();
         root.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        panel1 = new JPanel();
+        panel1 = new BackgroundPanel();
+        panel1.setImagestr("src/main/resources/picture/AA.png");
         panel1.setLayout(new FormLayout("fill:max(d;4px):noGrow,left:68dlu:noGrow,left:50dlu:noGrow,left:103dlu:noGrow,fill:93px:noGrow,left:69dlu:noGrow,fill:max(d;4px):noGrow", "center:61px:noGrow,top:13dlu:noGrow,top:28dlu:noGrow,center:28dlu:noGrow,center:28dlu:noGrow,top:28dlu:noGrow,top:30dlu:noGrow,center:30dlu:noGrow,center:61px:noGrow,top:31dlu:noGrow,center:max(d;4px):noGrow"));
         panel1.setBackground(new Color(-4272661));
         panel1.setForeground(new Color(-5922902));
         root.add(panel1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JLabel label1 = new JLabel();
         label1.setForeground(new Color(-4928789));
-        label1.setText("Label");
         CellConstraints cc = new CellConstraints();
         panel1.add(label1, cc.xy(2, 1));
         final JLabel label2 = new JLabel();
@@ -124,15 +125,15 @@ public class update_equipment {
         label2.setText("更新设备");
         panel1.add(label2, cc.xyw(3, 1, 3, CellConstraints.CENTER, CellConstraints.DEFAULT));
         final JLabel label3 = new JLabel();
-        Font label3Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label3.getFont());
+        Font label3Font = this.$$$getFont$$$(null, Font.BOLD, 20, label3.getFont());
         if (label3Font != null) label3.setFont(label3Font);
-        label3.setForeground(new Color(-5409849));
+        label3.setForeground(new Color(-0));
         label3.setText("设备名称");
         panel1.add(label3, cc.xy(3, 3, CellConstraints.CENTER, CellConstraints.CENTER));
         final JLabel label4 = new JLabel();
-        Font label4Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label4.getFont());
+        Font label4Font = this.$$$getFont$$$(null, Font.BOLD, 20, label4.getFont());
         if (label4Font != null) label4.setFont(label4Font);
-        label4.setForeground(new Color(-5409849));
+        label4.setForeground(new Color(-0));
         label4.setText("设备类型");
         panel1.add(label4, cc.xy(3, 4, CellConstraints.CENTER, CellConstraints.CENTER));
         eq_type = new JTextField();
@@ -140,24 +141,24 @@ public class update_equipment {
         eq_name = new JTextField();
         panel1.add(eq_name, cc.xy(4, 3, CellConstraints.FILL, CellConstraints.CENTER));
         final JLabel label5 = new JLabel();
-        Font label5Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label5.getFont());
+        Font label5Font = this.$$$getFont$$$(null, Font.BOLD, 20, label5.getFont());
         if (label5Font != null) label5.setFont(label5Font);
-        label5.setForeground(new Color(-5409849));
+        label5.setForeground(new Color(-0));
         label5.setText("数量");
         panel1.add(label5, cc.xy(3, 5, CellConstraints.CENTER, CellConstraints.CENTER));
         num = new JTextField();
         num.setText("");
         panel1.add(num, cc.xy(4, 5, CellConstraints.FILL, CellConstraints.CENTER));
         final JLabel label6 = new JLabel();
-        Font label6Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label6.getFont());
+        Font label6Font = this.$$$getFont$$$(null, Font.BOLD, 20, label6.getFont());
         if (label6Font != null) label6.setFont(label6Font);
-        label6.setForeground(new Color(-5409849));
+        label6.setForeground(new Color(-0));
         label6.setText("单价");
         panel1.add(label6, cc.xy(3, 6, CellConstraints.CENTER, CellConstraints.CENTER));
         final JLabel label7 = new JLabel();
-        Font label7Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label7.getFont());
+        Font label7Font = this.$$$getFont$$$(null, Font.BOLD, 20, label7.getFont());
         if (label7Font != null) label7.setFont(label7Font);
-        label7.setForeground(new Color(-5409849));
+        label7.setForeground(new Color(-0));
         label7.setText("产地");
         panel1.add(label7, cc.xy(3, 7, CellConstraints.CENTER, CellConstraints.CENTER));
         single_price = new JTextField();
@@ -171,11 +172,13 @@ public class update_equipment {
         panel1.add(sure_Button, cc.xy(3, 9, CellConstraints.RIGHT, CellConstraints.DEFAULT));
         exit_Button = new JButton();
         exit_Button.setText("返回");
+        sure_Button.setBackground(new Color(230,230,250));
+        exit_Button.setBackground(new Color(230,230,250));
         panel1.add(exit_Button, cc.xy(5, 9, CellConstraints.LEFT, CellConstraints.DEFAULT));
         final JLabel label8 = new JLabel();
-        Font label8Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label8.getFont());
+        Font label8Font = this.$$$getFont$$$(null, Font.BOLD, 20, label8.getFont());
         if (label8Font != null) label8.setFont(label8Font);
-        label8.setForeground(new Color(-5409849));
+        label8.setForeground(new Color(-0));
         label8.setText("备注");
         panel1.add(label8, cc.xy(3, 8, CellConstraints.CENTER, CellConstraints.CENTER));
         remark = new JTextField();

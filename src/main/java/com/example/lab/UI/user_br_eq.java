@@ -1,7 +1,9 @@
 package com.example.lab.UI;
 import com.example.lab.Controller.BasicEquipmentController;
 import com.example.lab.Entity.BorrowReturn;
+import com.example.lab.Entity.Equipment;
 import com.example.lab.Util.ApplicationContextUtil;
+import com.example.lab.common.Ret;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
@@ -17,9 +19,9 @@ import java.util.List;
 import java.util.Locale;
 
 public class user_br_eq {
-    static JFrame frame = new JFrame("user_br_eq");
+    static JFrame frame = new JFrame("实验室设备管理系统");
     private JPanel root;
-    private JPanel panel1;
+    private BackgroundPanel panel1;
     private JButton eq_Button;
     private JButton bd_eq;
     private JButton re_eq;
@@ -104,6 +106,7 @@ public class user_br_eq {
         bre=printform(bre);
         frame.setContentPane(bre.root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(600, 300, 800, 400);
         frame.pack();
         frame.setVisible(true);
     }
@@ -113,21 +116,17 @@ public class user_br_eq {
         String[] columnNames = new String[]{"表ID", "设备名称", "数量","借用人","借用时间","归还情况","归还时间","损坏情况"};
         /******改这个的方法****/
         BasicEquipmentController controller = (BasicEquipmentController) ApplicationContextUtil.getBean("BasicEquipmentController");
-        String info =controller.get().info;
-        if (info.equals("success")){
-            java.util.List<BorrowReturn> list = (List<BorrowReturn>)controller.get().data;
-            String[][] eqs = new String[list.size()][];
-            int i=0;
-            for (BorrowReturn eq_list:list){
-                String[] eq=eq_list.get_eq();
-                eqs[i++]=eq;
-            }
-            DefaultTableModel dt = new DefaultTableModel(eqs, columnNames);
-            se.table1.setModel(dt);
-        }else{
-            DefaultTableModel dt = new DefaultTableModel(null, columnNames);
-            se.table1.setModel(dt);
+        Ret<?> ret=controller.getByUserId(Token.token);
+        String info = ret.info;
+        java.util.List<BorrowReturn> list = (List<BorrowReturn>)ret.data;
+        String[][] eqs = new String[list.size()][];
+        int i=0;
+        for (BorrowReturn eq_list:list){
+            String[] eq=eq_list.get_eq();
+            eqs[i++]=eq;
         }
+        DefaultTableModel dt = new DefaultTableModel(eqs, columnNames);
+        se.table1.setModel(dt);
         return se;
     }
 
@@ -158,25 +157,31 @@ public class user_br_eq {
     private void $$$setupUI$$$() {
         root = new JPanel();
         root.setLayout(new FormLayout("fill:d:grow", "center:d:grow"));
-        panel1 = new JPanel();
+        panel1 = new BackgroundPanel();
+        panel1.setImagestr("src/main/resources/picture/bg.jpg");
         panel1.setLayout(new FormLayout("fill:110px:noGrow,left:4dlu:noGrow,left:86dlu:noGrow,fill:95dlu:noGrow,fill:95dlu:noGrow", "center:79px:noGrow,top:30dlu:noGrow,top:30dlu:noGrow,center:30dlu:noGrow,top:30dlu:noGrow,center:29dlu:noGrow,center:30dlu:noGrow,top:30dlu:noGrow,center:max(d;4px):noGrow"));
         panel1.setBackground(new Color(-4272661));
         CellConstraints cc = new CellConstraints();
         root.add(panel1, cc.xy(1, 1));
         eq_Button = new JButton();
         eq_Button.setText("基本设备");
+        eq_Button.setBackground(new Color(230,230,250));
         panel1.add(eq_Button, cc.xy(1, 2, CellConstraints.CENTER, CellConstraints.CENTER));
         bd_eq = new JButton();
         bd_eq.setText("损坏设备");
+        bd_eq.setBackground(new Color(230,230,250));
         panel1.add(bd_eq, cc.xy(1, 3, CellConstraints.CENTER, CellConstraints.CENTER));
         re_eq = new JButton();
         re_eq.setText("维修设备");
+        re_eq.setBackground(new Color(230,230,250));
         panel1.add(re_eq, cc.xy(1, 4, CellConstraints.CENTER, CellConstraints.CENTER));
         br_eq = new JButton();
         br_eq.setText("借还设备");
+        br_eq.setBackground(new Color(230,230,250));
         panel1.add(br_eq, cc.xy(1, 5, CellConstraints.CENTER, CellConstraints.CENTER));
         information = new JButton();
         information.setText("个人信息");
+        information.setBackground(new Color(230,230,250));
         panel1.add(information, cc.xy(1, 6, CellConstraints.CENTER, CellConstraints.CENTER));
         final JLabel label1 = new JLabel();
         Font label1Font = this.$$$getFont$$$(null, Font.BOLD, 26, label1.getFont());
@@ -186,6 +191,7 @@ public class user_br_eq {
         panel1.add(label1, cc.xyw(3, 1, 3, CellConstraints.CENTER, CellConstraints.DEFAULT));
         返回Button = new JButton();
         返回Button.setText("返回");
+        返回Button.setBackground(new Color(230,230,250));
         panel1.add(返回Button, cc.xy(1, 7, CellConstraints.CENTER, CellConstraints.CENTER));
         final JScrollPane scrollPane1 = new JScrollPane();
         scrollPane1.setForeground(new Color(-12369221));
@@ -193,19 +199,22 @@ public class user_br_eq {
         scrollPane1.setBorder(BorderFactory.createTitledBorder(null, "", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         table1 = new JTable();
         table1.setDragEnabled(true);
-        Font table1Font = this.$$$getFont$$$(null, Font.BOLD, -1, table1.getFont());
+        Font table1Font = this.$$$getFont$$$(null, Font.PLAIN, -1, table1.getFont());
         if (table1Font != null) table1.setFont(table1Font);
         table1.setForeground(new Color(-3770255));
         table1.putClientProperty("terminateEditOnFocusLost", Boolean.FALSE);
         scrollPane1.setViewportView(table1);
         b_eq = new JButton();
         b_eq.setText("借用");
+        b_eq.setBackground(new Color(230,230,250));
         panel1.add(b_eq, cc.xy(3, 8, CellConstraints.CENTER, CellConstraints.CENTER));
         归还Button = new JButton();
         归还Button.setText("归还");
+        归还Button.setBackground(new Color(230,230,250));
         panel1.add(归还Button, cc.xy(5, 8, CellConstraints.CENTER, CellConstraints.CENTER));
         借用更新Button = new JButton();
         借用更新Button.setText("借用更新");
+        借用更新Button.setBackground(new Color(230,230,250));
         panel1.add(借用更新Button, cc.xy(4, 8, CellConstraints.CENTER, CellConstraints.CENTER));
     }
 

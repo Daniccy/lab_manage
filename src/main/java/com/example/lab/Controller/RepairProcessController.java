@@ -70,7 +70,7 @@ public class RepairProcessController {
        return RetUtil.successWithMsg("更新成功");
     }
 
-    public Ret<?> get(String token){
+    public Ret<?> getByUserId(String token){
         String userId = TokenUtil.getInfoByToken(token);
 
         return RetUtil.success(service.get(userId));

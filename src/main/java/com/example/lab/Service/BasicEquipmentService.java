@@ -65,8 +65,8 @@ public class BasicEquipmentService {
         borrowReturnDao.update(borrowReturn);
     }
 
-    public List<Equipment> getById(String id){
-        return equipmentDao.getById(id);
+    public List<BorrowReturn> getById(String id){
+        return borrowReturnDao.getByUserId(id);
     }
 
     public Equipment getByName(String name){

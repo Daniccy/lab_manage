@@ -5,6 +5,7 @@ import com.example.lab.Controller.ExportExcelController;
 import com.example.lab.Entity.Equipment;
 import com.example.lab.Entity.Feedback;
 import com.example.lab.Util.ApplicationContextUtil;
+import com.example.lab.common.Ret;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
@@ -15,13 +16,14 @@ import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
 public class select_feedback {
-    static JFrame frame = new JFrame("select_feedback");
+    static JFrame frame = new JFrame("实验室设备管理系统");
     private JPanel root;
-    private JPanel panel1;
+    private BackgroundPanel panel1;
     private JButton eq;
     private JButton break_eq;
     private JButton repair_eq;
@@ -33,6 +35,7 @@ public class select_feedback {
     private JButton 借还设备Button;
     private JButton 故障设备Button;
     private JButton 查看报表Button;
+    private JButton 导出excelButton;
 
     public select_feedback() {
         eq.addActionListener(new ActionListener() {
@@ -76,6 +79,19 @@ public class select_feedback {
                 new select_users().init();
             }
         });
+        导出excelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ExportExcelController controller = (ExportExcelController) ApplicationContextUtil.getBean("ExportExcelController");
+                String info = null;
+                try {
+                    info = controller.export().info;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                JOptionPane.showMessageDialog(null, info);
+            }
+        });
     }
 
     public void init() {
@@ -83,6 +99,7 @@ public class select_feedback {
         sf = printform(sf);
         frame.setContentPane(sf.root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(600, 300, 800, 400);
         frame.pack();
         frame.setVisible(true);
     }
@@ -131,8 +148,9 @@ public class select_feedback {
     private void $$$setupUI$$$() {
         root = new JPanel();
         root.setLayout(new FormLayout("fill:d:grow", "center:d:grow"));
-        panel1 = new JPanel();
-        panel1.setLayout(new FormLayout("fill:110px:noGrow,left:4dlu:noGrow,left:150dlu:noGrow,fill:8px:noGrow,fill:150dlu:noGrow", "center:79px:noGrow,top:30dlu:noGrow,top:30dlu:noGrow,center:30dlu:noGrow,top:30dlu:noGrow,center:30dlu:noGrow,top:30dlu:noGrow,center:30px:noGrow"));
+        panel1 = new BackgroundPanel();
+        panel1.setImagestr("src/main/resources/picture/bg.jpg");
+        panel1.setLayout(new FormLayout("fill:110px:noGrow,left:4dlu:noGrow,left:136dlu:noGrow,fill:110px:noGrow,fill:136dlu:noGrow", "center:79px:noGrow,top:30dlu:noGrow,top:30dlu:noGrow,center:30dlu:noGrow,top:30dlu:noGrow,center:30dlu:noGrow,top:19dlu:noGrow,center:max(d;4px):noGrow,top:8dlu:noGrow,center:30px:noGrow,top:4dlu:noGrow,center:16px:noGrow"));
         panel1.setBackground(new Color(-4272661));
         CellConstraints cc = new CellConstraints();
         root.add(panel1, cc.xy(1, 1));
@@ -163,7 +181,18 @@ public class select_feedback {
         final JScrollPane scrollPane1 = new JScrollPane();
         panel1.add(scrollPane1, cc.xywh(3, 2, 3, 6, CellConstraints.FILL, CellConstraints.FILL));
         table1 = new JTable();
+        table1.setForeground(new Color(-3770255));
         scrollPane1.setViewportView(table1);
+        导出excelButton = new JButton();
+        导出excelButton.setText("导出excel");
+        panel1.add(导出excelButton, cc.xy(4, 10));
+        eq.setBackground(new Color(230,230,250));
+        break_eq.setBackground(new Color(230,230,250));
+        repair_eq.setBackground(new Color(230,230,250));
+        bore_eq.setBackground(new Color(230,230,250));
+        feedback.setBackground(new Color(230,230,250));
+        用户管理Button.setBackground(new Color(230,230,250));
+        导出excelButton.setBackground(new Color(230,230,250));
     }
 
     /**

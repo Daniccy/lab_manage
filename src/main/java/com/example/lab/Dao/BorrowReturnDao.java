@@ -1,6 +1,7 @@
 package com.example.lab.Dao;
 
 import com.example.lab.Entity.BorrowReturn;
+import com.example.lab.Entity.Equipment;
 import com.example.lab.Mapper.BorrowReturnMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -31,5 +32,9 @@ public class BorrowReturnDao {
 
     public BorrowReturn getById(int id){
         return borrowReturnMapper.getById(id);
+    }
+
+    public List<BorrowReturn> getByUserId(String id){
+        return borrowReturnMapper.getByUserId(id);
     }
 }

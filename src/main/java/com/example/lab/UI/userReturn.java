@@ -14,8 +14,8 @@ import java.awt.event.ActionListener;
 import java.util.Locale;
 
 public class userReturn {
-    static JFrame frame = new JFrame("userReturn");
-    private JPanel panel1;
+    static JFrame frame = new JFrame("实验室设备管理系统");
+    private BackgroundPanel panel1;
     private JTextField borrow_id;
     private JComboBox comboBox1;
     private JButton exit;
@@ -61,6 +61,7 @@ public class userReturn {
     public void init() {
         frame.setContentPane(new userReturn().root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(620, 320, 800, 400);
         frame.pack();
         frame.setVisible(true);
     }
@@ -90,7 +91,8 @@ public class userReturn {
     private void $$$setupUI$$$() {
         root = new JPanel();
         root.setLayout(new FormLayout("fill:d:grow", "center:d:grow"));
-        panel1 = new JPanel();
+        panel1 = new BackgroundPanel();
+        panel1.setImagestr("src/main/resources/picture/AA.png");
         panel1.setLayout(new FormLayout("fill:max(d;4px):noGrow,left:68dlu:noGrow,left:50dlu:noGrow,left:103dlu:noGrow,fill:93px:noGrow,left:69dlu:noGrow,fill:max(d;4px):noGrow", "center:61px:noGrow,top:27dlu:noGrow,center:28dlu:noGrow,center:28dlu:noGrow,center:max(d;4px):noGrow,top:51dlu:noGrow,top:12dlu:noGrow,center:max(d;4px):noGrow,center:max(d;4px):noGrow"));
         panel1.setBackground(new Color(-4272661));
         panel1.setForeground(new Color(-5922902));
@@ -98,7 +100,6 @@ public class userReturn {
         root.add(panel1, cc.xy(1, 1, CellConstraints.DEFAULT, CellConstraints.FILL));
         final JLabel label1 = new JLabel();
         label1.setForeground(new Color(-4928789));
-        label1.setText("Label");
         panel1.add(label1, cc.xy(2, 1));
         final JLabel label2 = new JLabel();
         Font label2Font = this.$$$getFont$$$(null, Font.BOLD, 26, label2.getFont());
@@ -107,17 +108,17 @@ public class userReturn {
         label2.setText("归还设备");
         panel1.add(label2, cc.xyw(3, 1, 3, CellConstraints.CENTER, CellConstraints.DEFAULT));
         final JLabel label3 = new JLabel();
-        Font label3Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label3.getFont());
+        Font label3Font = this.$$$getFont$$$(null, Font.BOLD, 20, label3.getFont());
         if (label3Font != null) label3.setFont(label3Font);
-        label3.setForeground(new Color(-5409849));
+        label3.setForeground(new Color(-0));
         label3.setText("是否损坏");
         panel1.add(label3, cc.xy(3, 4, CellConstraints.CENTER, CellConstraints.CENTER));
         borrow_id = new JTextField();
         panel1.add(borrow_id, cc.xy(4, 3, CellConstraints.FILL, CellConstraints.CENTER));
         final JLabel label4 = new JLabel();
-        Font label4Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label4.getFont());
+        Font label4Font = this.$$$getFont$$$(null, Font.BOLD, 20, label4.getFont());
         if (label4Font != null) label4.setFont(label4Font);
-        label4.setForeground(new Color(-5409849));
+        label4.setForeground(new Color(-0));
         label4.setText("借用表ID");
         panel1.add(label4, cc.xy(3, 3, CellConstraints.CENTER, CellConstraints.CENTER));
         comboBox1 = new JComboBox();
@@ -133,6 +134,9 @@ public class userReturn {
         sure = new JButton();
         sure.setText("确定");
         panel1.add(sure, cc.xy(3, 6, CellConstraints.RIGHT, CellConstraints.CENTER));
+        sure.setBackground(new Color(230,230,250));
+        exit.setBackground(new Color(230,230,250));
+
     }
 
     /**

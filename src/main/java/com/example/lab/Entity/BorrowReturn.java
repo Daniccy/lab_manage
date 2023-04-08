@@ -2,6 +2,7 @@ package com.example.lab.Entity;
 
 import lombok.Data;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Data
@@ -17,8 +18,16 @@ public class BorrowReturn {
 	private String equipmentName;
 
 	public String[] get_eq(){
-		String[] a={String.valueOf(borrowId), equipmentName, String.valueOf(number),borrower, String.valueOf(borrowTime),isReturn, String.valueOf(returnTime),isDamage};
-		return a;
+
+		if(String.valueOf(returnTime).equals("null")){
+			String[] a={String.valueOf(borrowId), equipmentName, String.valueOf(number),borrower, new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(borrowTime),isReturn, String.valueOf(returnTime),isDamage};
+			return a;
+		}else
+		{
+			String[] a={String.valueOf(borrowId), equipmentName, String.valueOf(number),borrower, new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(borrowTime),isReturn, new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(returnTime),isDamage};
+			return a;
+		}
+
 	}
 
 }

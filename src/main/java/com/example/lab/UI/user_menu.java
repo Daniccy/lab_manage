@@ -11,8 +11,8 @@ import java.awt.event.ActionListener;
 import java.util.Locale;
 
 public class user_menu {
-    static JFrame frame = new JFrame("user_mune");
-    private JPanel panel1;
+    static JFrame frame = new JFrame("实验室设备管理系统");
+    private BackgroundPanel panel1;
     private JButton rp_eq;
     private JButton sl_eq;
     private JButton 返回Button;
@@ -70,6 +70,7 @@ public class user_menu {
 
         frame.setContentPane(new user_menu().root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(620, 320, 800, 400);
         frame.pack();
         frame.setVisible(true);
     }
@@ -102,7 +103,8 @@ public class user_menu {
     private void $$$setupUI$$$() {
         root = new JPanel();
         root.setLayout(new FormLayout("fill:d:grow", "center:d:grow"));
-        panel1 = new JPanel();
+        panel1 = new BackgroundPanel();
+        panel1.setImagestr("src/main/resources/picture/bg.jpg");
         panel1.setLayout(new FormLayout("fill:max(d;4px):noGrow,left:50dlu:noGrow,left:50dlu:noGrow,left:103dlu:noGrow,fill:93px:noGrow,left:50dlu:noGrow,fill:max(d;4px):noGrow", "center:61px:noGrow,top:13dlu:noGrow,center:30dlu:noGrow,top:30dlu:noGrow,center:30dlu:noGrow,center:30dlu:noGrow,top:30dlu:noGrow,center:max(d;4px):noGrow,top:40dlu:noGrow,center:max(d;4px):noGrow"));
         panel1.setBackground(new Color(-4272661));
         panel1.setForeground(new Color(-5922902));

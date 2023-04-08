@@ -17,4 +17,5 @@ public interface BorrowReturnMapper {
     List<BorrowReturn> get();
     void update(BorrowReturn borrowReturn);
     BorrowReturn getById(@Param("id") Integer id);
+    List<BorrowReturn> getByUserId(@Param("id") String id);
 }

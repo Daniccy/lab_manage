@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.Locale;
 
 public class user_information_update {
-    static JFrame frame = new JFrame("user_information_update");
+    static JFrame frame = new JFrame("实验室设备管理系统");
     private JTextField user_name;
     private JTextField pw_user;
     private JTextField user_phone;
@@ -33,20 +33,25 @@ public class user_information_update {
                 String userEmail = user_email.getText();
                 String userAdress = user_adress.getText();
                 String userPhone = user_phone.getText();
-                User user=new User();
-                user.setUserPassward(userpw);
-                user.setUserName(userName);
-                user.setUserMail(userEmail);
-                user.setUserAddress(userAdress);
-                user.setUserPhone(userPhone);
-                UserController controller = (UserController) ApplicationContextUtil.getBean("UserController");
-                /*******加个toekn***/
-                String info =controller.update(user).info;
-                JOptionPane.showMessageDialog(null, info);
-                if(info.equals("更新成功")){
-                    closepage();
-                    new user_information().init();
-                    return;
+                if(userName.equals("") || userpw.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "密码或用户名不可为空");
+                }else {
+                    User user=new User();
+                    user.setUserPassward(userpw);
+                    user.setUserName(userName);
+                    user.setUserMail(userEmail);
+                    user.setUserAddress(userAdress);
+                    user.setUserPhone(userPhone);
+                    UserController controller = (UserController) ApplicationContextUtil.getBean("UserController");
+                    /*******加个toekn***/
+                    String info =controller.update(user,Token.token).info;
+                    JOptionPane.showMessageDialog(null, info);
+                    if(info.equals("更新成功")){
+                        closepage();
+                        new user_information().init();
+                        return;
+                    }
                 }
 
             }
@@ -63,6 +68,7 @@ public class user_information_update {
     public void init() {
         frame.setContentPane(new user_information_update().root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(620, 320, 800, 400);
         frame.pack();
         frame.setVisible(true);
     }
@@ -93,7 +99,8 @@ public class user_information_update {
     private void $$$setupUI$$$() {
         root = new JPanel();
         root.setLayout(new FormLayout("fill:d:grow", "center:d:grow"));
-        final JPanel panel1 = new JPanel();
+        final BackgroundPanel panel1 = new BackgroundPanel();
+        panel1.setImagestr("src/main/resources/picture/AA.png");
         panel1.setLayout(new FormLayout("fill:max(d;4px):noGrow,left:49dlu:noGrow,left:50dlu:noGrow,left:93dlu:noGrow,fill:93px:noGrow,left:45dlu:noGrow,fill:max(d;4px):noGrow", "center:61px:noGrow,top:28dlu:noGrow,center:28dlu:noGrow,center:28dlu:noGrow,top:29dlu:noGrow,top:28dlu:noGrow,center:max(d;4px):noGrow,center:61px:noGrow,top:20dlu:noGrow,center:max(d;4px):noGrow"));
         panel1.setBackground(new Color(-4272661));
         panel1.setForeground(new Color(-5922902));
@@ -101,7 +108,7 @@ public class user_information_update {
         root.add(panel1, cc.xy(1, 1));
         final JLabel label1 = new JLabel();
         label1.setForeground(new Color(-4928789));
-        label1.setText("Label");
+
         panel1.add(label1, cc.xy(2, 1));
         final JLabel label2 = new JLabel();
         Font label2Font = this.$$$getFont$$$(null, Font.BOLD, 26, label2.getFont());
@@ -119,38 +126,40 @@ public class user_information_update {
         panel1.add(user_email, cc.xy(4, 5, CellConstraints.FILL, CellConstraints.CENTER));
         exit = new JButton();
         exit.setText("返回");
+        exit.setBackground(new Color(230,230,250));
         panel1.add(exit, cc.xy(5, 8, CellConstraints.LEFT, CellConstraints.DEFAULT));
         确定Button = new JButton();
         确定Button.setText("确定");
+        确定Button.setBackground(new Color(230,230,250));
         panel1.add(确定Button, cc.xy(3, 8, CellConstraints.RIGHT, CellConstraints.DEFAULT));
         final JLabel label3 = new JLabel();
-        Font label3Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label3.getFont());
+        Font label3Font = this.$$$getFont$$$(null, Font.BOLD, 20, label3.getFont());
         if (label3Font != null) label3.setFont(label3Font);
-        label3.setForeground(new Color(-5409849));
+        label3.setForeground(new Color(-0));
         label3.setText("用户地址");
         panel1.add(label3, cc.xy(3, 6, CellConstraints.CENTER, CellConstraints.CENTER));
         final JLabel label4 = new JLabel();
-        Font label4Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label4.getFont());
+        Font label4Font = this.$$$getFont$$$(null, Font.BOLD, 20, label4.getFont());
         if (label4Font != null) label4.setFont(label4Font);
-        label4.setForeground(new Color(-5409849));
+        label4.setForeground(new Color(-0));
         label4.setText("用户邮箱");
         panel1.add(label4, cc.xy(3, 5, CellConstraints.CENTER, CellConstraints.CENTER));
         final JLabel label5 = new JLabel();
-        Font label5Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label5.getFont());
+        Font label5Font = this.$$$getFont$$$(null, Font.BOLD, 20, label5.getFont());
         if (label5Font != null) label5.setFont(label5Font);
-        label5.setForeground(new Color(-5409849));
+        label5.setForeground(new Color(-0));
         label5.setText("用户电话");
         panel1.add(label5, cc.xy(3, 4, CellConstraints.CENTER, CellConstraints.CENTER));
         final JLabel label6 = new JLabel();
-        Font label6Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label6.getFont());
+        Font label6Font = this.$$$getFont$$$(null, Font.BOLD, 20, label6.getFont());
         if (label6Font != null) label6.setFont(label6Font);
-        label6.setForeground(new Color(-5409849));
+        label6.setForeground(new Color(-0));
         label6.setText("用户名字");
         panel1.add(label6, cc.xy(3, 3, CellConstraints.CENTER, CellConstraints.CENTER));
         final JLabel label7 = new JLabel();
-        Font label7Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label7.getFont());
+        Font label7Font = this.$$$getFont$$$(null, Font.BOLD, 20, label7.getFont());
         if (label7Font != null) label7.setFont(label7Font);
-        label7.setForeground(new Color(-5409849));
+        label7.setForeground(new Color(-0));
         label7.setText("新密码");
         panel1.add(label7, cc.xy(3, 2, CellConstraints.CENTER, CellConstraints.CENTER));
         user_adress = new JTextField();

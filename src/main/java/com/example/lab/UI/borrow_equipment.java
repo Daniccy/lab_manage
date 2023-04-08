@@ -17,9 +17,9 @@ import java.awt.event.ActionListener;
 import java.util.Locale;
 
 public class borrow_equipment {
-    static JFrame frame = new JFrame("borrow_equipment");
+    static JFrame frame = new JFrame("实验室设备管理系统");
     private JPanel root;
-    private JPanel panel1;
+    private BackgroundPanel panel1;
     private JTextField eq_name;
     private JTextField user_id;
     private JButton exit;
@@ -65,7 +65,7 @@ public class borrow_equipment {
     public void init() {
         frame.setContentPane(new borrow_equipment().root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setBounds(1000, 600, 800, 400);
+        frame.setBounds(600, 300, 800, 400);
         frame.pack();
         frame.setVisible(true);
     }
@@ -93,14 +93,14 @@ public class borrow_equipment {
     private void $$$setupUI$$$() {
         root = new JPanel();
         root.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        panel1 = new JPanel();
+        panel1 = new BackgroundPanel();
+        panel1.setImagestr("src/main/resources/picture/AA.png");
         panel1.setLayout(new FormLayout("fill:max(d;4px):noGrow,left:68dlu:noGrow,left:50dlu:noGrow,left:103dlu:noGrow,fill:93px:noGrow,left:69dlu:noGrow,fill:max(d;4px):noGrow", "center:61px:noGrow,top:20dlu:noGrow,center:28dlu:noGrow,center:28dlu:noGrow,top:28dlu:noGrow,center:max(d;4px):noGrow,top:35dlu:noGrow,center:29px:noGrow"));
         panel1.setBackground(new Color(-4272661));
         panel1.setForeground(new Color(-5922902));
         root.add(panel1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JLabel label1 = new JLabel();
         label1.setForeground(new Color(-4928789));
-        label1.setText("Label");
         CellConstraints cc = new CellConstraints();
         panel1.add(label1, cc.xy(2, 1));
         final JLabel label2 = new JLabel();
@@ -110,9 +110,9 @@ public class borrow_equipment {
         label2.setText("借用设备");
         panel1.add(label2, cc.xyw(3, 1, 3, CellConstraints.CENTER, CellConstraints.DEFAULT));
         final JLabel label3 = new JLabel();
-        Font label3Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label3.getFont());
+        Font label3Font = this.$$$getFont$$$(null, Font.BOLD, 20, label3.getFont());
         if (label3Font != null) label3.setFont(label3Font);
-        label3.setForeground(new Color(-5409849));
+        label3.setForeground(new Color(-0));
         label3.setText("设备名称");
         panel1.add(label3, cc.xy(3, 4, CellConstraints.CENTER, CellConstraints.CENTER));
         eq_name = new JTextField();
@@ -120,15 +120,15 @@ public class borrow_equipment {
         user_id = new JTextField();
         panel1.add(user_id, cc.xy(4, 3, CellConstraints.FILL, CellConstraints.CENTER));
         final JLabel label4 = new JLabel();
-        Font label4Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label4.getFont());
+        Font label4Font = this.$$$getFont$$$(null, Font.BOLD, 20, label4.getFont());
         if (label4Font != null) label4.setFont(label4Font);
-        label4.setForeground(new Color(-5409849));
+        label4.setForeground(new Color(-0));
         label4.setText("借用人ID");
         panel1.add(label4, cc.xy(3, 3, CellConstraints.CENTER, CellConstraints.CENTER));
         final JLabel label5 = new JLabel();
-        Font label5Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label5.getFont());
+        Font label5Font = this.$$$getFont$$$(null, Font.BOLD, 20, label5.getFont());
         if (label5Font != null) label5.setFont(label5Font);
-        label5.setForeground(new Color(-5409849));
+        label5.setForeground(new Color(-0));
         label5.setText("借用数量");
         panel1.add(label5, cc.xy(3, 5, CellConstraints.CENTER, CellConstraints.CENTER));
         num = new JTextField();
@@ -139,6 +139,8 @@ public class borrow_equipment {
         panel1.add(yes, cc.xy(3, 7, CellConstraints.RIGHT, CellConstraints.CENTER));
         exit = new JButton();
         exit.setText("返回");
+        yes.setBackground(new Color(230,230,250));
+        exit.setBackground(new Color(230,230,250));
         panel1.add(exit, cc.xy(5, 7, CellConstraints.LEFT, CellConstraints.CENTER));
     }
 

@@ -28,9 +28,7 @@ public class EquipmentDao {
         equipmentMapper.update(equipment);
     }
 
-    public List<Equipment> getById(String id){
-        return equipmentMapper.getById(id);
-    }
+
 
     public Equipment getByName(String equipmentName){
         return equipmentMapper.getByName(equipmentName);

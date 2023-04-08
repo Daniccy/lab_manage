@@ -15,11 +15,12 @@ import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
 public class breakdown_equipment {
-    static JFrame frame = new JFrame("breakdown_equipment");
+    static JFrame frame = new JFrame("实验室设备管理系统");
     private JButton eq;
     private JButton insert;
     private JButton update;
@@ -99,6 +100,7 @@ public class breakdown_equipment {
         be = printform(be);
         frame.setContentPane(be.root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(600, 300, 800, 400);
         frame.pack();
         frame.setVisible(true);
     }
@@ -121,7 +123,7 @@ public class breakdown_equipment {
 
             int i=0;
             for (Breakdown eq_list:list){
-                String[] eq={String.valueOf(eq_list.getBreakdownId()),eq_list.getEquipmentName(), String.valueOf(eq_list.getNum()),eq_list.getApplyReason(),eq_list.getApplyPerson(), String.valueOf(eq_list.getApplyTime())};
+                String[] eq={String.valueOf(eq_list.getBreakdownId()),eq_list.getEquipmentName(), String.valueOf(eq_list.getNum()),eq_list.getApplyReason(),eq_list.getApplyPerson(), new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(eq_list.getApplyTime())};
                 eqs[i++]=eq;
             }
             DefaultTableModel dt = new DefaultTableModel(eqs, columnNames);
@@ -160,7 +162,8 @@ public class breakdown_equipment {
     private void $$$setupUI$$$() {
         root = new JPanel();
         root.setLayout(new FormLayout("fill:max(d;4px):noGrow,left:4dlu:noGrow,fill:d:grow", "center:max(d;4px):noGrow,top:4dlu:noGrow,center:d:grow"));
-        final JPanel panel1 = new JPanel();
+        final BackgroundPanel panel1 = new BackgroundPanel();
+        panel1.setImagestr("src/main/resources/picture/bg.jpg");
         panel1.setLayout(new FormLayout("fill:110px:noGrow,left:4dlu:noGrow,left:150dlu:noGrow,fill:8px:noGrow,fill:151dlu:noGrow", "center:79px:noGrow,top:30dlu:noGrow,top:30dlu:noGrow,center:30dlu:noGrow,top:30dlu:noGrow,center:31dlu:noGrow,top:30dlu:noGrow,center:max(d;4px):noGrow,center:28dlu:noGrow,top:9dlu:noGrow,center:max(d;4px):noGrow"));
         panel1.setBackground(new Color(-4272661));
         CellConstraints cc = new CellConstraints();
@@ -198,7 +201,16 @@ public class breakdown_equipment {
         final JScrollPane scrollPane1 = new JScrollPane();
         panel1.add(scrollPane1, cc.xywh(3, 2, 3, 6, CellConstraints.FILL, CellConstraints.FILL));
         table1 = new JTable();
+        table1.setForeground(new Color(-3770255));
         scrollPane1.setViewportView(table1);
+        eq.setBackground(new Color(230,230,250));
+        break_eq.setBackground(new Color(230,230,250));
+        repair_eq.setBackground(new Color(230,230,250));
+        bore_eq.setBackground(new Color(230,230,250));
+        feedback.setBackground(new Color(230,230,250));
+        用户管理Button.setBackground(new Color(230,230,250));
+        insert.setBackground(new Color(230,230,250));
+        update.setBackground(new Color(230,230,250));
     }
 
     /**

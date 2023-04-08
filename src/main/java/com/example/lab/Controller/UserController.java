@@ -34,13 +34,14 @@ public class UserController {
     }
 
     // 获取用户信息
-    public Ret<?> get(String id){
+    public Ret<?> get(String token){
+        String id = TokenUtil.getInfoByToken(token);
         return RetUtil.success(service.get(id));
     }
 
     // 更新用户信息
-    public Ret<?> update(User user){
-        service.update(user);
+    public Ret<?> update(User user, String token){
+        service.update(user, token);
         return RetUtil.successWithMsg("更新成功");
     }
 

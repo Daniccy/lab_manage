@@ -26,7 +26,11 @@ public class UserService {
     public User get(String id){
         return dao.get(id);
     }
-    public void update(User user){
+    public void update(User user, String token){
+        if(user.getUserId() == null){
+            String userId = TokenUtil.getInfoByToken(token);
+            user.setUserId(userId);
+        }
         dao.update(user);
     }
     public void delete(String id){

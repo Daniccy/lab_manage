@@ -2,6 +2,7 @@ package com.example.lab.Entity;
 
 import lombok.Data;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Data
@@ -20,7 +21,7 @@ public class Feedback {
 	private Date time;
 
 	public String[] get_eq(){
-		String[] a={feedbackId,userId,question,detail,answer, String.valueOf(time)};
+		String[] a={feedbackId,userId,question,detail,answer, new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(time)};
 		return a;
 	}
 

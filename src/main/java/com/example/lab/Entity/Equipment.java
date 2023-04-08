@@ -2,6 +2,7 @@ package com.example.lab.Entity;
 
 import lombok.Data;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Data
@@ -49,7 +50,7 @@ public class Equipment {
 	}
 
 	public String[] get_eq(){
-		String[] eq={String.valueOf(equipmentId),equipmentName,equipmentType, String.valueOf(date), String.valueOf(number), String.valueOf(singlePrice),fromFactory,remark};
+		String[] eq={String.valueOf(equipmentId),equipmentName,equipmentType,new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(date), String.valueOf(number), String.valueOf(singlePrice),fromFactory,remark};
 		return eq;
 	}
 }

@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.Locale;
 
 public class user_brok_update {
-    static JFrame frame = new JFrame("user_brok_update");
+    static JFrame frame = new JFrame("实验室设备管理系统");
     private JTextField eq_name;
     private JTextField breakdown_id;
     private JTextField reason;
@@ -63,6 +63,7 @@ public class user_brok_update {
     public void init() {
         frame.setContentPane(new user_brok_update().root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(620, 320, 800, 400);
         frame.pack();
         frame.setVisible(true);
     }
@@ -93,7 +94,8 @@ public class user_brok_update {
     private void $$$setupUI$$$() {
         root = new JPanel();
         root.setLayout(new FormLayout("fill:d:grow", "center:d:grow"));
-        final JPanel panel1 = new JPanel();
+        final BackgroundPanel panel1 = new BackgroundPanel();
+        panel1.setImagestr("src/main/resources/picture/AA.png");
         panel1.setLayout(new FormLayout("fill:max(d;4px):noGrow,left:68dlu:noGrow,left:50dlu:noGrow,left:103dlu:noGrow,fill:93px:noGrow,left:69dlu:noGrow,fill:max(d;4px):noGrow", "center:61px:noGrow,top:22dlu:noGrow,top:28dlu:noGrow,center:28dlu:noGrow,center:28dlu:noGrow,center:49px:noGrow,top:30dlu:noGrow,center:23px:noGrow"));
         panel1.setBackground(new Color(-4272661));
         panel1.setForeground(new Color(-5922902));
@@ -101,7 +103,6 @@ public class user_brok_update {
         root.add(panel1, cc.xy(1, 1));
         final JLabel label1 = new JLabel();
         label1.setForeground(new Color(-4928789));
-        label1.setText("Label");
         panel1.add(label1, cc.xy(2, 1));
         final JLabel label2 = new JLabel();
         Font label2Font = this.$$$getFont$$$(null, Font.BOLD, 26, label2.getFont());
@@ -110,15 +111,15 @@ public class user_brok_update {
         label2.setText("更新损坏设备信息");
         panel1.add(label2, cc.xyw(3, 1, 3, CellConstraints.CENTER, CellConstraints.DEFAULT));
         final JLabel label3 = new JLabel();
-        Font label3Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label3.getFont());
+        Font label3Font = this.$$$getFont$$$(null, Font.BOLD, 20, label3.getFont());
         if (label3Font != null) label3.setFont(label3Font);
-        label3.setForeground(new Color(-5409849));
+        label3.setForeground(new Color(-0));
         label3.setText("损坏表id");
         panel1.add(label3, cc.xy(3, 3, CellConstraints.CENTER, CellConstraints.CENTER));
         final JLabel label4 = new JLabel();
-        Font label4Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label4.getFont());
+        Font label4Font = this.$$$getFont$$$(null, Font.BOLD, 20, label4.getFont());
         if (label4Font != null) label4.setFont(label4Font);
-        label4.setForeground(new Color(-5409849));
+        label4.setForeground(new Color(-0));
         label4.setText("设备名称");
         panel1.add(label4, cc.xy(3, 4, CellConstraints.CENTER, CellConstraints.CENTER));
         eq_name = new JTextField();
@@ -126,17 +127,17 @@ public class user_brok_update {
         breakdown_id = new JTextField();
         panel1.add(breakdown_id, cc.xy(4, 3, CellConstraints.FILL, CellConstraints.CENTER));
         final JLabel label5 = new JLabel();
-        Font label5Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label5.getFont());
+        Font label5Font = this.$$$getFont$$$(null, Font.BOLD, 20, label5.getFont());
         if (label5Font != null) label5.setFont(label5Font);
-        label5.setForeground(new Color(-5409849));
+        label5.setForeground(new Color(-0));
         label5.setText("更新原因");
         panel1.add(label5, cc.xy(3, 5, CellConstraints.CENTER, CellConstraints.CENTER));
         reason = new JTextField();
         panel1.add(reason, cc.xy(4, 5, CellConstraints.FILL, CellConstraints.CENTER));
         final JLabel label6 = new JLabel();
-        Font label6Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label6.getFont());
+        Font label6Font = this.$$$getFont$$$(null, Font.BOLD, 20, label6.getFont());
         if (label6Font != null) label6.setFont(label6Font);
-        label6.setForeground(new Color(-5409849));
+        label6.setForeground(new Color(-0));
         label6.setText("数量");
         panel1.add(label6, cc.xy(3, 6, CellConstraints.CENTER, CellConstraints.CENTER));
         num = new JTextField();
@@ -147,6 +148,9 @@ public class user_brok_update {
         确定Button = new JButton();
         确定Button.setText("确定");
         panel1.add(确定Button, cc.xy(3, 7, CellConstraints.RIGHT, CellConstraints.CENTER));
+        确定Button.setBackground(new Color(230,230,250));
+        exit.setBackground(new Color(230,230,250));
+
     }
 
     /**

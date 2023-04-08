@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class borrow_return_equipment {
-    static JFrame frame = new JFrame("borrow_return_equipment");
-    private JPanel panel1;
+    static JFrame frame = new JFrame("实验室设备管理系统");
+    private BackgroundPanel panel1;
     private JButton eq;
     private JTable table1;
     private JButton borrrow;
@@ -83,6 +83,7 @@ public class borrow_return_equipment {
         update.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                closepage();
                 new update_borrow_equipment().init();
             }
         });
@@ -106,6 +107,7 @@ public class borrow_return_equipment {
         bre = printform(bre);
         frame.setContentPane(bre.root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(600, 300, 800, 400);
         frame.pack();
         frame.setVisible(true);
     }
@@ -164,25 +166,31 @@ public class borrow_return_equipment {
     private void $$$setupUI$$$() {
         root = new JPanel();
         root.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        panel1 = new JPanel();
+        panel1 = new BackgroundPanel();
+        panel1.setImagestr("src/main/resources/picture/bg.jpg");
         panel1.setLayout(new FormLayout("fill:110px:noGrow,left:4dlu:noGrow,left:94dlu:noGrow,fill:165px:noGrow,fill:101dlu:noGrow", "center:79px:noGrow,top:30dlu:noGrow,top:30dlu:noGrow,center:30dlu:noGrow,top:30dlu:noGrow,center:30dlu:noGrow,center:30dlu:noGrow,top:28dlu:noGrow,top:14dlu:noGrow,center:max(d;4px):noGrow"));
         panel1.setBackground(new Color(-4272661));
         root.add(panel1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         eq = new JButton();
         eq.setText("基本设备");
+        eq.setBackground(new Color(230,230,250));
         CellConstraints cc = new CellConstraints();
         panel1.add(eq, cc.xy(1, 2, CellConstraints.CENTER, CellConstraints.CENTER));
         break_eq = new JButton();
         break_eq.setText("损坏设备");
+        break_eq.setBackground(new Color(230,230,250));
         panel1.add(break_eq, cc.xy(1, 3, CellConstraints.CENTER, CellConstraints.CENTER));
         repair_eq = new JButton();
         repair_eq.setText("维修设备");
+        repair_eq.setBackground(new Color(230,230,250));
         panel1.add(repair_eq, cc.xy(1, 4, CellConstraints.CENTER, CellConstraints.CENTER));
         bore_eq = new JButton();
         bore_eq.setText("借还设备");
+        bore_eq.setBackground(new Color(230,230,250));
         panel1.add(bore_eq, cc.xy(1, 5, CellConstraints.CENTER, CellConstraints.CENTER));
         feedback = new JButton();
         feedback.setText("查看报表");
+        feedback.setBackground(new Color(230,230,250));
         panel1.add(feedback, cc.xy(1, 6, CellConstraints.CENTER, CellConstraints.CENTER));
         final JLabel label1 = new JLabel();
         Font label1Font = this.$$$getFont$$$(null, Font.BOLD, 26, label1.getFont());
@@ -192,19 +200,24 @@ public class borrow_return_equipment {
         panel1.add(label1, cc.xyw(3, 1, 3, CellConstraints.CENTER, CellConstraints.DEFAULT));
         用户管理Button = new JButton();
         用户管理Button.setText("用户管理");
+        用户管理Button.setBackground(new Color(230,230,250));
         panel1.add(用户管理Button, cc.xy(1, 7, CellConstraints.CENTER, CellConstraints.CENTER));
         borrrow = new JButton();
         borrrow.setText("借用");
+        borrrow.setBackground(new Color(230,230,250));
         panel1.add(borrrow, cc.xy(3, 8, CellConstraints.CENTER, CellConstraints.CENTER));
         return_Button = new JButton();
         return_Button.setText("归还");
+        return_Button.setBackground(new Color(230,230,250));
         panel1.add(return_Button, cc.xy(4, 8, CellConstraints.CENTER, CellConstraints.CENTER));
         update = new JButton();
         update.setText("更新");
+        update.setBackground(new Color(230,230,250));
         panel1.add(update, cc.xy(5, 8, CellConstraints.CENTER, CellConstraints.CENTER));
         final JScrollPane scrollPane1 = new JScrollPane();
         panel1.add(scrollPane1, cc.xywh(3, 2, 3, 6, CellConstraints.FILL, CellConstraints.FILL));
         table1 = new JTable();
+        table1.setForeground(new Color(-3770255));
         scrollPane1.setViewportView(table1);
     }
 

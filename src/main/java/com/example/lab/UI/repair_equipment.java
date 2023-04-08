@@ -17,13 +17,14 @@ import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
 public class repair_equipment {
-    static JFrame frame = new JFrame("repair_equipment");
+    static JFrame frame = new JFrame("实验室设备管理系统");
     private JPanel root;
-    private JPanel panel1;
+    private BackgroundPanel panel1;
     private JButton eq;
     private JButton insert;
     private JButton update;
@@ -101,6 +102,7 @@ public class repair_equipment {
         re = printform(re);
         frame.setContentPane(re.root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(600, 300, 800, 400);
         frame.pack();
         frame.setVisible(true);
     }
@@ -116,7 +118,7 @@ public class repair_equipment {
             String[][] eqs = new String[list.size()][];
             int i=0;
             for (Repair eq_list:list){
-                String[] eq={String.valueOf(eq_list.getRepairId()),eq_list.getRepairPerson(), String.valueOf(eq_list.getBreakdownId()), String.valueOf(eq_list.getEquipmentId()),eq_list.getEquipmentName(),eq_list.getApplyReason(), String.valueOf(eq_list.getRepairTime())};
+                String[] eq={String.valueOf(eq_list.getRepairId()),eq_list.getRepairPerson(), String.valueOf(eq_list.getBreakdownId()), String.valueOf(eq_list.getEquipmentId()),eq_list.getEquipmentName(),eq_list.getApplyReason(), new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(eq_list.getRepairTime())};
                 eqs[i++]=eq;
             }
             DefaultTableModel dt = new DefaultTableModel(eqs, columnNames);
@@ -154,7 +156,8 @@ public class repair_equipment {
     private void $$$setupUI$$$() {
         root = new JPanel();
         root.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        panel1 = new JPanel();
+        panel1 = new BackgroundPanel();
+        panel1.setImagestr("src/main/resources/picture/bg.jpg");
         panel1.setLayout(new FormLayout("fill:110px:noGrow,left:4dlu:noGrow,left:150dlu:noGrow,fill:8px:noGrow,fill:150dlu:noGrow", "center:79px:noGrow,top:30dlu:noGrow,top:30dlu:noGrow,center:30dlu:noGrow,top:30dlu:noGrow,center:29dlu:noGrow,top:27dlu:noGrow,center:max(d;4px):noGrow,center:30dlu:noGrow"));
         panel1.setBackground(new Color(-4272661));
         root.add(panel1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
@@ -192,7 +195,16 @@ public class repair_equipment {
         final JScrollPane scrollPane1 = new JScrollPane();
         panel1.add(scrollPane1, cc.xywh(3, 2, 3, 6, CellConstraints.FILL, CellConstraints.FILL));
         table1 = new JTable();
+        table1.setForeground(new Color(-3770255));
         scrollPane1.setViewportView(table1);
+        eq.setBackground(new Color(230,230,250));
+        break_eq.setBackground(new Color(230,230,250));
+        repair_eq.setBackground(new Color(230,230,250));
+        bore_eq.setBackground(new Color(230,230,250));
+        feedback.setBackground(new Color(230,230,250));
+        用户管理Button.setBackground(new Color(230,230,250));
+        insert.setBackground(new Color(230,230,250));
+        update.setBackground(new Color(230,230,250));
     }
 
     /**

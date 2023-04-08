@@ -2,6 +2,7 @@ package com.example.lab.UI;
 import com.example.lab.Controller.RepairProcessController;
 import com.example.lab.Entity.Repair;
 import com.example.lab.Util.ApplicationContextUtil;
+import com.example.lab.common.Ret;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
@@ -13,13 +14,14 @@ import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
 public class user_rep_eq {
-    static JFrame frame = new JFrame("user_rep_eq");
+    static JFrame frame = new JFrame("实验室设备管理系统");
     private JPanel root;
-    private JPanel panel1;
+    private BackgroundPanel panel1;
     private JButton eq_Button;
     private JButton bd_eq;
     private JButton re_eq;
@@ -93,6 +95,7 @@ public class user_rep_eq {
         ure=printform(ure);
         frame.setContentPane(ure.root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(600, 300, 800, 400);
         frame.pack();
         frame.setVisible(true);
     }
@@ -102,22 +105,17 @@ public class user_rep_eq {
         String[] columnNames = new String[]{"维修表ID", "申请人", "损坏表ID", "设备ID","设备名称","申请原因","维修时间"};
         // 表格中的内容，是一个二维数组
         RepairProcessController controller = (RepairProcessController) ApplicationContextUtil.getBean("RepairProcessController");
-        String info =controller.get().info;
-        if (info.equals("success")){
-            /***改这条****/
-            java.util.List<Repair> list = (List<Repair>)controller.get().data;
-            String[][] eqs = new String[list.size()][];
-            int i=0;
-            for (Repair eq_list:list){
-                String[] eq={String.valueOf(eq_list.getRepairId()),eq_list.getRepairPerson(), String.valueOf(eq_list.getBreakdownId()), String.valueOf(eq_list.getEquipmentId()),eq_list.getEquipmentName(),eq_list.getApplyReason(), String.valueOf(eq_list.getRepairTime())};
-                eqs[i++]=eq;
-            }
-            DefaultTableModel dt = new DefaultTableModel(eqs, columnNames);
-            se.table1.setModel(dt);
-        }else{
-            DefaultTableModel dt = new DefaultTableModel(null, columnNames);
-            se.table1.setModel(dt);
+        Ret<?> ret=controller.getByUserId(Token.token);
+        String info = ret.info;
+        java.util.List<Repair> list = (List<Repair>)ret.data;
+        String[][] eqs = new String[list.size()][];
+        int i=0;
+        for (Repair eq_list:list){
+            String[] eq={String.valueOf(eq_list.getRepairId()),eq_list.getRepairPerson(), String.valueOf(eq_list.getBreakdownId()), String.valueOf(eq_list.getEquipmentId()),eq_list.getEquipmentName(),eq_list.getApplyReason(), new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(eq_list.getRepairTime())};
+            eqs[i++]=eq;
         }
+        DefaultTableModel dt = new DefaultTableModel(eqs, columnNames);
+        se.table1.setModel(dt);
         return se;
     }
 
@@ -149,7 +147,8 @@ public class user_rep_eq {
     private void $$$setupUI$$$() {
         root = new JPanel();
         root.setLayout(new FormLayout("fill:d:grow", "center:d:grow"));
-        panel1 = new JPanel();
+        panel1 = new BackgroundPanel();
+        panel1.setImagestr("src/main/resources/picture/bg.jpg");
         panel1.setLayout(new FormLayout("fill:110px:noGrow,left:4dlu:noGrow,left:150dlu:noGrow,fill:8px:noGrow,fill:150dlu:noGrow", "center:79px:noGrow,top:30dlu:noGrow,top:30dlu:noGrow,center:30dlu:noGrow,top:30dlu:noGrow,center:29dlu:noGrow,center:30dlu:noGrow,top:30dlu:noGrow,center:max(d;4px):noGrow"));
         panel1.setBackground(new Color(-4272661));
         CellConstraints cc = new CellConstraints();
@@ -184,7 +183,7 @@ public class user_rep_eq {
         scrollPane1.setBorder(BorderFactory.createTitledBorder(null, "", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         table1 = new JTable();
         table1.setDragEnabled(true);
-        Font table1Font = this.$$$getFont$$$(null, Font.BOLD, -1, table1.getFont());
+        Font table1Font = this.$$$getFont$$$(null, Font.PLAIN, -1, table1.getFont());
         if (table1Font != null) table1.setFont(table1Font);
         table1.setForeground(new Color(-3770255));
         table1.putClientProperty("terminateEditOnFocusLost", Boolean.FALSE);
@@ -195,6 +194,14 @@ public class user_rep_eq {
         更新Button = new JButton();
         更新Button.setText("更新");
         panel1.add(更新Button, cc.xy(5, 8, CellConstraints.CENTER, CellConstraints.CENTER));
+        eq_Button.setBackground(new Color(230,230,250));
+        bd_eq.setBackground(new Color(230,230,250));
+        re_eq.setBackground(new Color(230,230,250));
+        br_eq.setBackground(new Color(230,230,250));
+        information.setBackground(new Color(230,230,250));
+        返回Button.setBackground(new Color(230,230,250));
+        申请.setBackground(new Color(230,230,250));
+        更新Button.setBackground(new Color(230,230,250));
     }
 
     /**

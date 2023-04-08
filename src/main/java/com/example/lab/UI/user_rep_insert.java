@@ -14,8 +14,8 @@ import java.awt.event.ActionListener;
 import java.util.Locale;
 
 public class user_rep_insert {
-    static JFrame frame = new JFrame("user_rep_insert");
-    private JPanel panel1;
+    static JFrame frame = new JFrame("实验室设备管理系统");
+    private BackgroundPanel panel1;
     private JTextField break_id;
     private JButton exit;
     private JButton sure;
@@ -55,6 +55,7 @@ public class user_rep_insert {
     public void init() {
         frame.setContentPane(new user_rep_insert().root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(620, 320, 800, 400);
         frame.pack();
         frame.setVisible(true);
     }
@@ -84,7 +85,8 @@ public class user_rep_insert {
     private void $$$setupUI$$$() {
         root = new JPanel();
         root.setLayout(new FormLayout("fill:d:grow", "center:d:grow"));
-        panel1 = new JPanel();
+        panel1 = new BackgroundPanel();
+        panel1.setImagestr("src/main/resources/picture/AA.png");
         panel1.setLayout(new FormLayout("fill:max(d;4px):noGrow,left:68dlu:noGrow,left:50dlu:noGrow,left:103dlu:noGrow,fill:93px:noGrow,left:69dlu:noGrow,fill:max(d;4px):noGrow", "center:61px:noGrow,top:22dlu:noGrow,center:67px:noGrow,center:61px:noGrow,top:31dlu:noGrow,center:max(d;4px):noGrow"));
         panel1.setBackground(new Color(-4272661));
         panel1.setForeground(new Color(-5922902));
@@ -92,7 +94,6 @@ public class user_rep_insert {
         root.add(panel1, cc.xy(1, 1, CellConstraints.DEFAULT, CellConstraints.FILL));
         final JLabel label1 = new JLabel();
         label1.setForeground(new Color(-4928789));
-        label1.setText("Label");
         panel1.add(label1, cc.xy(2, 1));
         final JLabel label2 = new JLabel();
         Font label2Font = this.$$$getFont$$$(null, Font.BOLD, 26, label2.getFont());
@@ -101,9 +102,9 @@ public class user_rep_insert {
         label2.setText("损坏设备报修");
         panel1.add(label2, cc.xyw(3, 1, 3, CellConstraints.CENTER, CellConstraints.DEFAULT));
         final JLabel label3 = new JLabel();
-        Font label3Font = this.$$$getFont$$$(null, Font.PLAIN, 20, label3.getFont());
+        Font label3Font = this.$$$getFont$$$(null, Font.BOLD, 20, label3.getFont());
         if (label3Font != null) label3.setFont(label3Font);
-        label3.setForeground(new Color(-5409849));
+        label3.setForeground(new Color(-0));
         label3.setText("损坏表id");
         panel1.add(label3, cc.xy(3, 3, CellConstraints.CENTER, CellConstraints.CENTER));
         break_id = new JTextField();
@@ -114,6 +115,8 @@ public class user_rep_insert {
         sure = new JButton();
         sure.setText("确定");
         panel1.add(sure, cc.xy(3, 4, CellConstraints.RIGHT, CellConstraints.DEFAULT));
+        sure.setBackground(new Color(230,230,250));
+        exit.setBackground(new Color(230,230,250));
     }
 
     /**

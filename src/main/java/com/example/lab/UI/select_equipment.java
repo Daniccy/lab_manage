@@ -26,8 +26,8 @@ import java.util.Locale;
 import java.util.Random;
 public class select_equipment extends JFrame {
 
-    static JFrame frame = new JFrame("select_equipment");
-    private JPanel panel1;
+    static JFrame frame = new JFrame("实验室设备管理系统");
+    private BackgroundPanel panel1;
     private JButton eq_Button;
     private JTable table1;
     private JButton insert_button;
@@ -43,6 +43,7 @@ public class select_equipment extends JFrame {
         se = printform(se);
         frame.setContentPane(se.panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(600, 300, 800, 400);
         frame.pack();
         frame.setVisible(true);
 
@@ -163,7 +164,8 @@ public class select_equipment extends JFrame {
      * @noinspection ALL
      */
     private void $$$setupUI$$$() {
-        panel1 = new JPanel();
+        panel1 = new BackgroundPanel();
+        panel1.setImagestr("src/main/resources/picture/bg.jpg");
         panel1.setLayout(new FormLayout("fill:110px:noGrow,left:4dlu:noGrow,left:150dlu:noGrow,fill:8px:noGrow,fill:150dlu:noGrow", "center:79px:noGrow,top:30dlu:noGrow,top:30dlu:noGrow,center:30dlu:noGrow,top:30dlu:noGrow,center:29dlu:noGrow,center:30dlu:noGrow,top:11dlu:noGrow,top:28dlu:noGrow,center:max(d;4px):noGrow"));
         panel1.setBackground(new Color(-4272661));
         eq_Button = new JButton();
@@ -200,14 +202,22 @@ public class select_equipment extends JFrame {
         final JScrollPane scrollPane1 = new JScrollPane();
         scrollPane1.setForeground(new Color(-12369221));
         panel1.add(scrollPane1, cc.xywh(3, 2, 3, 6, CellConstraints.FILL, CellConstraints.FILL));
-        scrollPane1.setBorder(BorderFactory.createTitledBorder(null, "kakakaka", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
+        scrollPane1.setBorder(BorderFactory.createTitledBorder(null, "", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         table1 = new JTable();
         table1.setDragEnabled(true);
-        Font table1Font = this.$$$getFont$$$(null, Font.BOLD, -1, table1.getFont());
+        Font table1Font = this.$$$getFont$$$(null, Font.PLAIN, -1, table1.getFont());
         if (table1Font != null) table1.setFont(table1Font);
         table1.setForeground(new Color(-3770255));
         table1.putClientProperty("terminateEditOnFocusLost", Boolean.FALSE);
         scrollPane1.setViewportView(table1);
+        eq_Button.setBackground(new Color(230,230,250));
+        br_eq.setBackground(new Color(230,230,250));
+        re_eq.setBackground(new Color(230,230,250));
+        bore_eq.setBackground(new Color(230,230,250));
+        feedback.setBackground(new Color(230,230,250));
+        用户管理Button.setBackground(new Color(230,230,250));
+        insert_button.setBackground(new Color(230,230,250));
+        update_Button.setBackground(new Color(230,230,250));
     }
 
     /**

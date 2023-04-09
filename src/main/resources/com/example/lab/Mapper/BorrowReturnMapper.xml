@@ -23,4 +23,8 @@
     <select id="getByUserId" resultType="com.example.lab.Entity.BorrowReturn">
         {call select_borrow_return_equipment_byUserID(#{id})}
     </select>
+
+    <select id="getById" resultType="com.example.lab.Entity.BorrowReturn">
+        select * from borrow_return where id = #{id}
+    </select>
 </mapper>
